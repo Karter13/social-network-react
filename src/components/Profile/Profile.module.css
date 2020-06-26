@@ -1,0 +1,9 @@
+.profile {
+    background-color: #c4c8cc;
+    grid-area: p;
+
+}
+.profile img {
+    width: 100%;
+}
+
