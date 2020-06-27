@@ -11,9 +11,9 @@ export const MyPosts = () => {
                 <button>add post</button>
             </div>
             <div className={s.posts}>
-                <Post message='Good post' number={3} />
-                <Post message='I love React' number={4} />
-                <Post message='I love JS' number={10} />
+                <Post message='Good post' likesCount={15} />
+                <Post message='I love React' likesCount={20} />
+                <Post message='I love JS' likesCount={10} />
             </div>
         </div>
     )
