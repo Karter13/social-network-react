@@ -1,12 +1,15 @@
 .nav {
     background-color: #708fa7;
     grid-area: n;
+    text-align: center;
+    padding: 10px;
 }
 
-.item {
+.item a{
     color: white;
+    text-decoration: none;
 }
 
-.item.active {
+.item a.activeLick {
     color: goldenrod;
 }
