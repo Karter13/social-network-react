@@ -24,23 +24,42 @@ export const Message: React.FC<MessagePropsType> = (props) => {
     )
 };
 
-
+type dialogType = {
+    id: number
+    name: string
+}
+type messageType = {
+    id: number
+    message: string
+}
 type DialogsPropsType = {}
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
+
+    const dialogs: Array<dialogType> = [
+        {id: 1, name: 'Maikl'},
+        {id: 2, name: 'Anna'},
+        {id: 3, name: 'Masha'},
+        {id: 4, name: 'Aleksey'},
+    ];
+
+    const message: Array<messageType> = [
+        {id: 1, message: 'Hello my friend'},
+        {id: 1, message: 'Good morning'},
+        {id: 1, message: 'Good by'},
+        {id: 1, message: 'Yo'},
+    ];
+
+    let dialogsElements = dialogs
+        .map(d => <Dialog name={d.name} id={d.id}/>);
+    let messagesElements = message.map(m => <Message message={m.message}/>)
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <Dialog name='Maikl' id={1}/>
-                <Dialog name='Anna' id={2}/>
-                <Dialog name='Masha' id={3}/>
-                <Dialog name='Aleksey' id={4}/>
+                {dialogsElements}
             </div>
             <div className={s.messages}>
-                <Message message='Hello my friend'/>
-                <Message message='Good morning'/>
-                <Message message='Good by'/>
-                <Message message='Yo'/>
-
+                {messagesElements}
             </div>
         </div>
     )
