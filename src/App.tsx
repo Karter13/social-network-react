@@ -7,7 +7,7 @@ import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
-import {BrowserRouter, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import {RootStateType} from "./redux/state";
 
 type AppPropsType = {
@@ -15,23 +15,21 @@ type AppPropsType = {
 }
 const App: React.FC<AppPropsType> = (props) => {
     return (
-        <BrowserRouter>
-            <div className='app-wrapper'>
-                <Header/>
-                <Navbar/>
-                <div className='app-wrapper-content'>
-                    <Route path='/profile'
-                           render={() => <Profile
-                               state={props.state.profilePage}/>} />
-                    <Route path='/dialogs'
-                           render={() => <Dialogs
-                               state={props.state.dialogsPage}/>} />
-                    <Route path='/news' render={() => <News/>}/>
-                    <Route path='/music' render={() => <Music/>}/>
-                    <Route path='/settings' render={() => <Settings/>}/>
-                </div>
+        <div className='app-wrapper'>
+            <Header/>
+            <Navbar/>
+            <div className='app-wrapper-content'>
+                <Route path='/profile'
+                       render={() => <Profile
+                           state={props.state.profilePage}/>}/>
+                <Route path='/dialogs'
+                       render={() => <Dialogs
+                           state={props.state.dialogsPage}/>}/>
+                <Route path='/news' render={() => <News/>}/>
+                <Route path='/music' render={() => <Music/>}/>
+                <Route path='/settings' render={() => <Settings/>}/>
             </div>
-        </BrowserRouter>
+        </div>
     );
 };
 
