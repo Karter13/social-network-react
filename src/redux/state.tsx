@@ -1,4 +1,5 @@
 import {v1} from "uuid";
+import {renderEntireTree} from "../render";
 
 export type PostType = {
     id: string
@@ -64,5 +65,17 @@ export let state: RootStateType = {
             {id: v1(), name: 'Friends3', img: "http://avatars.mds.yandex.net/get-pdb/1245924/bc43f857-5d36-4e10-a9e1-4f838cbb5753/s1200?webp=false"},
         ]
     }
-
 };
+
+export type AddPostType = (newMessage:string) => void;
+export const addPost = (newMessage:string) => {
+    let newPost = {
+        id: v1(),
+        message: newMessage,
+        likesCount: 0,
+    };
+    state.profilePage.posts.push(newPost);
+    renderEntireTree(state);
+};
+
+

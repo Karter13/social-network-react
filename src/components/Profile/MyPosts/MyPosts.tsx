@@ -1,21 +1,22 @@
 import React from 'react';
 import s from './MyPosts.module.css'
 import {Post} from "./Post/Post";
-import {PostType} from "../../../redux/state";
+import {AddPostType, PostType} from "../../../redux/state";
 
 type MyPostsPropsType = {
     messages: Array<PostType>
+    addPost: AddPostType
 }
 export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
     let postsElement = props.messages
-        .map(p => <Post message={p.message} likesCount={p.likesCount}/>)
+        .map(p => <Post message={p.message} likesCount={p.likesCount}/>);
 
     let newPostElement = React.createRef<any>();
-
-    const addPost = () => {
+    const addPostMessage = () => {
         let text = newPostElement.current.value;
-        alert(text)
+        props.addPost(text);
+        newPostElement.current.value = '';
     };
 
     return (
@@ -26,7 +27,7 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
                     <textarea ref={newPostElement}></textarea>
                 </div>
                 <div>
-                    <button onClick= {addPost}>add post</button>
+                    <button onClick = {addPostMessage}>add post</button>
                 </div>
             </div>
             <div className={s.posts}>
