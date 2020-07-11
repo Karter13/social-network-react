@@ -68,7 +68,7 @@ export let state: RootStateType = {
 };
 
 export type AddPostType = (newMessage:string) => void;
-export const addPost = (newMessage:string) => {
+export const addPost: AddPostType = (newMessage:string) => {
     let newPost = {
         id: v1(),
         message: newMessage,
