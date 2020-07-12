@@ -8,11 +8,20 @@ import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import {Route} from "react-router-dom";
-import {AddPostType, RootStateType} from "./redux/state";
+import {
+    AddMessageType,
+    AddPostType,
+    RootStateType, updateNewMessageText,
+    UpdateNewMessageTextType,
+    UpdateNewPostTextType
+} from "./redux/state";
 
 type AppPropsType = {
     state: RootStateType
     addPost: AddPostType
+    updateNewPostText: UpdateNewPostTextType
+    addMessage: AddMessageType
+    updateNewMessageText: UpdateNewMessageTextType
 }
 const App: React.FC<AppPropsType> = (props) => {
     return (
@@ -22,10 +31,14 @@ const App: React.FC<AppPropsType> = (props) => {
             <div className='app-wrapper-content'>
                 <Route path='/profile'
                        render={() => <Profile
-                           state={props.state.profilePage} addPost={props.addPost}/>}/>
+                           profilePage={props.state.profilePage}
+                           addPost={props.addPost}
+                           updateNewPostText={props.updateNewPostText}/>}/>
                 <Route path='/dialogs'
                        render={() => <Dialogs
-                           state={props.state.dialogsPage}/>}/>
+                           dialogsPage={props.state.dialogsPage}
+                           addMessage={props.addMessage}
+                           updateNewMessageText={updateNewMessageText}/>}/>
                 <Route path='/news' render={() => <News/>}/>
                 <Route path='/music' render={() => <Music/>}/>
                 <Route path='/settings' render={() => <Settings/>}/>
