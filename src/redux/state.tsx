@@ -104,7 +104,7 @@ export let state: RootStateType = {
 
 export type AddPostType = () => void;
 export const addPost: AddPostType = () => {
-    let newPost = {
+    let newPost: PostType = {
         id: v1(),
         message: state.profilePage.newPostText,
         likesCount: 0,
@@ -123,7 +123,7 @@ export const updateNewPostText: UpdateNewPostTextType = (newText: string) => {
 
 export type AddMessageType = () => void
 export const addMessage: AddMessageType = () => {
-    let newMessage = {
+    let newMessage: MessageType = {
         id: v1(),
         message: state.dialogsPage.newMessageText,
     };
