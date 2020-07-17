@@ -109,8 +109,10 @@ export const addPost: AddPostType = () => {
         message: state.profilePage.newPostText,
         likesCount: 0,
     };
-    state.profilePage.posts.push(newPost);
-    state.profilePage.newPostText = '';
+    if(newPost.message.trim()) {
+        state.profilePage.posts.push(newPost);
+        state.profilePage.newPostText = '';
+    }
     renderEntireTree(state);
 };
 
