@@ -12,9 +12,9 @@ type DialogsPropsType = {
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
     let dialogsElements = props.dialogsPage.dialogs
-        .map(d => <DialogItem name={d.name} id={d.id} img={d.img}/>);
+        .map(d => <DialogItem key={d.id} name={d.name} id={d.id} img={d.img}/>);
     let messagesElements = props.dialogsPage.messages
-        .map(m => <Message message={m.message}/>);
+        .map(m => <Message key={m.id} message={m.message}/>);
 
 
     const addMessage = () => {

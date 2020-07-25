@@ -12,7 +12,7 @@ type MyPostsPropsType = {
 export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
     let postsElement = props.messages
-        .map(p => <Post message={p.message} likesCount={p.likesCount}/>);
+        .map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>);
 
     const addPostMessage = () => {
             props.addPost();
