@@ -3,15 +3,7 @@ import * as serviceWorker from './serviceWorker';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {
-    addMessage,
-    addPost,
-    RootStateType,
-    state,
-    subscribe,
-    updateNewMessageText,
-    updateNewPostText
-} from './redux/state'
+import {RootStateType, store} from './redux/state'
 import {BrowserRouter} from "react-router-dom";
 
 
@@ -19,10 +11,11 @@ export type RenderEntireTreeType = (state: RootStateType) => void
 let renderEntireTree: RenderEntireTreeType = (state: RootStateType) => {
     ReactDOM.render(
         <BrowserRouter>
-            <App state={state} addPost={addPost}
-                 updateNewPostText={updateNewPostText}
-                 addMessage={addMessage}
-                 updateNewMessageText={updateNewMessageText}
+            <App state={store.getState()}
+                 addPost={store.addPost.bind(store)}
+                 updateNewPostText={store.updateNewPostText.bind(store)}
+                 addMessage={store.addMessage.bind(store)}
+                 updateNewMessageText={store.updateNewMessageText.bind(store)}
             />
         </BrowserRouter>
         , document.getElementById('root')
@@ -30,9 +23,9 @@ let renderEntireTree: RenderEntireTreeType = (state: RootStateType) => {
 };
 
 
-renderEntireTree(state);
+renderEntireTree(store.getState());
 
-subscribe(renderEntireTree);
+store.subscribe(renderEntireTree);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -11,7 +11,7 @@ import {Route} from "react-router-dom";
 import {
     AddMessageType,
     AddPostType,
-    RootStateType, updateNewMessageText,
+    RootStateType,
     UpdateNewMessageTextType,
     UpdateNewPostTextType
 } from "./redux/state";
@@ -38,7 +38,7 @@ const App: React.FC<AppPropsType> = (props) => {
                        render={() => <Dialogs
                            dialogsPage={props.state.dialogsPage}
                            addMessage={props.addMessage}
-                           updateNewMessageText={updateNewMessageText}/>}/>
+                           updateNewMessageText={props.updateNewMessageText}/>}/>
                 <Route path='/news' render={() => <News/>}/>
                 <Route path='/music' render={() => <Music/>}/>
                 <Route path='/settings' render={() => <Settings/>}/>
