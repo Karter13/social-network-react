@@ -1,4 +1,4 @@
-import {RenderEntireTreeType} from "../index";
+import {RenderEntireTreeType} from '../index';
 import {v1} from 'uuid';
 
 //type of _state
@@ -50,13 +50,26 @@ export type SubscribeType = (observer: RenderEntireTreeType) => void
 export type StoreType = {
     _state: RootStateType
     _callSubscriber: RenderEntireTreeType
+    subscribe: SubscribeType
+    getState: () => RootStateType
     updateNewPostText: UpdateNewPostTextType
     addPost: AddPostType
     updateNewMessageText: UpdateNewMessageTextType
     addMessage: AddMessageType
-    subscribe: SubscribeType
-    getState: () => RootStateType
+    dispatch: (action: any) => void
+
 }
+
+export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType
+type AddPostActionType = {
+    type: 'UPDATE -NEW-POST-TEXT'
+}
+type UpdateNewPostTextActionType = {
+    type: 'UPDATE -NEW-POST-TEXT'
+    newText: string
+}
+
+
 
 export const store: StoreType = {
     _state: {
@@ -73,22 +86,22 @@ export const store: StoreType = {
                 {
                     id: v1(),
                     name: 'Maikl',
-                    img: "http://avatars.mds.yandex.net/get-pdb/1245924/bc43f857-5d36-4e10-a9e1-4f838cbb5753/s1200?webp=false"
+                    img: 'http://avatars.mds.yandex.net/get-pdb/1245924/bc43f857-5d36-4e10-a9e1-4f838cbb5753/s1200?webp=false'
                 },
                 {
                     id: v1(),
                     name: 'Anna',
-                    img: "http://avatars.mds.yandex.net/get-pdb/1245924/bc43f857-5d36-4e10-a9e1-4f838cbb5753/s1200?webp=false"
+                    img: 'http://avatars.mds.yandex.net/get-pdb/1245924/bc43f857-5d36-4e10-a9e1-4f838cbb5753/s1200?webp=false'
                 },
                 {
                     id: v1(),
                     name: 'Masha',
-                    img: "http://avatars.mds.yandex.net/get-pdb/1245924/bc43f857-5d36-4e10-a9e1-4f838cbb5753/s1200?webp=false"
+                    img: 'http://avatars.mds.yandex.net/get-pdb/1245924/bc43f857-5d36-4e10-a9e1-4f838cbb5753/s1200?webp=false'
                 },
                 {
                     id: v1(),
                     name: 'Aleksey',
-                    img: "http://avatars.mds.yandex.net/get-pdb/1245924/bc43f857-5d36-4e10-a9e1-4f838cbb5753/s1200?webp=false"
+                    img: 'http://avatars.mds.yandex.net/get-pdb/1245924/bc43f857-5d36-4e10-a9e1-4f838cbb5753/s1200?webp=false'
                 },
             ],
             messages: [
@@ -104,23 +117,30 @@ export const store: StoreType = {
                 {
                     id: v1(),
                     name: 'Friends1',
-                    img: "http://avatars.mds.yandex.net/get-pdb/1245924/bc43f857-5d36-4e10-a9e1-4f838cbb5753/s1200?webp=false"
+                    img: 'http://avatars.mds.yandex.net/get-pdb/1245924/bc43f857-5d36-4e10-a9e1-4f838cbb5753/s1200?webp=false'
                 },
                 {
                     id: v1(),
                     name: 'Friends2',
-                    img: "http://avatars.mds.yandex.net/get-pdb/1245924/bc43f857-5d36-4e10-a9e1-4f838cbb5753/s1200?webp=false"
+                    img: 'http://avatars.mds.yandex.net/get-pdb/1245924/bc43f857-5d36-4e10-a9e1-4f838cbb5753/s1200?webp=false'
                 },
                 {
                     id: v1(),
                     name: 'Friends3',
-                    img: "http://avatars.mds.yandex.net/get-pdb/1245924/bc43f857-5d36-4e10-a9e1-4f838cbb5753/s1200?webp=false"
+                    img: 'http://avatars.mds.yandex.net/get-pdb/1245924/bc43f857-5d36-4e10-a9e1-4f838cbb5753/s1200?webp=false'
                 },
             ]
         }
     },
     _callSubscriber(state: RootStateType) {
         console.log('State changed');
+    },
+
+    subscribe(observer) {
+        this._callSubscriber = observer;
+    },
+    getState() {
+        return this._state
     },
 
     updateNewPostText(newText: string) {
@@ -133,7 +153,7 @@ export const store: StoreType = {
             message: this._state.profilePage.newPostText,
             likesCount: 0,
         };
-        if(newPost.message.trim()) {
+        if (newPost.message.trim()) {
             this._state.profilePage.posts.push(newPost);
             this._state.profilePage.newPostText = '';
         }
@@ -154,12 +174,22 @@ export const store: StoreType = {
         this._callSubscriber(this._state);
     },
 
-    subscribe(observer) {
-        this._callSubscriber = observer;
-    },
-
-    getState() {
-        return this._state
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            let newPost: PostType = {
+                id: v1(),
+                message: this._state.profilePage.newPostText,
+                likesCount: 0,
+            };
+            if (newPost.message.trim()) {
+                this._state.profilePage.posts.push(newPost);
+                this._state.profilePage.newPostText = '';
+            }
+            this._callSubscriber(this._state);
+        } else if (action.type === 'UPDATE -NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber(this._state);
+        }
     }
 };
 

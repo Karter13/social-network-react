@@ -2,7 +2,7 @@ import React from 'react';
 import * as serviceWorker from './serviceWorker';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import {App} from './App';
 import {RootStateType, store} from './redux/state'
 import {BrowserRouter} from "react-router-dom";
 
@@ -11,7 +11,7 @@ export type RenderEntireTreeType = (state: RootStateType) => void
 let renderEntireTree: RenderEntireTreeType = (state: RootStateType) => {
     ReactDOM.render(
         <BrowserRouter>
-            <App state={store.getState()}
+            <App state={state}
                  addPost={store.addPost.bind(store)}
                  updateNewPostText={store.updateNewPostText.bind(store)}
                  addMessage={store.addMessage.bind(store)}

@@ -23,7 +23,7 @@ type AppPropsType = {
     addMessage: AddMessageType
     updateNewMessageText: UpdateNewMessageTextType
 }
-const App: React.FC<AppPropsType> = (props) => {
+export const App: React.FC<AppPropsType> = (props) => {
     return (
         <div className='app-wrapper'>
             <Header/>
@@ -47,4 +47,4 @@ const App: React.FC<AppPropsType> = (props) => {
     );
 };
 
-export default App;
+
