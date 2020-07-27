@@ -180,18 +180,18 @@ export const store: StoreType = {
 };
 
 
-export const addPostActionCreator = ():ActionsTypes => {
-    return {type: ADD_POST};
-};
-export const updateNewPostTextActionCreator = (text: string):ActionsTypes => {
-    return {type: UPDATE_NEW_POST_TEXT, newText: text};
-};
-export const addMessageActionCreator = ():ActionsTypes => {
-    return {type: ADD_MESSAGE};
-};
-export const updateNewMessageTextActionCreator = (text: string):ActionsTypes => {
-    return {type: UPDATE_NEW_MESSAGE_TEXT, newText: text};
-};
+export const addPostActionCreator = ():ActionsTypes => ({type: ADD_POST});
+export const updateNewPostTextActionCreator = (text: string):ActionsTypes => ({
+    type: UPDATE_NEW_POST_TEXT,
+    newText: text
+});
+
+export const addMessageActionCreator = ():ActionsTypes => ({type: ADD_MESSAGE});
+export const updateNewMessageTextActionCreator = (text: string):ActionsTypes => ({
+    type: UPDATE_NEW_MESSAGE_TEXT,
+    newText: text
+});
+
 
 
 

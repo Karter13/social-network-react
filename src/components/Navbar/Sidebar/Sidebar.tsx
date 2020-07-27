@@ -5,7 +5,6 @@ export const Sidebar = () => {
     return (
         <div className={s.sidebar}>
             <h3>Friends</h3>
-
         </div>
     )
 }
