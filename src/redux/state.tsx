@@ -175,5 +175,13 @@ export const store: StoreType = {
 };
 
 
+export const addPostActionCreator = ():ActionsTypes => {
+    return {type: 'ADD-POST'};
+};
+export const updateNewPostTextActionCreator = (text: string):ActionsTypes => {
+    return {type: 'UPDATE-NEW-POST-TEXT', newText: text};
+};
+
+
 
 
