@@ -1,6 +1,11 @@
 import {RenderEntireTreeType} from '../index';
 import {v1} from 'uuid';
 
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const ADD_MESSAGE = 'ADD-MESSAGE';
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+
 //type of _state
 export type PostType = {
     id: string
@@ -145,7 +150,7 @@ export const store: StoreType = {
     },
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             let newPost: PostType = {
                 id: v1(),
                 message: this._state.profilePage.newPostText,
@@ -156,10 +161,10 @@ export const store: StoreType = {
                 this._state.profilePage.newPostText = '';
             }
             this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber(this._state);
-        } else if (action.type === 'ADD-MESSAGE') {
+        } else if (action.type === ADD_MESSAGE) {
             let newMessage: MessageType = {
                 id: v1(),
                 message: this._state.dialogsPage.newMessageText,
@@ -167,7 +172,7 @@ export const store: StoreType = {
             this._state.dialogsPage.messages.push(newMessage);
             this._state.dialogsPage.newMessageText = '';
             this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
             this._state.dialogsPage.newMessageText = action.newText;
             this._callSubscriber(this._state);
         }
@@ -176,12 +181,17 @@ export const store: StoreType = {
 
 
 export const addPostActionCreator = ():ActionsTypes => {
-    return {type: 'ADD-POST'};
+    return {type: ADD_POST};
 };
 export const updateNewPostTextActionCreator = (text: string):ActionsTypes => {
-    return {type: 'UPDATE-NEW-POST-TEXT', newText: text};
+    return {type: UPDATE_NEW_POST_TEXT, newText: text};
 };
-
+export const addMessageActionCreator = ():ActionsTypes => {
+    return {type: ADD_MESSAGE};
+};
+export const updateNewMessageTextActionCreator = (text: string):ActionsTypes => {
+    return {type: UPDATE_NEW_MESSAGE_TEXT, newText: text};
+};
 
 
 
