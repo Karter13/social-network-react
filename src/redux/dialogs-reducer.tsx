@@ -1,5 +1,5 @@
 import {v1} from 'uuid';
-import {ActionsTypes, DialogsPageType, MessageType} from './state';
+import {ActionsTypes, DialogsPageType, MessageType} from './store';
 
 const ADD_MESSAGE = 'ADD-MESSAGE';
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
