@@ -12,7 +12,7 @@ import {ActionsTypes, RootStateType,} from './redux/store';
 
 type AppPropsType = {
     state: RootStateType
-    dispatch:(action: ActionsTypes) => void
+    dispatch: (action: ActionsTypes) => void
 }
 export const App: React.FC<AppPropsType> = (props) => {
     return (

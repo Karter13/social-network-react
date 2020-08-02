@@ -1,8 +1,6 @@
 import React from 'react';
 
-type MusicPropsType = {
-
-}
+type MusicPropsType = {}
 
 export const Music: React.FC<MusicPropsType> = (props) => {
     return (

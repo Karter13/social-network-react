@@ -7,7 +7,7 @@ import {addPostActionCreator, updateNewPostTextActionCreator} from '../../../red
 type MyPostsPropsType = {
     messages: Array<PostType>
     newPostText: string
-    dispatch:(action: ActionsTypes) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
 export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
@@ -16,10 +16,10 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
         .map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>);
 
     const addPostMessage = () => {
-            props.dispatch(addPostActionCreator());
+        props.dispatch(addPostActionCreator());
     };
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-            props.dispatch(updateNewPostTextActionCreator(e.currentTarget.value));
+        props.dispatch(updateNewPostTextActionCreator(e.currentTarget.value));
     };
 
     return (
@@ -32,7 +32,7 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
                     />
                 </div>
                 <div>
-                    <button onClick = {addPostMessage}>add post</button>
+                    <button onClick={addPostMessage}>add post</button>
                 </div>
             </div>
             <div className={s.posts}>

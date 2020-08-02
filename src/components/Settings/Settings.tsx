@@ -1,8 +1,6 @@
 import React from 'react';
 
-type SettingsPropsType = {
-
-}
+type SettingsPropsType = {}
 
 export const Settings: React.FC<SettingsPropsType> = (props) => {
     return (

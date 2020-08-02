@@ -1,10 +1,8 @@
 import React from 'react';
 
-type NewsPropsType = {
+type NewsPropsType = {}
 
-}
-
-export const  News: React.FC<NewsPropsType> = (props) => {
+export const News: React.FC<NewsPropsType> = (props) => {
     return (
         <div>
             News

@@ -5,7 +5,7 @@ import './index.css';
 import {App} from './App';
 import {BrowserRouter} from 'react-router-dom';
 import {RootStateType} from './redux/store';
-import store from './redux/redux-store';
+import {store} from './redux/redux-store';
 
 
 export type RenderEntireTreeType = (state: RootStateType) => void
@@ -19,7 +19,6 @@ let renderEntireTree: RenderEntireTreeType = (state: RootStateType) => {
         , document.getElementById('root')
     );
 };
-
 
 renderEntireTree(store.getState());
 store.subscribe(() => {

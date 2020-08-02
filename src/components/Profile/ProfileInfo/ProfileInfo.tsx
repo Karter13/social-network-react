@@ -1,10 +1,7 @@
 import React from 'react';
 import s from './ProfileInfo.module.css'
 
-
-type ProfileInfoPropsType = {
-
-}
+type ProfileInfoPropsType = {}
 export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
     return (
         <div className={s.profile}>

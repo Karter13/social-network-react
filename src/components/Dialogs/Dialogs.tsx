@@ -10,7 +10,7 @@ import {addMessageActionCreator, updateNewMessageTextActionCreator} from '../../
 
 type DialogsPropsType = {
     dialogsPage: DialogsPageType
-    dispatch:(action: ActionsTypes) => void
+    dispatch: (action: ActionsTypes) => void
 }
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
@@ -21,10 +21,10 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
 
     const addMessage = () => {
-            props.dispatch(addMessageActionCreator());
+        props.dispatch(addMessageActionCreator());
     };
     const addNewMessageText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-            props.dispatch(updateNewMessageTextActionCreator(e.currentTarget.value));
+        props.dispatch(updateNewMessageTextActionCreator(e.currentTarget.value));
     };
 
     return (
