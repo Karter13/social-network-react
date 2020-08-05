@@ -3,16 +3,14 @@ import './App.css';
 import {Header} from './components/Header/Header';
 import {Navbar} from './components/Navbar/Navbar';
 import {Profile} from './components/Profile/Profile';
-import {Dialogs} from './components/Dialogs/Dialogs';
 import {Music} from './components/Music/Music';
 import {News} from './components/News/News';
 import {Settings} from './components/Settings/Settings';
 import {Route} from 'react-router-dom';
-import {ActionsTypes, RootStateType,} from './redux/store';
+import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 
 type AppPropsType = {
-    state: RootStateType
-    dispatch: (action: ActionsTypes) => void
+    store: any
 }
 export const App: React.FC<AppPropsType> = (props) => {
     return (
@@ -21,14 +19,10 @@ export const App: React.FC<AppPropsType> = (props) => {
             <Navbar/>
             <div className='app-wrapper-content'>
                 <Route path='/profile'
-                       render={() => <Profile
-                           profilePage={props.state.profilePage}
-                           dispatch={props.dispatch}
+                       render={() => <Profile store={props.store}
                        />}/>
                 <Route path='/dialogs'
-                       render={() => <Dialogs
-                           dialogsPage={props.state.dialogsPage}
-                           dispatch={props.dispatch}
+                       render={() => <DialogsContainer store={props.store}
                        />}/>
                 <Route path='/news' render={() => <News/>}/>
                 <Route path='/music' render={() => <Music/>}/>
