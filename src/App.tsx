@@ -10,7 +10,7 @@ import {Route} from 'react-router-dom';
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 
 type AppPropsType = {
-    store: any
+
 }
 export const App: React.FC<AppPropsType> = (props) => {
     return (
@@ -19,11 +19,9 @@ export const App: React.FC<AppPropsType> = (props) => {
             <Navbar/>
             <div className='app-wrapper-content'>
                 <Route path='/profile'
-                       render={() => <Profile store={props.store}
-                       />}/>
+                       render={() => <Profile />}/>
                 <Route path='/dialogs'
-                       render={() => <DialogsContainer store={props.store}
-                       />}/>
+                       render={() => <DialogsContainer/>}/>
                 <Route path='/news' render={() => <News/>}/>
                 <Route path='/music' render={() => <Music/>}/>
                 <Route path='/settings' render={() => <Settings/>}/>
