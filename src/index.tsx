@@ -5,10 +5,10 @@ import './index.css';
 import {App} from './App';
 import {BrowserRouter} from 'react-router-dom';
 import {RootStateType} from './redux/store';
-import {store} from './redux/redux-store';
+import {StateType, store} from './redux/redux-store';
 
 
-export type RenderEntireTreeType = (state: RootStateType) => void
+export type RenderEntireTreeType = (state: StateType) => void
 let renderEntireTree: RenderEntireTreeType = (state: RootStateType) => {
     ReactDOM.render(
         <BrowserRouter>

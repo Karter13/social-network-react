@@ -9,5 +9,7 @@ let reducers = combineReducers({
     sidebar: sidebarReducer
 });
 
+export type StateType = ReturnType<typeof reducers>
+// export type StoreType = ReturnType<typeof store>
 export let store = createStore(reducers);
 
