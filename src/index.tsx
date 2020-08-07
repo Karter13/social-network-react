@@ -9,7 +9,19 @@ import {store} from './redux/redux-store';
 import {Provider} from 'react-redux';
 
 
-export type RenderEntireTreeType = (state: RootStateType) => void
+ReactDOM.render(
+    <BrowserRouter>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </BrowserRouter>
+    , document.getElementById('root')
+);
+
+
+
+// export type RenderEntireTreeType = (state: RootStateType) => void
+/*
 let renderEntireTree: RenderEntireTreeType = (state: RootStateType) => {
     ReactDOM.render(
         <BrowserRouter>
@@ -20,12 +32,15 @@ let renderEntireTree: RenderEntireTreeType = (state: RootStateType) => {
         , document.getElementById('root')
     );
 };
+*/
 
+/*
 renderEntireTree(store.getState());
 store.subscribe(() => {
     let state = store.getState();
     renderEntireTree(state);
 });
+*/
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

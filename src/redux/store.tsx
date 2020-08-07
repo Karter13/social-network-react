@@ -1,4 +1,4 @@
-import {RenderEntireTreeType} from '../index';
+// import {RenderEntireTreeType} from '../index';
 import {v1} from 'uuid';
 import {addPostActionCreator, profileReducer, updateNewPostTextActionCreator} from './profile-reducer';
 import {addMessageActionCreator, dialogsReducer, updateNewMessageTextActionCreator} from './dialogs-reducer';
@@ -44,12 +44,12 @@ export type RootStateType = {
 }
 
 //type of methods
-export type SubscribeType = (observer: RenderEntireTreeType) => void
+export type SubscribeType = (observer: any) => void
 
 //type of store
 export type StoreType = {
     _state: RootStateType
-    _callSubscriber: RenderEntireTreeType
+    _callSubscriber: any
     subscribe: SubscribeType
     getState: () => RootStateType
     dispatch: (action: ActionsTypes) => void
