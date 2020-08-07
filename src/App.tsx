@@ -9,9 +9,7 @@ import {Settings} from './components/Settings/Settings';
 import {Route} from 'react-router-dom';
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 
-type AppPropsType = {
-
-}
+type AppPropsType = {}
 export const App: React.FC<AppPropsType> = (props) => {
     return (
         <div className='app-wrapper'>

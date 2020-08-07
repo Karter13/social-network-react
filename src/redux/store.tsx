@@ -5,6 +5,7 @@ import {addMessageActionCreator, dialogsReducer, updateNewMessageTextActionCreat
 import {sidebarReducer} from './sidebar-reducer';
 
 //type of _state
+export type DispatchType = (action: ActionsTypes) => void
 export type PostType = {
     id: string
     message: string
