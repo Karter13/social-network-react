@@ -1,20 +1,20 @@
 import {v1} from 'uuid';
-import {ActionsTypes} from './store';
+import {ActionsTypes, UsersPageType, UserType} from './store';
 
-type LocationType = {
-    city: string
-    country: string
-}
-type UserType = {
-    id: string
-    followed: boolean
-    fullName: string
-    status: string
-    location: LocationType
-}
-type UsersPageType = {
-    users: Array<UserType>
-}
+// export type LocationType = {
+//     city: string
+//     country: string
+// }
+// export type UserType = {
+//     id: string
+//     followed: boolean
+//     fullName: string
+//     status: string
+//     location: LocationType
+// }
+// export type UsersPageType = {
+//     users: Array<UserType>
+// }
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -24,8 +24,9 @@ const SET_USERS = 'SET_USERS';
 
 let initialState: UsersPageType = {
     users: [
-       /* {
+        {
             id: v1(),
+            photoUrl:'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
             followed: false,
             fullName: 'Maikl',
             status: 'I am a good boy',
@@ -33,6 +34,7 @@ let initialState: UsersPageType = {
         },
         {
             id: v1(),
+            photoUrl:'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
             followed: true,
             fullName: 'Alex',
             status: 'I am a good boy too',
@@ -40,16 +42,17 @@ let initialState: UsersPageType = {
         },
         {
             id: v1(),
+            photoUrl:'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
             followed: false,
             fullName: 'Tolia',
             status: 'I am a good boy too',
             location: {city: 'Moscow', country: 'Russia'}
-        },*/
+        },
 
     ],
 };
 
-export const userReducer = (state: UsersPageType = initialState, action: ActionsTypes): UsersPageType => {
+export const usersReducer = (state: UsersPageType = initialState, action: ActionsTypes): UsersPageType => {
 
     switch (action.type) {
         case FOLLOW:

@@ -38,10 +38,26 @@ export type DialogsPageType = {
 export type SidebarType = {
     friends: Array<FriendSidebarType>
 }
+export type LocationType = {
+    city: string
+    country: string
+}
+export type UserType = {
+    id: string
+    photoUrl: string
+    followed: boolean
+    fullName: string
+    status: string
+    location: LocationType
+}
+export type UsersPageType = {
+    users: Array<UserType>
+}
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sidebar: SidebarType
+    usersPage: UsersPageType
 }
 
 //type of methods
@@ -67,6 +83,35 @@ export type ActionsTypes = ReturnType<typeof addPostActionCreator>
 
 export const store: StoreType = {
     _state: {
+        usersPage: {
+            users: [
+                {
+                    id: v1(),
+                    photoUrl:'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
+                    followed: false,
+                    fullName: 'Maikl',
+                    status: 'I am a good boy',
+                    location: {city: 'Grodno', country: 'Belarus'}
+                },
+                {
+                    id: v1(),
+                    photoUrl:'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
+                    followed: true,
+                    fullName: 'Alex',
+                    status: 'I am a good boy too',
+                    location: {city: 'Minsk', country: 'Belarus'}
+                },
+                {
+                    id: v1(),
+                    photoUrl:'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
+                    followed: false,
+                    fullName: 'Tolia',
+                    status: 'I am a good boy too',
+                    location: {city: 'Moscow', country: 'Russia'}
+                },
+
+            ],
+        },
         profilePage: {
             posts: [
                 {id: v1(), message: 'Good post', likesCount: 15},
