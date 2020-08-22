@@ -2,6 +2,7 @@ import React from 'react';
 import {UserType} from '../../redux/store';
 import styles from './Users.module.css'
 import {v1} from 'uuid';
+import axios from 'axios'
 
 
 export type UsersPropsType = {
@@ -14,32 +15,39 @@ export type UsersPropsType = {
 export const Users: React.FC<UsersPropsType> = (props) => {
 
     if (props.users.length === 0) {
-        props.setUsers([
-            {
-                id: v1(),
-                photoUrl: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
-                followed: false,
-                fullName: 'Maikl',
-                status: 'I am a good boy',
-                location: {city: 'Grodno', country: 'Belarus'}
-            },
-            {
-                id: v1(),
-                photoUrl: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
-                followed: true,
-                fullName: 'Alex',
-                status: 'I am a good boy too',
-                location: {city: 'Minsk', country: 'Belarus'}
-            },
-            {
-                id: v1(),
-                photoUrl: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
-                followed: false,
-                fullName: 'Tolia',
-                status: 'I am a good boy too',
-                location: {city: 'Moscow', country: 'Russia'}
-            },
-        ]);
+
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response) => {
+            debugger;
+            console.log(response.data.items);
+            props.setUsers(response.data.items);
+        });
+
+        // props.setUsers([
+        //     {
+        //         id: v1(),
+        //         photoUrl: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
+        //         followed: false,
+        //         fullName: 'Maikl',
+        //         status: 'I am a good boy',
+        //         location: {city: 'Grodno', country: 'Belarus'}
+        //     },
+        //     {
+        //         id: v1(),
+        //         photoUrl: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
+        //         followed: true,
+        //         fullName: 'Alex',
+        //         status: 'I am a good boy too',
+        //         location: {city: 'Minsk', country: 'Belarus'}
+        //     },
+        //     {
+        //         id: v1(),
+        //         photoUrl: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
+        //         followed: false,
+        //         fullName: 'Tolia',
+        //         status: 'I am a good boy too',
+        //         location: {city: 'Moscow', country: 'Russia'}
+        //     },
+        // ]);
     }
 
     return <div className={styles.usersPage}>
@@ -63,12 +71,12 @@ export const Users: React.FC<UsersPropsType> = (props) => {
                 </span>
                 <span>
                     <span>
-                        <div>{u.fullName}</div>
+                        <div>{u.name}</div>
                         <div>{u.status}</div>
                     </span>
                      <span>
-                        <div>{u.location.country}</div>
-                        <div>{u.location.city}</div>
+                        <div>{'u.location.country'}</div>
+                        <div>{'u.location.city'}</div>
                     </span>
                 </span>
 

@@ -46,7 +46,7 @@ export type UserType = {
     id: string
     photoUrl: string
     followed: boolean
-    fullName: string
+    name: string
     status: string
     location: LocationType
 }
@@ -89,7 +89,7 @@ export const store: StoreType = {
                     id: v1(),
                     photoUrl:'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
                     followed: false,
-                    fullName: 'Maikl',
+                    name: 'Maikl',
                     status: 'I am a good boy',
                     location: {city: 'Grodno', country: 'Belarus'}
                 },
@@ -97,7 +97,7 @@ export const store: StoreType = {
                     id: v1(),
                     photoUrl:'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
                     followed: true,
-                    fullName: 'Alex',
+                    name: 'Alex',
                     status: 'I am a good boy too',
                     location: {city: 'Minsk', country: 'Belarus'}
                 },
@@ -105,7 +105,7 @@ export const store: StoreType = {
                     id: v1(),
                     photoUrl:'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
                     followed: false,
-                    fullName: 'Tolia',
+                    name: 'Tolia',
                     status: 'I am a good boy too',
                     location: {city: 'Moscow', country: 'Russia'}
                 },
