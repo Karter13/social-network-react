@@ -14,42 +14,18 @@ export type UsersPropsType = {
 
 export const Users: React.FC<UsersPropsType> = (props) => {
 
-    if (props.users.length === 0) {
+    let getUsers = () => {
+        if (props.users.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users')
+                .then((response) => {
+                    props.setUsers(response.data.items);
+                });
+        }
+    };
 
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
-            .then((response) => {
-                props.setUsers(response.data.items);
-            });
-
-        // props.setUsers([
-        //     {
-        //         id: v1(),
-        //         photoUrl: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
-        //         followed: false,
-        //         fullName: 'Maikl',
-        //         status: 'I am a good boy',
-        //         location: {city: 'Grodno', country: 'Belarus'}
-        //     },
-        //     {
-        //         id: v1(),
-        //         photoUrl: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
-        //         followed: true,
-        //         fullName: 'Alex',
-        //         status: 'I am a good boy too',
-        //         location: {city: 'Minsk', country: 'Belarus'}
-        //     },
-        //     {
-        //         id: v1(),
-        //         photoUrl: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
-        //         followed: false,
-        //         fullName: 'Tolia',
-        //         status: 'I am a good boy too',
-        //         location: {city: 'Moscow', country: 'Russia'}
-        //     },
-        // ]);
-    }
 
     return <div className={styles.usersPage}>
+        <button onClick={getUsers}>getUsers</button>
         {
             props.users.map(u => <div key={u.id}>
                 <span>
