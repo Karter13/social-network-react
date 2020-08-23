@@ -14,12 +14,12 @@ export type UsersPropsType = {
 
 //при типизации классовой компоненты первая позиция типизация пропсов вторая стэйта!!!
 // пропсы в конструкторе также типизируются
-export class UsersC extends React.Component<UsersPropsType, any> {
+export class UsersC extends React.Component<UsersPropsType> {
 
     constructor(props: UsersPropsType) {
         super(props);
 
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+        axios.get('https://social-network.samuraijs.com/api/1.0/users?count=4')
             .then((response) => {
                 this.props.setUsers(response.data.items);
             });
