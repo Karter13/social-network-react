@@ -42,9 +42,13 @@ export type LocationType = {
     city: string
     country: string
 }
+export type PhotosType = {
+    small: string
+    large: string
+}
 export type UserType = {
     id: string
-    photoUrl: string
+    photos: PhotosType
     followed: boolean
     name: string
     status: string
@@ -87,7 +91,7 @@ export const store: StoreType = {
             users: [
                 {
                     id: v1(),
-                    photoUrl:'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
+                    photos:{small:'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg', large: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg'},
                     followed: false,
                     name: 'Maikl',
                     status: 'I am a good boy',
@@ -95,7 +99,7 @@ export const store: StoreType = {
                 },
                 {
                     id: v1(),
-                    photoUrl:'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
+                    photos:{small:'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg', large: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg'},
                     followed: true,
                     name: 'Alex',
                     status: 'I am a good boy too',
@@ -103,7 +107,7 @@ export const store: StoreType = {
                 },
                 {
                     id: v1(),
-                    photoUrl:'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
+                    photos:{small:'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg', large: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg'},
                     followed: false,
                     name: 'Tolia',
                     status: 'I am a good boy too',

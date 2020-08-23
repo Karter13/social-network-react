@@ -1,8 +1,8 @@
 import React from 'react';
 import {UserType} from '../../redux/store';
 import styles from './Users.module.css'
-import {v1} from 'uuid';
 import axios from 'axios'
+import userPhoto from '../../assets/images/noavatar.png'
 
 
 export type UsersPropsType = {
@@ -16,11 +16,10 @@ export const Users: React.FC<UsersPropsType> = (props) => {
 
     if (props.users.length === 0) {
 
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response) => {
-            debugger;
-            console.log(response.data.items);
-            props.setUsers(response.data.items);
-        });
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+            .then((response) => {
+                props.setUsers(response.data.items);
+            });
 
         // props.setUsers([
         //     {
@@ -55,7 +54,8 @@ export const Users: React.FC<UsersPropsType> = (props) => {
             props.users.map(u => <div key={u.id}>
                 <span>
                     <div>
-                        <img src={u.photoUrl} alt="photo" className={styles.usersPhoto}/>
+                        <img src={u.photos.small !== null ? u.photos.small : userPhoto} alt="photo"
+                             className={styles.usersPhoto}/>
                     </div>
                     <div>
                         {
