@@ -13,7 +13,9 @@ export type UsersPropsType = {
     follow: (usersId: string) => void
     unfollow: (usersId: string) => void
     setUsers: (users: Array<UserType>) => void
-    setCurrentPage: (currentPage: number) => void
+    setCurrentPage: (pageNumber: number) => void
+    setTotalUsersCount: (totalCount: number) => void
+
 }
 
 //при типизации классовой компоненты первая позиция типизация пропсов вторая стэйта!!!
@@ -24,8 +26,17 @@ export class Users extends React.Component<UsersPropsType> {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then((response) => {
                 this.props.setUsers(response.data.items);
+                this.props.setTotalUsersCount(response.data.totalCount);
             });
     }
+
+    onPageChanged = (pageNumber: number) => {
+        this.props.setCurrentPage(pageNumber);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+            .then((response) => {
+                this.props.setUsers(response.data.items);
+            });
+    };
 
     render() {
 
@@ -41,7 +52,7 @@ export class Users extends React.Component<UsersPropsType> {
                     return <span
                         className={this.props.currentPage === page ? styles.selectedPage : undefined}
                         onClick={() => {
-                            this.props.setCurrentPage(page)
+                            this.onPageChanged(page);
                         }}>{page}</span>
                 })}
             </div>

@@ -3,7 +3,7 @@ import {v1} from 'uuid';
 import {addPostActionCreator, profileReducer, updateNewPostTextActionCreator} from './profile-reducer';
 import {addMessageActionCreator, dialogsReducer, updateNewMessageTextActionCreator} from './dialogs-reducer';
 import {sidebarReducer} from './sidebar-reducer';
-import {followAC, setCurrentPageAC, setUsersAC, unfollowAC} from './users-reducer';
+import {followAC, setCurrentPageAC, setUsersAC, setUsersTotalCountAC, unfollowAC} from './users-reducer';
 
 //type of _state
 export type DispatchType = (action: ActionsTypes) => void
@@ -87,6 +87,7 @@ export type ActionsTypes = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof unfollowAC>
     | ReturnType<typeof setUsersAC>
     | ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setUsersTotalCountAC>
 
 
 export const store: StoreType = {
