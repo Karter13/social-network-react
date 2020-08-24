@@ -56,6 +56,8 @@ export type UserType = {
 }
 export type UsersPageType = {
     users: Array<UserType>
+    pageSize: number
+    totalUserCount: number
 }
 export type RootStateType = {
     profilePage: ProfilePageType
@@ -115,6 +117,8 @@ export const store: StoreType = {
                 },
 
             ],
+            pageSize: 10,
+            totalUserCount: 100,
         },
         profilePage: {
             posts: [

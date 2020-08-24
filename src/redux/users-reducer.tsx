@@ -8,6 +8,8 @@ const SET_USERS = 'SET_USERS';
 
 let initialState: UsersPageType = {
     users: [],
+    pageSize: 5,
+    totalUserCount: 0,
 };
 
 export const usersReducer = (state: UsersPageType = initialState, action: ActionsTypes): UsersPageType => {

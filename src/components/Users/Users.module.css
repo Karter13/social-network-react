@@ -5,3 +5,8 @@
 .usersPage {
     margin: 10px;
 }
+
+.selectedPage {
+    font-weight: bold;
+    font-size: 25px;
+}
