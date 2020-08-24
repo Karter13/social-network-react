@@ -3,7 +3,7 @@ import {v1} from 'uuid';
 import {addPostActionCreator, profileReducer, updateNewPostTextActionCreator} from './profile-reducer';
 import {addMessageActionCreator, dialogsReducer, updateNewMessageTextActionCreator} from './dialogs-reducer';
 import {sidebarReducer} from './sidebar-reducer';
-import {followAC, setUsersAC, unfollowAC} from './users-reducer';
+import {followAC, setCurrentPageAC, setUsersAC, unfollowAC} from './users-reducer';
 
 //type of _state
 export type DispatchType = (action: ActionsTypes) => void
@@ -58,6 +58,7 @@ export type UsersPageType = {
     users: Array<UserType>
     pageSize: number
     totalUserCount: number
+    currentPage: number
 }
 export type RootStateType = {
     profilePage: ProfilePageType
@@ -85,6 +86,7 @@ export type ActionsTypes = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof followAC>
     | ReturnType<typeof unfollowAC>
     | ReturnType<typeof setUsersAC>
+    | ReturnType<typeof setCurrentPageAC>
 
 
 export const store: StoreType = {
@@ -93,7 +95,10 @@ export const store: StoreType = {
             users: [
                 {
                     id: v1(),
-                    photos:{small:'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg', large: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg'},
+                    photos: {
+                        small: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
+                        large: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg'
+                    },
                     followed: false,
                     name: 'Maikl',
                     status: 'I am a good boy',
@@ -101,7 +106,10 @@ export const store: StoreType = {
                 },
                 {
                     id: v1(),
-                    photos:{small:'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg', large: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg'},
+                    photos: {
+                        small: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
+                        large: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg'
+                    },
                     followed: true,
                     name: 'Alex',
                     status: 'I am a good boy too',
@@ -109,7 +117,10 @@ export const store: StoreType = {
                 },
                 {
                     id: v1(),
-                    photos:{small:'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg', large: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg'},
+                    photos: {
+                        small: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
+                        large: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg'
+                    },
                     followed: false,
                     name: 'Tolia',
                     status: 'I am a good boy too',
@@ -119,6 +130,7 @@ export const store: StoreType = {
             ],
             pageSize: 10,
             totalUserCount: 100,
+            currentPage: 1
         },
         profilePage: {
             posts: [
