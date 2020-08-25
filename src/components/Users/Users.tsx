@@ -48,8 +48,8 @@ export class Users extends React.Component<UsersPropsType> {
 
         return <div className={styles.usersPage}>
             <div>
-                {pages.map(page => {
-                    return <span
+                {pages.map((page, i) => {
+                    return <span key={i}
                         className={this.props.currentPage === page ? styles.selectedPage : undefined}
                         onClick={() => {
                             this.onPageChanged(page);
