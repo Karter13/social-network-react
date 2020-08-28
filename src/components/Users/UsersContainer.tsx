@@ -8,7 +8,54 @@ import {
     setUsersTotalCountAC,
     unfollowAC
 } from '../../redux/users-reducer';
-import {UsersAPIComponent} from './UsersAPIComponent';
+import axios from 'axios';
+import {Users} from './Users';
+
+
+export type UsersAPIContainerPropsType = {
+    users: Array<UserType>
+    pageSize: number
+    totalUserCount: number
+    currentPage: number
+    follow: (usersId: string) => void
+    unfollow: (usersId: string) => void
+    setUsers: (users: Array<UserType>) => void
+    setCurrentPage: (pageNumber: number) => void
+    setTotalUsersCount: (totalCount: number) => void
+
+}
+
+//при типизации классовой компоненты первая позиция типизация пропсов вторая стэйта!!!
+// пропсы в конструкторе также типизируются
+export class UsersAPIContainer extends React.Component<UsersAPIContainerPropsType> {
+
+    componentDidMount(): void {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            .then((response) => {
+                this.props.setUsers(response.data.items);
+                this.props.setTotalUsersCount(response.data.totalCount);
+            });
+    }
+
+    onPageChanged = (pageNumber: number) => {
+        this.props.setCurrentPage(pageNumber);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+            .then((response) => {
+                this.props.setUsers(response.data.items);
+            });
+    };
+
+    render() {
+        return <Users totalUserCount={this.props.totalUserCount}
+                      pageSize={this.props.pageSize}
+                      currentPage={this.props.currentPage}
+                      onPageChanged={this.onPageChanged}
+                      users={this.props.users}
+                      follow={this.props.follow}
+                      unfollow={this.props.unfollow}
+        />
+    }
+}
 
 const mapStateToProps = (state: RootStateType) => {
     return {
@@ -38,4 +85,4 @@ const mapDispatchToProps = (dispatch: DispatchType) => {
     }
 };
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIContainer);
