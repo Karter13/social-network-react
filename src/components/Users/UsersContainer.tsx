@@ -8,7 +8,7 @@ import {
     setUsersTotalCountAC,
     unfollowAC
 } from '../../redux/users-reducer';
-import {Users} from './Users';
+import {UsersAPIComponent} from './UsersAPIComponent';
 
 const mapStateToProps = (state: RootStateType) => {
     return {
@@ -38,4 +38,4 @@ const mapDispatchToProps = (dispatch: DispatchType) => {
     }
 };
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent);

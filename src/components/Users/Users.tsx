@@ -20,44 +20,27 @@ export type UsersPropsType = {
 
 //при типизации классовой компоненты первая позиция типизация пропсов вторая стэйта!!!
 // пропсы в конструкторе также типизируются
-export class Users extends React.Component<UsersPropsType> {
+export const Users = (props) => {
 
-    componentDidMount(): void {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then((response) => {
-                this.props.setUsers(response.data.items);
-                this.props.setTotalUsersCount(response.data.totalCount);
-            });
+    let pagesCount = Math.ceil(props.totalUserCount / props.pageSize);
+    let pages = [];
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i);
     }
 
-    onPageChanged = (pageNumber: number) => {
-        this.props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
-            .then((response) => {
-                this.props.setUsers(response.data.items);
-            });
-    };
-
-    render() {
-
-        let pagesCount = Math.ceil(this.props.totalUserCount / this.props.pageSize);
-        let pages = [];
-        for (let i = 1; i <= pagesCount; i++) {
-            pages.push(i);
-        }
-
-        return <div className={styles.usersPage}>
+    return (
+        <div className={styles.usersPage}>
             <div>
                 {pages.map((page, i) => {
                     return <span key={i}
-                        className={this.props.currentPage === page ? styles.selectedPage : undefined}
-                        onClick={() => {
-                            this.onPageChanged(page);
-                        }}>{page}</span>
+                                 className={props.currentPage === page ? styles.selectedPage : undefined}
+                                 onClick={() => {
+                                     onPageChanged(page);
+                                 }}>{page}</span>
                 })}
             </div>
             {
-                this.props.users.map(u => <div key={u.id}>
+                props.users.map(u => <div key={u.id}>
                     <span>
                         <div>
                             <img src={u.photos.small !== null ? u.photos.small : userPhoto}
@@ -68,10 +51,10 @@ export class Users extends React.Component<UsersPropsType> {
                             {
                                 u.followed
                                     ? <button onClick={() => {
-                                        this.props.unfollow(u.id)
+                                        props.unfollow(u.id)
                                     }}>Unfollow</button>
                                     : <button onClick={() => {
-                                        this.props.follow(u.id)
+                                        props.follow(u.id)
                                     }}>Follow</button>
                             }
                         </div>
@@ -89,6 +72,5 @@ export class Users extends React.Component<UsersPropsType> {
                 </div>)
             }
         </div>
-    };
-
-}
+    )
+};
