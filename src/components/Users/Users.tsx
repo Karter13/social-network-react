@@ -3,7 +3,6 @@ import {UserType} from '../../redux/store';
 import styles from './Users.module.css'
 import userPhoto from '../../assets/images/noavatar.png'
 
-
 export type UsersPropsType = {
     users: Array<UserType>
     pageSize: number
@@ -28,6 +27,7 @@ export const Users: React.FC<UsersPropsType> = (props) => {
 
     return (
         <div className={styles.usersPage}>
+
             <div>
                 {pages.map((page, i) => {
                     return <span key={i}
@@ -37,6 +37,7 @@ export const Users: React.FC<UsersPropsType> = (props) => {
                                  }}>{page}</span>
                 })}
             </div>
+
             {
                 props.users.map(u => <div key={u.id}>
                     <span>

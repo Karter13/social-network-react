@@ -3,7 +3,14 @@ import {v1} from 'uuid';
 import {addPostActionCreator, profileReducer, updateNewPostTextActionCreator} from './profile-reducer';
 import {addMessageActionCreator, dialogsReducer, updateNewMessageTextActionCreator} from './dialogs-reducer';
 import {sidebarReducer} from './sidebar-reducer';
-import {followAC, setCurrentPageAC, setUsersAC, setUsersTotalCountAC, unfollowAC} from './users-reducer';
+import {
+    followAC,
+    setCurrentPageAC,
+    setUsersAC,
+    setUsersTotalCountAC,
+    toggleIsFetchingAC,
+    unfollowAC
+} from './users-reducer';
 
 //type of _state
 export type DispatchType = (action: ActionsTypes) => void
@@ -59,6 +66,7 @@ export type UsersPageType = {
     pageSize: number
     totalUserCount: number
     currentPage: number
+    isFetching: boolean,
 }
 export type RootStateType = {
     profilePage: ProfilePageType
@@ -88,6 +96,8 @@ export type ActionsTypes = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof setUsersAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setUsersTotalCountAC>
+    | ReturnType<typeof toggleIsFetchingAC>
+
 
 
 export const store: StoreType = {
@@ -131,7 +141,8 @@ export const store: StoreType = {
             ],
             pageSize: 10,
             totalUserCount: 100,
-            currentPage: 1
+            currentPage: 1,
+            isFetching: false
         },
         profilePage: {
             posts: [
