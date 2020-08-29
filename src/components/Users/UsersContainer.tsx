@@ -5,13 +5,13 @@ import {
     followAC,
     setCurrentPageAC,
     setUsersAC,
-    setUsersTotalCountAC, toggleIsFetchingAC,
+    setUsersTotalCountAC,
+    toggleIsFetchingAC,
     unfollowAC
 } from '../../redux/users-reducer';
 import axios from 'axios';
 import {Users} from './Users';
-import preloader from '../../assets/images/loader.svg'
-import styles from './Users.module.css'
+import {Preloader} from '../common/Preloader/Preloader';
 
 
 export type UsersAPIContainerPropsType = {
@@ -56,9 +56,7 @@ export class UsersAPIContainer extends React.Component<UsersAPIContainerPropsTyp
     render() {
         return <>
             {this.props.isFetching
-                ? <div className={styles.loader}>
-                    <img src={preloader}/>
-                </div>
+                ? <Preloader/>
                 : null}
             <Users totalUserCount={this.props.totalUserCount}
                    pageSize={this.props.pageSize}
