@@ -10,13 +10,37 @@ export type PostType = {
     message: string
     likesCount: number
 }
+
+export type ContactsType = {
+    facebook: string,
+    website: string,
+    vk: string,
+    twitter: string,
+    instagram: string,
+    youtube: string,
+    github: string,
+    mainLink: string
+}
+export type PhotosType = {
+    small: string,
+    large: string
+}
+export type ProfileType = {
+    aboutMe: string,
+    contacts: ContactsType,
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
+    fullName: string,
+    userId: number,
+    photos: PhotosType
+}
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
-    profile: any
+    profile: ProfileType | null
 }
 
-let initialState = {
+let initialState: ProfilePageType = {
     posts: [
         {id: v1(), message: 'Good post', likesCount: 15},
         {id: v1(), message: 'I love React', likesCount: 20},
@@ -26,7 +50,7 @@ let initialState = {
     profile: null
 };
 
-export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes): ProfilePageType => {
+export const profileReducer = (state = initialState, action: ActionsTypes): ProfilePageType => {
 
     switch (action.type) {
         case ADD_POST: {
@@ -59,4 +83,4 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
 
 export const addPost = () => ({type: ADD_POST} as const);
 export const updateNewPostText = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newText: text} as const);
-export const setUserProfile = (profile: string) => ({type: SET_USER_PROFILE, profile} as const);
+export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const);

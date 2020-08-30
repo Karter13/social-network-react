@@ -2,12 +2,12 @@ import React from 'react';
 import {Profile} from './Profile';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import {setUserProfile} from '../../redux/profile-reducer';
+import {ProfileType, setUserProfile} from '../../redux/profile-reducer';
 import {StateType} from '../../redux/redux-store';
 
 type ProfileAPIContainerPropsType = {
     setUserProfile: (profile: any) => void
-    profile: any
+    profile: ProfileType | null
 }
 
 export class ProfileAPIContainer extends React.Component<ProfileAPIContainerPropsType> {
