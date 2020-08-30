@@ -1,8 +1,23 @@
 import {v1} from 'uuid';
-import {ActionsTypes, DialogsPageType, MessageType} from './store';
+import {ActionsTypes} from './store';
 
 const ADD_MESSAGE = 'ADD-MESSAGE';
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+
+export type DialogType = {
+    id: string
+    name: string
+    img: string
+}
+export type MessageType = {
+    id: string
+    message: string
+}
+export type DialogsPageType = {
+    dialogs: Array<DialogType>
+    messages: Array<MessageType>
+    newMessageText: string
+}
 
 let initialState = {
     dialogs: [
@@ -60,11 +75,7 @@ export const dialogsReducer = (state: DialogsPageType = initialState, action: Ac
         default:
             return state;
     }
-
 };
 
 export const addMessage = () => ({type: ADD_MESSAGE} as const);
-export const addNewMessageText = (text: string) => ({
-    type: UPDATE_NEW_MESSAGE_TEXT,
-    newText: text
-} as const);
+export const addNewMessageText = (text: string) => ({type: UPDATE_NEW_MESSAGE_TEXT, newText: text} as const);

@@ -1,5 +1,14 @@
-import {ActionsTypes, SidebarType} from './store';
+import {ActionsTypes} from './store';
 import {v1} from 'uuid';
+
+export type FriendSidebarType = {
+    id: string
+    name: string
+    img: string
+}
+export type SidebarType = {
+    friends: Array<FriendSidebarType>
+}
 
 let initialState = {
     friends: [

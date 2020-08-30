@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {RootStateType, UserType} from '../../redux/store';
+import {UserType} from '../../redux/users-reducer';
 import axios from 'axios';
 import {Users} from './Users';
 import {Preloader} from '../common/Preloader/Preloader';
@@ -12,6 +12,7 @@ import {
     toggleIsFetching,
     unfollow
 } from '../../redux/users-reducer';
+import {StateType} from '../../redux/redux-store';
 
 export type UsersAPIContainerPropsType = {
     users: Array<UserType>
@@ -66,7 +67,7 @@ export class UsersAPIContainer extends React.Component<UsersAPIContainerPropsTyp
     }
 }
 
-const mapStateToProps = (state: RootStateType) => {
+const mapStateToProps = (state: StateType) => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,

@@ -1,9 +1,20 @@
 import {v1} from 'uuid';
-import {ActionsTypes, PostType, ProfilePageType} from './store';
+import {ActionsTypes} from './store';
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
+
+export type PostType = {
+    id: string
+    message: string
+    likesCount: number
+}
+export type ProfilePageType = {
+    posts: Array<PostType>
+    newPostText: string
+    profile: any
+}
 
 let initialState = {
     posts: [

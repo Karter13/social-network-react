@@ -1,4 +1,4 @@
-import {ActionsTypes, UsersPageType, UserType} from './store';
+import {ActionsTypes} from './store';
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -6,6 +6,31 @@ const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_USERS_TOTAL_COUNT = 'SET_USERS_TOTAL_COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+
+export type LocationType = {
+    city: string
+    country: string
+}
+export type PhotosType = {
+    small: string
+    large: string
+}
+export type UserType = {
+    id: string
+    photos: PhotosType
+    followed: boolean
+    name: string
+    status: string
+    location: LocationType
+}
+export type UsersPageType = {
+    users: Array<UserType>
+    pageSize: number
+    totalUserCount: number
+    currentPage: number
+    isFetching: boolean,
+}
+
 
 let initialState: UsersPageType = {
     users: [],
