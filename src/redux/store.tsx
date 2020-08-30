@@ -1,7 +1,7 @@
 // import {RenderEntireTreeType} from '../index';
 import {v1} from 'uuid';
-import {addPostActionCreator, profileReducer, updateNewPostTextActionCreator} from './profile-reducer';
-import {addMessageActionCreator, dialogsReducer, updateNewMessageTextActionCreator} from './dialogs-reducer';
+import {addPost, profileReducer, updateNewPostText} from './profile-reducer';
+import {addMessage, addNewMessageText, dialogsReducer} from './dialogs-reducer';
 import {sidebarReducer} from './sidebar-reducer';
 import {follow, setCurrentPage, setUsers, setUsersTotalCount, toggleIsFetching, unfollow} from './users-reducer';
 
@@ -80,10 +80,10 @@ export type StoreType = {
     dispatch: (action: ActionsTypes) => void
 }
 
-export type ActionsTypes = ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof updateNewPostTextActionCreator>
-    | ReturnType<typeof addMessageActionCreator>
-    | ReturnType<typeof updateNewMessageTextActionCreator>
+export type ActionsTypes = ReturnType<typeof addPost>
+    | ReturnType<typeof updateNewPostText>
+    | ReturnType<typeof addMessage>
+    | ReturnType<typeof addNewMessageText>
     | ReturnType<typeof follow>
     | ReturnType<typeof unfollow>
     | ReturnType<typeof setUsers>

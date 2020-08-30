@@ -11,8 +11,6 @@ export type UsersPropsType = {
     follow: (usersId: string) => void
     unfollow: (usersId: string) => void
     onPageChanged: (pageNumber: number) => void
-
-
 }
 
 //при типизации классовой компоненты первая позиция типизация пропсов вторая стэйта!!!

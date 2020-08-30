@@ -13,7 +13,6 @@ import {
     unfollow
 } from '../../redux/users-reducer';
 
-
 export type UsersAPIContainerPropsType = {
     users: Array<UserType>
     pageSize: number
@@ -26,7 +25,6 @@ export type UsersAPIContainerPropsType = {
     setUsersTotalCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
     isFetching: boolean
-
 }
 
 //при типизации классовой компоненты первая позиция типизация пропсов вторая стэйта!!!
