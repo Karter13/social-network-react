@@ -16,3 +16,5 @@ export type StateType = ReturnType<typeof reducers>
 
 export let store = createStore(reducers);
 
+// @ts-ignore
+window.store = store;

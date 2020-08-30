@@ -1,6 +1,6 @@
 // import {RenderEntireTreeType} from '../index';
 import {v1} from 'uuid';
-import {addPost, profileReducer, updateNewPostText} from './profile-reducer';
+import {addPost, profileReducer, setUserProfile, updateNewPostText} from './profile-reducer';
 import {addMessage, addNewMessageText, dialogsReducer} from './dialogs-reducer';
 import {sidebarReducer} from './sidebar-reducer';
 import {follow, setCurrentPage, setUsers, setUsersTotalCount, toggleIsFetching, unfollow} from './users-reducer';
@@ -29,6 +29,7 @@ export type FriendSidebarType = {
 export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
+    profile: any
 }
 export type DialogsPageType = {
     dialogs: Array<DialogType>
@@ -90,6 +91,7 @@ export type ActionsTypes = ReturnType<typeof addPost>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setUsersTotalCount>
     | ReturnType<typeof toggleIsFetching>
+    | ReturnType<typeof setUserProfile>
 
 
 
@@ -143,7 +145,8 @@ export const store: StoreType = {
                 {id: v1(), message: 'I love React', likesCount: 20},
                 {id: v1(), message: 'I love JS', likesCount: 10},
             ],
-            newPostText: ''
+            newPostText: '',
+            profile: null
         },
         dialogsPage: {
             dialogs: [
