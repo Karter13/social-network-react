@@ -2,7 +2,7 @@ import {
     follow,
     setCurrentPage,
     setUsers,
-    setUsersTotalCount,
+    setUsersTotalCount, toggleIsFetching,
     unfollow,
     UsersPageType,
     usersReducer
@@ -223,4 +223,44 @@ test('correct change number in totalUserCount', () => {
     expect(endState.totalUserCount).toBe(70);
     expect(endState.totalUserCount).toBeTruthy();
     expect(typeof endState.totalUserCount).toBe('number');
+});
+
+test('correct change toggle in isFetching', () => {
+
+    const startState: UsersPageType = {
+        users: [
+            {
+                id: '1',
+                photos: {
+                    small: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
+                    large: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg'
+                },
+                followed: true,
+                name: 'Maikl',
+                status: 'I am a good boy',
+                location: {city: 'Grodno', country: 'Belarus'}
+            },
+            {
+                id: '2',
+                photos: {
+                    small: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg',
+                    large: 'https://chitayutvse.ru/upload/vk/img/4338_D1Itz_TUvvA.jpg'
+                },
+                followed: false,
+                name: 'Alex',
+                status: 'I am a good boy too',
+                location: {city: 'Minsk', country: 'Belarus'}
+            },
+        ],
+        pageSize: 10,
+        totalUserCount: 100,
+        currentPage: 1,
+        isFetching: true,
+    };
+
+    const action = toggleIsFetching(false);
+    const endState = usersReducer(startState, action);
+
+    expect(endState.isFetching).toBe(false);
+    expect(typeof endState.isFetching).toBe('boolean');
 });
