@@ -1,5 +1,4 @@
-import {DialogsPageType} from './store';
-import {addMessageActionCreator, dialogsReducer, updateNewMessageTextActionCreator} from './dialogs-reducer';
+import {addMessage, addNewMessageText, DialogsPageType, dialogsReducer} from './dialogs-reducer';
 
 test('correct add message in array messages for dialogPage', () => {
     const startState: DialogsPageType = {
@@ -19,7 +18,7 @@ test('correct add message in array messages for dialogPage', () => {
         newMessageText: ''
     };
 
-    const action = addMessageActionCreator();
+    const action = addMessage();
     const engState = dialogsReducer(startState, action);
 
     expect(engState.messages.length).toBe(5);
@@ -46,7 +45,7 @@ test('correct add text to newMessageText for dialogPage', () => {
 
     const newText = 'text for test';
 
-    const action = updateNewMessageTextActionCreator(newText);
+    const action = addNewMessageText(newText);
     const engState = dialogsReducer(startState, action);
 
     expect(engState.newMessageText).toBe('text for test');

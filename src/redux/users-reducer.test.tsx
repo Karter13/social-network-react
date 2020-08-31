@@ -1,5 +1,12 @@
-import {UsersPageType} from './store';
-import {followAC, setCurrentPageAC, setUsersAC, setUsersTotalCountAC, unfollowAC, usersReducer} from './users-reducer';
+import {
+    follow,
+    setCurrentPage,
+    setUsers,
+    setUsersTotalCount,
+    unfollow,
+    UsersPageType,
+    usersReducer
+} from './users-reducer';
 
 test('correct change followed to true', () => {
 
@@ -30,10 +37,11 @@ test('correct change followed to true', () => {
         ],
         pageSize: 10,
         totalUserCount: 100,
-        currentPage: 1
+        currentPage: 1,
+        isFetching: true,
     };
 
-    const action = followAC('2');
+    const action = follow('2');
     const endState = usersReducer(startState, action)
 
     expect(endState.users.length).toBe(2);
@@ -69,10 +77,11 @@ test('correct change followed to false', () => {
         ],
         pageSize: 10,
         totalUserCount: 100,
-        currentPage: 1
+        currentPage: 1,
+        isFetching: true,
     };
 
-    const action = unfollowAC('1');
+    const action = unfollow('1');
     const endState = usersReducer(startState, action)
 
     expect(endState.users.length).toBe(2);
@@ -97,7 +106,8 @@ test('correct change users in array users', () => {
         ],
         pageSize: 10,
         totalUserCount: 100,
-        currentPage: 1
+        currentPage: 1,
+        isFetching: true,
     };
 
     const users = [
@@ -125,7 +135,7 @@ test('correct change users in array users', () => {
         }
     ];
 
-    const action = setUsersAC(users);
+    const action = setUsers(users);
     const endState = usersReducer(startState, action)
 
     expect(endState.users.length).toBe(2);
@@ -163,10 +173,11 @@ test('correct change number in currentPage', () => {
         ],
         pageSize: 10,
         totalUserCount: 100,
-        currentPage: 1
+        currentPage: 1,
+        isFetching: true,
     };
 
-    const action = setCurrentPageAC(5);
+    const action = setCurrentPage(5);
     const endState = usersReducer(startState, action);
 
     expect(endState.currentPage).toBe(5);
@@ -202,10 +213,11 @@ test('correct change number in totalUserCount', () => {
         ],
         pageSize: 10,
         totalUserCount: 100,
-        currentPage: 1
+        currentPage: 1,
+        isFetching: true,
     };
 
-    const action = setUsersTotalCountAC(70);
+    const action = setUsersTotalCount(70);
     const endState = usersReducer(startState, action);
 
     expect(endState.totalUserCount).toBe(70);
