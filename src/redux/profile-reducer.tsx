@@ -78,7 +78,6 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Prof
         default:
             return state;
     }
-
 };
 
 export const addPost = () => ({type: ADD_POST} as const);
