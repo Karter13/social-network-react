@@ -2,7 +2,7 @@ import {ActionsTypes} from './store';
 
 const SET_USERS_DATA = 'SET_USERS_DATA';
 
-type AuthType = {
+export type AuthType = {
     id: number | null,
     email: string | null,
     login: string | null
@@ -27,6 +27,6 @@ export const authReducer = (state = initialState, action: ActionsTypes): AuthTyp
 
 };
 
-export const setUserData = (userId: number | null, email: string | null, login: string | null) => ({
+export const setAuthUserData = (userId: number | null, email: string | null, login: string | null) => ({
     type: SET_USERS_DATA,
     data: {userId, email, login}} as const);

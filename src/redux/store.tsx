@@ -93,7 +93,7 @@
 import {addPost, setUserProfile, updateNewPostText} from './profile-reducer';
 import {addMessage, addNewMessageText} from './dialogs-reducer';
 import {follow, setCurrentPage, setUsers, setUsersTotalCount, toggleIsFetching, unfollow} from './users-reducer';
-import {setUserData} from './auth-reducer';
+import {setAuthUserData} from './auth-reducer';
 
 export type ActionsTypes = ReturnType<typeof addPost>
     | ReturnType<typeof updateNewPostText>
@@ -106,7 +106,7 @@ export type ActionsTypes = ReturnType<typeof addPost>
     | ReturnType<typeof setUsersTotalCount>
     | ReturnType<typeof toggleIsFetching>
     | ReturnType<typeof setUserProfile>
-    | ReturnType<typeof setUserData
+    | ReturnType<typeof setAuthUserData
 
     >
 
