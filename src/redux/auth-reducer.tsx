@@ -3,22 +3,25 @@ import {ActionsTypes} from './store';
 const SET_USERS_DATA = 'SET_USERS_DATA';
 
 export type AuthType = {
-    id: number | null,
-    email: string | null,
+    userId: number | null
+    email: string | null
     login: string | null
+    isAuth: boolean
 }
 
 const initialState: AuthType  = {
-    id: null,
+    userId: null,
     email: null,
-    login: null
+    login: null,
+    isAuth: false
 };
 export const authReducer = (state = initialState, action: ActionsTypes): AuthType => {
     switch (action.type) {
         case SET_USERS_DATA: {
             return {
                 ...state,
-                ...action.data
+                ...action.data,
+                isAuth: true
             }
         }
         default:

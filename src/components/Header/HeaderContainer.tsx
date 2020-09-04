@@ -5,7 +5,10 @@ import {connect} from 'react-redux';
 import {StateType} from '../../redux/redux-store';
 import {setAuthUserData} from '../../redux/auth-reducer';
 
-type MapStatePropsType = {}
+type MapStatePropsType = {
+    isAuth: boolean
+    login: string | null
+}
 type MapDispatchPropsType = {
     setAuthUserData: (userId: number | null, email: string | null, login: string | null) => void
 }
@@ -20,7 +23,7 @@ class HeaderContainer extends React.Component<HeaderContainerPropsType> {
         })
             .then((response) => {
                 if (response.data.resultCode === 0) {
-                    //вопрос с id
+                    console.log(response.data.data);
                     let {id, email, login} = response.data.data;
                     this.props.setAuthUserData(id, email, login);
                 }
@@ -34,7 +37,10 @@ class HeaderContainer extends React.Component<HeaderContainerPropsType> {
 
 
 const mapStateToProps = (state: StateType) => {
-    return {}
+    return {
+        isAuth: state.auth.isAuth,
+        login: state.auth.login,
+    }
 };
 export default connect(mapStateToProps, {setAuthUserData})(HeaderContainer)
 
