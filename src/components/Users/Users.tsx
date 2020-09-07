@@ -13,8 +13,8 @@ export type UsersPropsType = {
     follow: (usersId: string) => void
     unfollow: (usersId: string) => void
     onPageChanged: (pageNumber: number) => void
-    toggleFollowingProgress: (isFetching: boolean) => void
-    followingInProgress: boolean
+    toggleFollowingProgress: (isFetching: boolean, userId: string) => void
+    followingInProgress: Array<string>
 }
 
 //при типизации классовой компоненты первая позиция типизация пропсов вторая стэйта!!!
@@ -53,27 +53,31 @@ export const Users: React.FC<UsersPropsType> = (props) => {
                         <div>
                             {
                                 u.followed
-                                    ? <button disabled={props.followingInProgress} onClick={() => {
+                                    ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
 
-                                        props.toggleFollowingProgress(true);
+                                        props.toggleFollowingProgress(true, u.id);
 
                                         unfollowAPI.delUnfollow(u.id).then((data) => {
                                             if (data.resultCode === 0) {
                                                 props.unfollow(u.id)
                                             }
-                                            props.toggleFollowingProgress(false);
+
+                                            props.toggleFollowingProgress(false, u.id);
                                         });
 
                                     }}>Unfollow</button>
-                                    : <button disabled={props.followingInProgress} onClick={() => {
+                                    : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
 
-                                        props.toggleFollowingProgress(true);
+                                        props.toggleFollowingProgress(true, u.id);
 
                                         followAPI.postUnfollow(u.id).then((data) => {
                                             if (data.resultCode === 0) {
                                                 props.follow(u.id)
                                             }
-                                            props.toggleFollowingProgress(false);
+
+                                            console.log(props.followingInProgress);
+                                        debugger
+                                            props.toggleFollowingProgress(false, u.id);
                                         });
 
                                     }}>Follow</button>
