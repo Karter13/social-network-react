@@ -74,9 +74,6 @@ export const Users: React.FC<UsersPropsType> = (props) => {
                                             if (data.resultCode === 0) {
                                                 props.follow(u.id)
                                             }
-
-                                            console.log(props.followingInProgress);
-                                        debugger
                                             props.toggleFollowingProgress(false, u.id);
                                         });
 
