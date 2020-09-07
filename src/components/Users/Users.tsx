@@ -1,5 +1,5 @@
 import React from 'react';
-import {UserType} from '../../redux/users-reducer';
+import {toggleFollowingProgress, UserType} from '../../redux/users-reducer';
 import styles from './Users.module.css'
 import userPhoto from '../../assets/images/noavatar.png'
 import {NavLink} from 'react-router-dom';
@@ -13,6 +13,8 @@ export type UsersPropsType = {
     follow: (usersId: string) => void
     unfollow: (usersId: string) => void
     onPageChanged: (pageNumber: number) => void
+    toggleFollowingProgress: (isFetching: boolean) => void
+    followingInProgress: boolean
 }
 
 //при типизации классовой компоненты первая позиция типизация пропсов вторая стэйта!!!
@@ -51,21 +53,27 @@ export const Users: React.FC<UsersPropsType> = (props) => {
                         <div>
                             {
                                 u.followed
-                                    ? <button onClick={() => {
+                                    ? <button disabled={props.followingInProgress} onClick={() => {
+
+                                        props.toggleFollowingProgress(true);
 
                                         unfollowAPI.delUnfollow(u.id).then((data) => {
                                             if (data.resultCode === 0) {
                                                 props.unfollow(u.id)
                                             }
+                                            props.toggleFollowingProgress(false);
                                         });
 
                                     }}>Unfollow</button>
-                                    : <button onClick={() => {
+                                    : <button disabled={props.followingInProgress} onClick={() => {
+
+                                        props.toggleFollowingProgress(true);
 
                                         followAPI.postUnfollow(u.id).then((data) => {
                                             if (data.resultCode === 0) {
                                                 props.follow(u.id)
                                             }
+                                            props.toggleFollowingProgress(false);
                                         });
 
                                     }}>Follow</button>
