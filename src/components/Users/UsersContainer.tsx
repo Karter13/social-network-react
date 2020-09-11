@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {follow, getUsers, toggleFollowingProgress, unfollow, UserType} from '../../redux/users-reducer';
+import {follow, getPage, getUsers, toggleFollowingProgress, unfollow, UserType} from '../../redux/users-reducer';
 import {Users} from './Users';
 import {Preloader} from '../common/Preloader/Preloader';
 import {StateType} from '../../redux/redux-store';
@@ -16,6 +16,7 @@ export type UsersAPIContainerPropsType = {
     toggleFollowingProgress: (isFetching: boolean, userId: string) => void
     followingInProgress: Array<string>
     getUsers: (currentPage: number, pageSize: number) => void
+    getPage: (pageNumber: number, pageSize: number) => void
 }
 
 //при типизации классовой компоненты первая позиция типизация пропсов вторая стэйта!!!
@@ -36,7 +37,7 @@ export class UsersAPIContainer extends React.Component<UsersAPIContainerPropsTyp
 
     onPageChanged = (pageNumber: number) => {
 
-        this.props.getUsers(pageNumber,this.props.pageSize)
+        this.props.getPage(pageNumber,this.props.pageSize)
 
        /* this.props.toggleIsFetching(true);
         this.props.setCurrentPage(pageNumber);
@@ -102,5 +103,6 @@ export const UsersContainer = connect(mapStateToProps, {
     follow,
     unfollow,
     toggleFollowingProgress,
-    getUsers
+    getUsers,
+    getPage
 })(UsersAPIContainer);
