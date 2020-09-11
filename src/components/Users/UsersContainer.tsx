@@ -2,9 +2,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {
     follow,
+    getUsers,
     setCurrentPage,
     setUsers,
-    setUsersTotalCount, toggleFollowingProgress,
+    setUsersTotalCount,
+    toggleFollowingProgress,
     toggleIsFetching,
     unfollow,
     UserType
@@ -12,7 +14,6 @@ import {
 import {Users} from './Users';
 import {Preloader} from '../common/Preloader/Preloader';
 import {StateType} from '../../redux/redux-store';
-import {usersAPI} from '../../api/api';
 
 export type UsersAPIContainerPropsType = {
     users: Array<UserType>
@@ -28,6 +29,7 @@ export type UsersAPIContainerPropsType = {
     isFetching: boolean
     toggleFollowingProgress: (isFetching: boolean, userId: string) => void
     followingInProgress: Array<string>
+    getUsers: (currentPage: number, pageSize: number) => void
 }
 
 //при типизации классовой компоненты первая позиция типизация пропсов вторая стэйта!!!
@@ -35,23 +37,28 @@ export type UsersAPIContainerPropsType = {
 export class UsersAPIContainer extends React.Component<UsersAPIContainerPropsType> {
 
     componentDidMount(): void {
-        this.props.toggleIsFetching(true);
 
+        this.props.getUsers(this.props.currentPage,this.props.pageSize);
+
+       /* this.props.toggleIsFetching(true);
         usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then((data) => {
             this.props.toggleIsFetching(false);
             this.props.setUsers(data.items);
             this.props.setUsersTotalCount(data.totalCount);
-        });
+        });*/
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.toggleIsFetching(true);
+
+        this.props.getUsers(pageNumber,this.props.pageSize)
+
+       /* this.props.toggleIsFetching(true);
         this.props.setCurrentPage(pageNumber);
 
         usersAPI.getUsers(pageNumber, this.props.pageSize).then((data) => {
             this.props.toggleIsFetching(false);
             this.props.setUsers(data.items);
-        });
+        });*/
     };
 
     render() {
@@ -112,5 +119,6 @@ export const UsersContainer = connect(mapStateToProps, {
     setCurrentPage,
     setUsersTotalCount,
     toggleIsFetching,
-    toggleFollowingProgress
+    toggleFollowingProgress,
+    getUsers
 })(UsersAPIContainer);
