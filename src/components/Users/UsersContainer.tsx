@@ -1,16 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {
-    follow,
-    getUsers,
-    setCurrentPage,
-    setUsers,
-    setUsersTotalCount,
-    toggleFollowingProgress,
-    toggleIsFetching,
-    unfollow,
-    UserType
-} from '../../redux/users-reducer';
+import {follow, getUsers, toggleFollowingProgress, unfollow, UserType} from '../../redux/users-reducer';
 import {Users} from './Users';
 import {Preloader} from '../common/Preloader/Preloader';
 import {StateType} from '../../redux/redux-store';
@@ -22,10 +12,6 @@ export type UsersAPIContainerPropsType = {
     currentPage: number
     follow: (usersId: string) => void
     unfollow: (usersId: string) => void
-    setUsers: (users: Array<UserType>) => void
-    setCurrentPage: (pageNumber: number) => void
-    setUsersTotalCount: (totalCount: number) => void
-    toggleIsFetching: (isFetching: boolean) => void
     isFetching: boolean
     toggleFollowingProgress: (isFetching: boolean, userId: string) => void
     followingInProgress: Array<string>
@@ -115,10 +101,6 @@ const mapStateToProps = (state: StateType) => {
 export const UsersContainer = connect(mapStateToProps, {
     follow,
     unfollow,
-    setUsers,
-    setCurrentPage,
-    setUsersTotalCount,
-    toggleIsFetching,
     toggleFollowingProgress,
     getUsers
 })(UsersAPIContainer);

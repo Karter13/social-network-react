@@ -1,9 +1,9 @@
 import React from 'react';
-import {toggleFollowingProgress, UserType} from '../../redux/users-reducer';
+import {UserType} from '../../redux/users-reducer';
 import styles from './Users.module.css'
 import userPhoto from '../../assets/images/noavatar.png'
 import {NavLink} from 'react-router-dom';
-import {followAPI, unfollowAPI} from '../../api/api';
+import {usersAPI} from '../../api/api';
 
 export type UsersPropsType = {
     users: Array<UserType>
@@ -57,7 +57,7 @@ export const Users: React.FC<UsersPropsType> = (props) => {
 
                                         props.toggleFollowingProgress(true, u.id);
 
-                                        unfollowAPI.delUnfollow(u.id).then((data) => {
+                                        usersAPI.unfollow(u.id).then((data) => {
                                             if (data.resultCode === 0) {
                                                 props.unfollow(u.id)
                                             }
@@ -70,7 +70,7 @@ export const Users: React.FC<UsersPropsType> = (props) => {
 
                                         props.toggleFollowingProgress(true, u.id);
 
-                                        followAPI.postUnfollow(u.id).then((data) => {
+                                        usersAPI.follow(u.id).then((data) => {
                                             if (data.resultCode === 0) {
                                                 props.follow(u.id)
                                             }

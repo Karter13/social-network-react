@@ -3,7 +3,7 @@ import {Header} from './Header';
 import {connect} from 'react-redux';
 import {StateType} from '../../redux/redux-store';
 import {setAuthUserData} from '../../redux/auth-reducer';
-import {authAPI} from '../../api/api';
+import {usersAPI} from '../../api/api';
 
 type MapStatePropsType = {
     isAuth: boolean
@@ -18,7 +18,7 @@ class HeaderContainer extends React.Component<HeaderContainerPropsType> {
 
     componentDidMount(): void {
 
-        authAPI.getAuth().then((data) => {
+        usersAPI.getAuth().then((data) => {
                 if (data.resultCode === 0) {
                     let {id, email, login} = data.data;
                     this.props.setAuthUserData(id, email, login);
