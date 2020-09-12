@@ -118,6 +118,7 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: string) => 
 } as const);
 
 
+//THUNKS
 export type ThunkType = ThunkAction<void, StateType, unknown, ActionsTypes>;
 export type ThunkDispatchUsers = ThunkDispatch<StateType, unknown, ActionsTypes>;
 

@@ -13,7 +13,6 @@ export type UsersAPIContainerPropsType = {
     follow: (usersId: string) => void
     unfollow: (usersId: string) => void
     isFetching: boolean
-    toggleFollowingProgress: (isFetching: boolean, userId: string) => void
     followingInProgress: Array<string>
     getUsers: (currentPage: number, pageSize: number) => void
     getPage: (pageNumber: number, pageSize: number) => void
@@ -58,7 +57,6 @@ export class UsersAPIContainer extends React.Component<UsersAPIContainerPropsTyp
                    users={this.props.users}
                    follow={this.props.follow}
                    unfollow={this.props.unfollow}
-                   toggleFollowingProgress={this.props.toggleFollowingProgress}
                    followingInProgress={this.props.followingInProgress}
             />
         </>
@@ -102,7 +100,6 @@ const mapStateToProps = (state: StateType) => {
 export const UsersContainer = connect(mapStateToProps, {
     follow,
     unfollow,
-    toggleFollowingProgress,
     getUsers,
     getPage
 })(UsersAPIContainer);
