@@ -1,5 +1,7 @@
 import {v1} from 'uuid';
 import {ActionsTypes} from './store';
+import {usersAPI} from '../api/api';
+import {ThunkDispatchUsers, ThunkType, toggleFollowingProgress, unfollowSuccess} from './users-reducer';
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -83,3 +85,13 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Prof
 export const addPost = () => ({type: ADD_POST} as const);
 export const updateNewPostText = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newText: text} as const);
 export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const);
+
+//THUNK
+export const getUserProfile = (userId: string): ThunkType => {
+    return (dispatch: ThunkDispatchUsers) => {
+        usersAPI.getProfile(userId)
+            .then((data) => {
+                dispatch(setUserProfile(data));
+            });
+    }
+};

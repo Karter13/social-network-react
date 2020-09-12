@@ -25,26 +25,11 @@ export class UsersAPIContainer extends React.Component<UsersAPIContainerPropsTyp
     componentDidMount(): void {
 
         this.props.getUsers(this.props.currentPage,this.props.pageSize);
-
-       /* this.props.toggleIsFetching(true);
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then((data) => {
-            this.props.toggleIsFetching(false);
-            this.props.setUsers(data.items);
-            this.props.setUsersTotalCount(data.totalCount);
-        });*/
     }
 
     onPageChanged = (pageNumber: number) => {
 
-        this.props.getPage(pageNumber,this.props.pageSize)
-
-       /* this.props.toggleIsFetching(true);
-        this.props.setCurrentPage(pageNumber);
-
-        usersAPI.getUsers(pageNumber, this.props.pageSize).then((data) => {
-            this.props.toggleIsFetching(false);
-            this.props.setUsers(data.items);
-        });*/
+        this.props.getPage(pageNumber,this.props.pageSize);
     };
 
     render() {
@@ -76,12 +61,6 @@ const mapStateToProps = (state: StateType) => {
 
 // const mapDispatchToProps = (dispatch: DispatchType) => {
 //     return {
-//         follow: (usersId: string) => {
-//             dispatch(followAC(usersId))
-//         },
-//         unfollow: (usersId: string) => {
-//             dispatch(unfollowAC(usersId))
-//         },
 //         setUsers: (users: Array<UserType>) => {
 //             dispatch(setUsersAC(users))
 //         },
