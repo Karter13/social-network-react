@@ -1,7 +1,7 @@
 import {v1} from 'uuid';
 import {ActionsTypes} from './store';
 import {usersAPI} from '../api/api';
-import {ThunkDispatchUsers, ThunkType, toggleFollowingProgress, unfollowSuccess} from './users-reducer';
+import {ThunkDispatchUsers, ThunkType} from './users-reducer';
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';

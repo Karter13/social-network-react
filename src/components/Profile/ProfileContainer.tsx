@@ -1,10 +1,9 @@
 import React from 'react';
 import {Profile} from './Profile';
 import {connect} from 'react-redux';
-import {getUserProfile, ProfileType, setUserProfile} from '../../redux/profile-reducer';
+import {getUserProfile, ProfileType} from '../../redux/profile-reducer';
 import {StateType} from '../../redux/redux-store';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
-import {usersAPI} from '../../api/api';
 
 type PathParamType = {
     userId: string | undefined

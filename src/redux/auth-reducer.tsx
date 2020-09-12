@@ -1,4 +1,6 @@
 import {ActionsTypes} from './store';
+import {ThunkDispatchUsers, ThunkType} from './users-reducer';
+import {authPI} from '../api/api';
 
 const SET_USERS_DATA = 'SET_USERS_DATA';
 
@@ -9,7 +11,7 @@ export type AuthType = {
     isAuth: boolean
 }
 
-const initialState: AuthType  = {
+const initialState: AuthType = {
     userId: null,
     email: null,
     login: null,
@@ -27,9 +29,19 @@ export const authReducer = (state = initialState, action: ActionsTypes): AuthTyp
         default:
             return state;
     }
-
 };
 
 export const setAuthUserData = (userId: number | null, email: string | null, login: string | null) => ({
     type: SET_USERS_DATA,
-    data: {userId, email, login}} as const);
+    data: {userId, email, login}
+} as const);
+
+export const getAuthUserData = (): ThunkType => (dispatch: ThunkDispatchUsers) => {
+    authPI.me().then((data) => {
+        if (data.resultCode === 0) {
+            let {id, email, login} = data.data;
+            dispatch(setAuthUserData(id, email, login));
+        }
+    });
+};
+
