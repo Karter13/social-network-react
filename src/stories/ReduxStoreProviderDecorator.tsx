@@ -6,6 +6,7 @@ import {usersReducer} from '../redux/users-reducer';
 import {authReducer} from '../redux/auth-reducer';
 import {Provider} from 'react-redux';
 import React from 'react';
+import {BrowserRouter} from 'react-router-dom';
 
 
 const rootReducer = combineReducers({
@@ -21,7 +22,9 @@ export const storyBookStore = createStore(rootReducer);
 
 
 export const ReduxStoreProviderDecorator = (storyFn: any) => {
-    return <Provider store={storyBookStore}>
-        { storyFn() }
-    </Provider>
+    return <BrowserRouter>
+        <Provider store={storyBookStore}>
+            {storyFn()}
+        </Provider>
+    </BrowserRouter>
 };
