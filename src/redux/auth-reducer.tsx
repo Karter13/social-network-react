@@ -36,6 +36,7 @@ export const setAuthUserData = (userId: number | null, email: string | null, log
     data: {userId, email, login}
 } as const);
 
+//THUNKS
 export const getAuthUserData = (): ThunkType => (dispatch: ThunkDispatchUsers) => {
     authPI.me().then((data) => {
         if (data.resultCode === 0) {
