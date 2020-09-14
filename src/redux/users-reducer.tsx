@@ -25,7 +25,7 @@ export type UserType = {
     followed: boolean
     name: string
     status: string
-    location: LocationType
+    location?: LocationType
 }
 export type UsersPageType = {
     users: Array<UserType>

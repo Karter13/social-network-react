@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {LocationType, PhotosType} from '../redux/users-reducer';
 
 const instance = axios.create({
     withCredentials: true,
@@ -8,17 +9,39 @@ const instance = axios.create({
     },
 });
 
+
+type UserType = {
+    id: string
+    photos: PhotosType
+    followed: boolean
+    name: string
+    status: string
+}
+type APIUsersType = {
+    items: Array<UserType>
+    totalCount: number
+    error: null | string
+}
+
+type ARIFollowType = {
+    resultCode: 1 | 0
+    messages: Array<string>
+    data: {}
+}
+
+
+
 export const usersAPI = {
     getUsers(currentPage: number = 1, pageSize: number = 10) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+        return instance.get<APIUsersType>(`users?page=${currentPage}&count=${pageSize}`)
             .then(response => response.data);
     },
     follow(id: string) {
-        return instance.post(`follow/${id}`)
+        return instance.post<ARIFollowType>(`follow/${id}`)
             .then(response => response.data)
     },
     unfollow(id: string) {
-        return instance.delete(`follow/${id}`)
+        return instance.delete<ARIFollowType>(`follow/${id}`)
             .then(response => response.data)
     },
     getProfile(userId: string) {
