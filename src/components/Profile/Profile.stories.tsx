@@ -1,13 +1,15 @@
-import {ProfileInfo, ProfileInfoPropsType} from './ProfileInfo';
+import {Profile} from './Profile';
+import {ReduxStoreProviderDecorator} from '../../stories/ReduxStoreProviderDecorator';
 import React from 'react';
 
 export default {
-    title: 'ProfileInfo component',
-    component: ProfileInfo,
+    title: 'Profile component',
+    component: Profile,
+    decorators: [ReduxStoreProviderDecorator]
 }
 
-export const ProfileInfoBaseExample: React.FC<ProfileInfoPropsType> = () => {
-    return <ProfileInfo profile={
+export const ProfileBaseExample = () => {
+    return <Profile profile={
         {
             aboutMe: 'Maikl',
             contacts: {

@@ -3,7 +3,7 @@ import s from './ProfileInfo.module.css'
 import {Preloader} from '../../common/Preloader/Preloader';
 import {ProfileType} from '../../../redux/profile-reducer';
 
-type ProfileInfoPropsType = {
+export type ProfileInfoPropsType = {
     profile: ProfileType | null
 }
 export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
