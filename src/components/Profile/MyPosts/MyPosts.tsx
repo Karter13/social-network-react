@@ -3,7 +3,7 @@ import s from './MyPosts.module.css'
 import {Post} from './Post/Post';
 import {PostType,} from '../../../redux/profile-reducer';
 
-type MyPostsPropsType = {
+export type MyPostsPropsType = {
     posts: Array<PostType>
     newPostText: string
     updateNewPostText: (text: string) => void
