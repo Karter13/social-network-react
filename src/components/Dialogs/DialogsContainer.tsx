@@ -1,9 +1,9 @@
 import React from 'react';
 import {addMessage, addNewMessageText} from '../../redux/dialogs-reducer';
-import {Dialogs, DialogsPropsType} from './Dialogs';
+import {Dialogs} from './Dialogs';
 import {connect} from 'react-redux';
 import {StateType} from '../../redux/redux-store';
-import {Redirect} from 'react-router';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 
 const mapStateToProps = (state: StateType) => {
@@ -25,9 +25,6 @@ const mapStateToProps = (state: StateType) => {
 //     }
 // };
 
-const AUthRedirectComponent: React.FC<DialogsPropsType> = (props) => {
-    if(!props.isAuth) return <Redirect to={'/login'}/>;
-    return <Dialogs {...props}/>
-};
+const AUthRedirectComponent = withAuthRedirect(Dialogs);
 
 export const DialogsContainer = connect(mapStateToProps, {addMessage, addNewMessageText})(AUthRedirectComponent);
