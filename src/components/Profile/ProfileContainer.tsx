@@ -11,13 +11,15 @@ type PathParamType = {
 }
 type MapStatePropsType = {
     profile: ProfileType | null
+}
+export type MapStatePropsTypeRedirect = {
     isAuth: boolean
 }
+
 type MapDispatchPropsType = {
-    // setUserProfile: (profile: ProfileType) => void
     getUserProfile: (userId: string) => void
 }
-type ProfileAPIContainerPropsType = MapStatePropsType & MapDispatchPropsType
+type ProfileAPIContainerPropsType = MapStatePropsType & MapStatePropsTypeRedirect & MapDispatchPropsType
 type PropsType = RouteComponentProps<PathParamType> & ProfileAPIContainerPropsType
 
 
@@ -28,7 +30,6 @@ class ProfileContainer extends React.Component<PropsType> {
         if (!userId) {
             userId = '2'
         }
-
         this.props.getUserProfile(userId);
     }
 
@@ -41,15 +42,13 @@ class ProfileContainer extends React.Component<PropsType> {
 }
 
 
-const AUthRedirectComponent = withAuthRedirect(ProfileContainer);
-
-
-let WithURLDataContainerComponent = withRouter(AUthRedirectComponent);
+let AUthRedirectComponent  = withAuthRedirect(ProfileContainer);
 
 const mapStateToProps = (store: StateType): MapStatePropsType => ({
     profile: store.profilePage.profile,
-    isAuth: store.auth.isAuth
+
 });
 
+const WithURLDataContainerComponent: any = withRouter(AUthRedirectComponent);
 
 export default connect(mapStateToProps, {getUserProfile})(WithURLDataContainerComponent);

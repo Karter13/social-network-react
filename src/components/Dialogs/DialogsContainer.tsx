@@ -8,8 +8,7 @@ import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 const mapStateToProps = (state: StateType) => {
     return {
-        dialogsPage: state.dialogsPage,
-        isAuth: state.auth.isAuth
+        dialogsPage: state.dialogsPage
     }
 };
 
