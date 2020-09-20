@@ -4,6 +4,8 @@ import {follow, getPage, getUsers, toggleFollowingProgress, unfollow, UserType} 
 import {Users} from './Users';
 import {Preloader} from '../common/Preloader/Preloader';
 import {StateType} from '../../redux/redux-store';
+import {compose} from 'redux';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 export type UsersAPIContainerPropsType = {
     users: Array<UserType>
@@ -59,26 +61,20 @@ const mapStateToProps = (state: StateType) => {
     }
 };
 
-// const mapDispatchToProps = (dispatch: DispatchType) => {
-//     return {
-//         setUsers: (users: Array<UserType>) => {
-//             dispatch(setUsersAC(users))
-//         },
-//         setCurrentPage: (pageNumber: number) => {
-//             dispatch(setCurrentPageAC(pageNumber))
-//         },
-//         setTotalUsersCount: (totalCount: number) => {
-//             dispatch(setUsersTotalCountAC(totalCount))
-//         },
-//         toggleIsFetching: (isFetcing: boolean) => {
-//             dispatch(toggleIsFetchingAC(isFetcing))
-//         }
-//     }
-// };
+//question fir <any>
+export const UsersContainer = compose<any>(
+    withAuthRedirect,
+    connect(mapStateToProps, {
+        follow,
+        unfollow,
+        getUsers,
+        getPage
+    })
+)(UsersAPIContainer);
 
-export const UsersContainer = connect(mapStateToProps, {
-    follow,
-    unfollow,
-    getUsers,
-    getPage
-})(UsersAPIContainer);
+// export const UsersContainer = connect(mapStateToProps, {
+//     follow,
+//     unfollow,
+//     getUsers,
+//     getPage
+// })(UsersAPIContainer);
