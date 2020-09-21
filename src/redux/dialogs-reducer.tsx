@@ -19,7 +19,7 @@ export type DialogsPageType = {
     newMessageText: string
 }
 
-let initialState = {
+let initialState: DialogsPageType = {
     dialogs: [
         {
             id: v1(),
@@ -51,7 +51,7 @@ let initialState = {
     newMessageText: ''
 };
 
-export const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTypes): DialogsPageType => {
+export const dialogsReducer = (state = initialState, action: ActionsTypes): DialogsPageType => {
 
     switch (action.type) {
         case ADD_MESSAGE: {

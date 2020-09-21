@@ -95,3 +95,4 @@ export const getUserProfile = (userId: string): ThunkType => {
             });
     }
 };
+
