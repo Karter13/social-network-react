@@ -5,16 +5,34 @@ type ProfileStatusType = {
     status: string
 }
 
-export const ProfileStatus: React.FC<ProfileStatusType> = (props) => {
-    return (
-        <div>
-            <div>
-                <span>{props.status}</span>
-            </div>
-            <div>
-                <input value={props.status}/>
-            </div>
+export class ProfileStatus extends React.Component<ProfileStatusType> {
 
-        </div>
-    )
-};
+    state = {
+        editMode: false
+    };
+
+    activateEditMode = () => {
+        this.setState({
+            editMode: true
+        });
+    };
+
+
+    render() {
+        return (
+            <div>
+                {!this.state.editMode &&
+                    <div>
+                        <span onDoubleClick={this.activateEditMode}>{this.props.status}</span>
+                    </div>
+                }
+                {this.state.editMode &&
+                    <div>
+                        <input value={this.props.status}/>
+                    </div>
+                }
+            </div>
+        )
+    }
+
+}
