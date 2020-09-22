@@ -6,6 +6,8 @@ import {ProfileStatus} from './ProfileStatus';
 
 export type ProfileInfoPropsType = {
     profile: ProfileType | null
+    status: string
+    updateStatus: (status: string) => void
 }
 export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
     if (!props.profile) {
@@ -17,7 +19,9 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
                 <div className={s.photo}>
                     <img src={props.profile.photos.small}/>
                 </div>
-                <ProfileStatus status={'Hello oll'}/>
+                <ProfileStatus status={props.status}
+                               updateStatus={props.updateStatus}
+                />
             </div>
         </div>
     )

@@ -3,6 +3,7 @@ import s from './ProfileInfo.module.css'
 
 type ProfileStatusType = {
     status: string
+    updateStatus: (status: string) => void
 }
 
 export class ProfileStatus extends React.Component<ProfileStatusType> {
