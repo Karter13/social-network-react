@@ -1,12 +1,13 @@
 import {ProfileInfo, ProfileInfoPropsType} from './ProfileInfo';
 import React from 'react';
-import {Profile} from '../Profile';
-import any = jasmine.any;
+import {action} from '@storybook/addon-actions';
 
 export default {
     title: 'ProfileInfo component',
     component: ProfileInfo,
 }
+
+const UpdateeStatusCallback = action('UpdateeStatus');
 
 export const ProfileInfoBaseExample: React.FC<ProfileInfoPropsType> = () => {
     return <ProfileInfo
@@ -35,6 +36,6 @@ export const ProfileInfoBaseExample: React.FC<ProfileInfoPropsType> = () => {
             }
         }
         status={'Active'}
-        updateStatus={(status: string) => any}
+        updateStatus={UpdateeStatusCallback}
     />
 };

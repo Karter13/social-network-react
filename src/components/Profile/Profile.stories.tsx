@@ -1,13 +1,15 @@
 import {Profile} from './Profile';
 import {ReduxStoreProviderDecorator} from '../../stories/ReduxStoreProviderDecorator';
 import React from 'react';
-import any = jasmine.any;
+import {action} from '@storybook/addon-actions';
 
 export default {
     title: 'Profile component',
     component: Profile,
     decorators: [ReduxStoreProviderDecorator]
 }
+
+const UpdateeStatusCallback = action('UpdateeStatus');
 
 export const ProfileBaseExample = () => {
     return <Profile
@@ -35,6 +37,6 @@ export const ProfileBaseExample = () => {
             }
         }
         status={'Active'}
-        updateStatus={(status: string) => any}
+        updateStatus={UpdateeStatusCallback}
     />
 };
