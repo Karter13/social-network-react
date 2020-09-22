@@ -20,7 +20,7 @@ type APIUsersType = {
     error: null | string
 }
 
-type CommonResponseType<T> = {
+type CommonResponseType<T ={}> = {
     resultCode: 1 | 0
     messages: Array<string>
     data: T
@@ -52,11 +52,11 @@ export const usersAPI = {
             .then(response => response.data);
     },
     follow(id: string) {
-        return instance.post<CommonResponseType<{}>>(`follow/${id}`)
+        return instance.post<CommonResponseType>(`follow/${id}`)
             .then(response => response.data)
     },
     unfollow(id: string) {
-        return instance.delete<CommonResponseType<{}>>(`follow/${id}`)
+        return instance.delete<CommonResponseType>(`follow/${id}`)
             .then(response => response.data)
     },
     getProfile(userId: string) {
@@ -71,10 +71,10 @@ export const profileAPI = {
             .then(response => response.data)
     },
     getStatus(userId: string) {
-        return instance.get(`/status/` + userId)
+        return instance.get<string>(`profile/status/` + userId)
     },
     updateStatus(status: string) {
-        return instance.put(`/status/`, {status: status} );
+        return instance.put<CommonResponseType>(`profile/status/`, {status: status} );
     }
 };
 

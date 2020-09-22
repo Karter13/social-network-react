@@ -90,7 +90,7 @@
 //     dispatch: (action: ActionsTypes) => void
 // }
 
-import {addPost, setUserProfile, updateNewPostText} from './profile-reducer';
+import {addPost, setStatus, setUserProfile, updateNewPostText} from './profile-reducer';
 import {addMessage, addNewMessageText} from './dialogs-reducer';
 import {
     followSuccess,
@@ -116,6 +116,7 @@ export type ActionsTypes = ReturnType<typeof addPost>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setAuthUserData>
     | ReturnType<typeof toggleFollowingProgress>
+    | ReturnType<typeof setStatus>
 
 
 //
