@@ -1,5 +1,4 @@
 import React, {ChangeEvent} from 'react';
-import s from './ProfileInfo.module.css'
 
 type ProfileStatusType = {
     status: string
@@ -38,11 +37,9 @@ export class ProfileStatus extends React.Component<ProfileStatusType> {
                 status: this.props.status
             });
         }
-        console.log('componentDidUpdate')
     }
 
     render() {
-        console.log('render')
         return (
             <div>
                 {!this.state.editMode &&
@@ -53,7 +50,7 @@ export class ProfileStatus extends React.Component<ProfileStatusType> {
                 {this.state.editMode &&
                 <div>
                     <input onChange={this.onStatusChange} autoFocus={true}
-                           onBlur={this.deActivateEditMode} value={this.props.status}/>
+                           onBlur={this.deActivateEditMode} value={this.state.status}/>
                 </div>
                 }
             </div>
