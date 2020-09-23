@@ -1,4 +1,4 @@
-import {Login, LoginPropsType} from './Login';
+import {Login} from './Login';
 import React from 'react';
 
 export default {
@@ -6,6 +6,6 @@ export default {
     component: Login
 }
 
-export const LoginBaseExample: React.FC<LoginPropsType> = () => {
+export const LoginBaseExample = () => {
     return <Login/>
 }
