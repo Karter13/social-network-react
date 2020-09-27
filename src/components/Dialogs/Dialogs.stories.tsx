@@ -47,7 +47,6 @@ export const DialogsBaseExample: React.FC<DialogsPropsType> = (props) => {
                              {id: v1(), message: 'Good by'},
                              {id: v1(), message: 'Yo'},
                          ],
-                         newMessageText: ''
                      }
                  }
                  addMessage={AddMessagesCallback}

@@ -33,14 +33,6 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
             <h3>My posts</h3>
             <div>
                 <PostsReduxForm onSubmit={onSubmit}/>
-                {/*<div>*/}
-                {/*    <textarea onChange={onPostChange}*/}
-                {/*              value={props.newPostText}*/}
-                {/*    />*/}
-                {/*</div>*/}
-                {/*<div>*/}
-                {/*    <button onClick={onAddPost}>add post</button>*/}
-                {/*</div>*/}
             </div>
             <div className={s.posts}>
                 {postsElement}

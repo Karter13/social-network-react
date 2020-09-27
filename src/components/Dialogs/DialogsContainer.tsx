@@ -1,5 +1,5 @@
 import React from 'react';
-import {addMessage, addNewMessageText} from '../../redux/dialogs-reducer';
+import {addMessage} from '../../redux/dialogs-reducer';
 import {Dialogs} from './Dialogs';
 import {connect} from 'react-redux';
 import {StateType} from '../../redux/redux-store';
@@ -28,7 +28,7 @@ const mapStateToProps = (state: StateType) => {
 
 //question fir <any>
 export const DialogsContainer = compose<any>(
-    connect(mapStateToProps, {addMessage, addNewMessageText}),
+    connect(mapStateToProps, {addMessage}),
     withAuthRedirect
 )(Dialogs);
 

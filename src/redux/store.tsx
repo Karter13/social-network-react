@@ -1,5 +1,5 @@
 import {addPost, setStatus, setUserProfile, updateNewPostText} from './profile-reducer';
-import {addMessage, addNewMessageText} from './dialogs-reducer';
+import {addMessage} from './dialogs-reducer';
 import {
     followSuccess,
     setCurrentPage,
@@ -14,7 +14,6 @@ import {setAuthUserData} from './auth-reducer';
 export type ActionsTypes = ReturnType<typeof addPost>
     | ReturnType<typeof updateNewPostText>
     | ReturnType<typeof addMessage>
-    | ReturnType<typeof addNewMessageText>
     | ReturnType<typeof followSuccess>
     | ReturnType<typeof unfollowSuccess>
     | ReturnType<typeof setUsers>

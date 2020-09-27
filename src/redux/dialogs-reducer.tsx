@@ -2,7 +2,6 @@ import {v1} from 'uuid';
 import {ActionsTypes} from './store';
 
 const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
 export type DialogType = {
     id: string
@@ -16,7 +15,6 @@ export type MessageType = {
 export type DialogsPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
-    newMessageText: string
 }
 
 let initialState: DialogsPageType = {
@@ -48,7 +46,6 @@ let initialState: DialogsPageType = {
         {id: v1(), message: 'Good by'},
         {id: v1(), message: 'Yo'},
     ],
-    newMessageText: ''
 };
 
 export const dialogsReducer = (state = initialState, action: ActionsTypes): DialogsPageType => {
@@ -57,19 +54,11 @@ export const dialogsReducer = (state = initialState, action: ActionsTypes): Dial
         case ADD_MESSAGE: {
             let newMessage: MessageType = {
                 id: v1(),
-                message: state.newMessageText,
+                message: action.newMessageBody,
             };
-
             return {
                 ...state,
                 messages: [...state.messages, newMessage],
-                newMessageText: '',
-            }
-        }
-        case UPDATE_NEW_MESSAGE_TEXT: {
-            return {
-                ...state,
-                newMessageText: action.newText
             }
         }
         default:
@@ -77,5 +66,4 @@ export const dialogsReducer = (state = initialState, action: ActionsTypes): Dial
     }
 };
 
-export const addMessage = () => ({type: ADD_MESSAGE} as const);
-export const addNewMessageText = (text: string) => ({type: UPDATE_NEW_MESSAGE_TEXT, newText: text} as const);
+export const addMessage = (newMessageBody: string) => ({type: ADD_MESSAGE, newMessageBody} as const);
