@@ -102,6 +102,7 @@ export const usersReducer = (state: UsersPageType = initialState, action: Action
 
 };
 
+//actionsCreators
 export const followSuccess = (userId: string) => ({type: FOLLOW, userId: userId} as const);
 export const unfollowSuccess = (userId: string) => ({type: UNFOLLOW, userId: userId} as const);
 export const setUsers = (users: Array<UserType>) => ({type: SET_USERS, users: users} as const);
@@ -118,7 +119,7 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: string) => 
 } as const);
 
 
-//THUNKS
+//thunkCreators
 export type ThunkType = ThunkAction<void, StateType, unknown, ActionsTypes>;
 export type ThunkDispatchUsers = ThunkDispatch<StateType, unknown, ActionsTypes>;
 
@@ -133,7 +134,6 @@ export const getUsers = (currentPage: number, pageSize: number): ThunkType => {
         });
     }
 };
-
 export const getPage = (pageNumber: number, pageSize: number): ThunkType => {
     return (dispatch: ThunkDispatchUsers) => {
         dispatch(toggleIsFetching(true));
@@ -145,7 +145,6 @@ export const getPage = (pageNumber: number, pageSize: number): ThunkType => {
         });
     }
 };
-
 export const follow = (userId: string): ThunkType => {
     return (dispatch: ThunkDispatchUsers) => {
 
@@ -161,7 +160,6 @@ export const follow = (userId: string): ThunkType => {
 
     }
 };
-
 export const unfollow = (userId: string): ThunkType => {
     return (dispatch: ThunkDispatchUsers) => {
 

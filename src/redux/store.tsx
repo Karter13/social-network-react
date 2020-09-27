@@ -1,3 +1,34 @@
+import {addPost, setStatus, setUserProfile, updateNewPostText} from './profile-reducer';
+import {addMessage, addNewMessageText} from './dialogs-reducer';
+import {
+    followSuccess,
+    setCurrentPage,
+    setUsers,
+    setUsersTotalCount,
+    toggleFollowingProgress,
+    toggleIsFetching,
+    unfollowSuccess
+} from './users-reducer';
+import {setAuthUserData} from './auth-reducer';
+
+export type ActionsTypes = ReturnType<typeof addPost>
+    | ReturnType<typeof updateNewPostText>
+    | ReturnType<typeof addMessage>
+    | ReturnType<typeof addNewMessageText>
+    | ReturnType<typeof followSuccess>
+    | ReturnType<typeof unfollowSuccess>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setUsersTotalCount>
+    | ReturnType<typeof toggleIsFetching>
+    | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof setAuthUserData>
+    | ReturnType<typeof toggleFollowingProgress>
+    | ReturnType<typeof setStatus>
+
+
+
+
 // import {RenderEntireTreeType} from '../index';
 // import {v1} from 'uuid';
 // import {addPost, profileReducer, setUserProfile, updateNewPostText} from './profile-reducer';
@@ -89,35 +120,6 @@
 //     getState: () => RootStateType
 //     dispatch: (action: ActionsTypes) => void
 // }
-
-import {addPost, setStatus, setUserProfile, updateNewPostText} from './profile-reducer';
-import {addMessage, addNewMessageText} from './dialogs-reducer';
-import {
-    followSuccess,
-    setCurrentPage,
-    setUsers,
-    setUsersTotalCount,
-    toggleFollowingProgress,
-    toggleIsFetching,
-    unfollowSuccess
-} from './users-reducer';
-import {setAuthUserData} from './auth-reducer';
-
-export type ActionsTypes = ReturnType<typeof addPost>
-    | ReturnType<typeof updateNewPostText>
-    | ReturnType<typeof addMessage>
-    | ReturnType<typeof addNewMessageText>
-    | ReturnType<typeof followSuccess>
-    | ReturnType<typeof unfollowSuccess>
-    | ReturnType<typeof setUsers>
-    | ReturnType<typeof setCurrentPage>
-    | ReturnType<typeof setUsersTotalCount>
-    | ReturnType<typeof toggleIsFetching>
-    | ReturnType<typeof setUserProfile>
-    | ReturnType<typeof setAuthUserData>
-    | ReturnType<typeof toggleFollowingProgress>
-    | ReturnType<typeof setStatus>
-
 
 //
 // export const store: StoreType = {

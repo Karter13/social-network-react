@@ -3,6 +3,7 @@ import s from './Dialogs.module.css'
 import {Message} from './Message/Message';
 import {DialogItem} from './DialogItem/DialogItem';
 import {DialogsPageType} from '../../redux/dialogs-reducer';
+import {reduxForm, Field, InjectedFormProps} from 'redux-form';
 
 export type DialogsPropsType = {
     dialogsPage: DialogsPageType
@@ -27,6 +28,10 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
         props.addNewMessageText(e.currentTarget.value);
     };
 
+    const onSubmit = (formData: MessagesFormType) => {
+        console.log(formData)
+    }
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
@@ -34,15 +39,27 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
             </div>
             <div className={s.messages}>
                 {messagesElements}
-                <div>
-                    <textarea onChange={addNewMessageText}
-                              value={props.dialogsPage.newMessageText}
-                    />
-                </div>
-                <div>
-                    <button onClick={addMessage}>add message</button>
-                </div>
+                <MessagesReduxForm onSubmit={onSubmit}/>
             </div>
         </div>
     )
 };
+
+type MessagesFormType = {
+    messageText: string
+}
+
+export const MessagesForm: React.FC<InjectedFormProps<MessagesFormType>> = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field component={'textarea'} name={'messageText'}/>
+            </div>
+            <div>
+                <button>add message</button>
+            </div>
+        </form>
+    )
+}
+
+const MessagesReduxForm = reduxForm<MessagesFormType>({form: 'messagesForm'})(MessagesForm)

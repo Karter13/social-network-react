@@ -26,18 +26,6 @@ type CommonResponseType<T ={}> = {
     data: T
 }
 
-// type APIFollowType = {
-//     resultCode: 1 | 0
-//     messages: Array<string>
-//     data: {}
-// }
-//
-// type APIAuthPI = {
-//     resultCode: 1 | 0
-//     messages: Array<string>
-//     data: AuthType
-// }
-
 const instance = axios.create({
     withCredentials: true,
     baseURL: `https://social-network.samuraijs.com/api/1.0/`,

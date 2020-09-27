@@ -8,13 +8,11 @@ const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
-
 export type PostType = {
     id: string
     message: string
     likesCount: number
 }
-
 export type ContactsType = {
     facebook: string,
     website: string,
@@ -55,7 +53,6 @@ let initialState: ProfilePageType = {
     profile: null,
     status: ''
 };
-
 export const profileReducer = (state = initialState, action: ActionsTypes): ProfilePageType => {
 
     switch (action.type) {
@@ -90,12 +87,13 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Prof
     }
 };
 
+//actionsCreators
 export const addPost = () => ({type: ADD_POST} as const);
 export const updateNewPostText = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newText: text} as const);
 export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const);
 export const setStatus = (status: string) => ({type: SET_STATUS, status} as const);
 
-//THUNK
+//thunkCreators
 export const getUserProfile = (userId: string): ThunkType => {
     return (dispatch: ThunkDispatchUsers) => {
         usersAPI.getProfile(userId)
@@ -104,7 +102,6 @@ export const getUserProfile = (userId: string): ThunkType => {
             });
     }
 };
-
 export const getStatus = (userId: string): ThunkType => {
     return (dispatch: ThunkDispatchUsers) => {
         profileAPI.getStatus(userId)
@@ -113,7 +110,6 @@ export const getStatus = (userId: string): ThunkType => {
             });
     }
 };
-
 export const updateStatus = (status: string): ThunkType => {
     return (dispatch: ThunkDispatchUsers) => {
         profileAPI.updateStatus(status)
