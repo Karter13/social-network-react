@@ -21,7 +21,5 @@ export const MyPostsBaseExample: React.FC<MyPostsPropsType> = () => {
                 {id: v1(), message: 'I love React', likesCount: 20},
                 {id: v1(), message: 'I love JS', likesCount: 10},
             ]}
-        newPostText={'new text'}
-        updateNewPostText={UpdateNewPostText}
         addPost={AddPost}/>
 };

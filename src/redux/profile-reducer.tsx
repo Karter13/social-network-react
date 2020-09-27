@@ -4,7 +4,6 @@ import {profileAPI, usersAPI} from '../api/api';
 import {ThunkDispatchUsers, ThunkType} from './users-reducer';
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
@@ -38,7 +37,6 @@ export type ProfileType = {
 }
 export type ProfilePageType = {
     posts: Array<PostType>
-    newPostText: string
     profile: ProfileType | null
     status: string
 }
@@ -49,7 +47,6 @@ let initialState: ProfilePageType = {
         {id: v1(), message: 'I love React', likesCount: 20},
         {id: v1(), message: 'I love JS', likesCount: 10},
     ],
-    newPostText: '',
     profile: null,
     status: ''
 };
@@ -59,26 +56,16 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Prof
         case ADD_POST: {
             let newPost: PostType = {
                 id: v1(),
-                message: state.newPostText,
+                message: action.newPostText,
                 likesCount: 0,
             };
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText: '',
             }
         }
-
-        case UPDATE_NEW_POST_TEXT: {
-            return {
-                ...state,
-                newPostText: action.newText,
-            };
-        }
-
         case SET_USER_PROFILE:
             return {...state, profile: action.profile};
-
         case SET_STATUS: {
             return {...state, status: action.status};
         }
@@ -88,8 +75,7 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Prof
 };
 
 //actionsCreators
-export const addPost = () => ({type: ADD_POST} as const);
-export const updateNewPostText = (text: string) => ({type: UPDATE_NEW_POST_TEXT, newText: text} as const);
+export const addPost = (newPostText: string) => ({type: ADD_POST, newPostText} as const);
 export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const);
 export const setStatus = (status: string) => ({type: SET_STATUS, status} as const);
 

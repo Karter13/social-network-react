@@ -1,14 +1,12 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import s from './MyPosts.module.css'
 import {Post} from './Post/Post';
 import {PostType,} from '../../../redux/profile-reducer';
-import {reduxForm, Field, InjectedFormProps} from 'redux-form';
+import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 
 export type MyPostsPropsType = {
     posts: Array<PostType>
-    newPostText: string
-    updateNewPostText: (text: string) => void
-    addPost: () => void
+    addPost: (value: string) => void
 }
 
 export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
@@ -16,23 +14,16 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
     let postsElement = props.posts
         .map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>);
 
-    const onAddPost = () => {
-        props.addPost();
-    };
-    const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let text = e.currentTarget.value;
-        props.updateNewPostText(text);
-    };
 
-    const onSubmit = (formData: PostsFormType) => {
-        console.log(formData)
+    const onSubmit = (formData: AddPostsFormType) => {
+        props.addPost(formData.newPostText);
     };
 
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>
             <div>
-                <PostsReduxForm onSubmit={onSubmit}/>
+                <AddPostsFormRedux onSubmit={onSubmit}/>
             </div>
             <div className={s.posts}>
                 {postsElement}
@@ -41,15 +32,15 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
     )
 };
 
-type PostsFormType = {
-    postText: string
+type AddPostsFormType = {
+    newPostText: string
 }
 
-export const PostsForm: React.FC<InjectedFormProps<PostsFormType>> = (props) => {
+export const AddPostForm: React.FC<InjectedFormProps<AddPostsFormType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field component={'textarea'} name={'postText'}/>
+                <Field component={'textarea'} name={'newPostText'} placeholder={'Enter your post'}/>
             </div>
             <div>
                 <button>add post</button>
@@ -58,4 +49,4 @@ export const PostsForm: React.FC<InjectedFormProps<PostsFormType>> = (props) => 
     )
 };
 
-const PostsReduxForm = reduxForm<PostsFormType>({form: 'postsForm'})(PostsForm);
+const AddPostsFormRedux = reduxForm<AddPostsFormType>({form: 'profileAddPostForm'})(AddPostForm);

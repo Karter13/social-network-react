@@ -7,7 +7,7 @@ import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 
 export type DialogsPropsType = {
     dialogsPage: DialogsPageType
-    addMessage: (formData: string) => void
+    addMessage: (value: string) => void
     addNewMessageText: (text: string) => void
     isAuth: boolean
 }
