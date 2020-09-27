@@ -14,8 +14,7 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
     let postsElement = props.posts
         .map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>);
 
-
-    const onSubmit = (formData: AddPostsFormType) => {
+    const onAddPost = (formData: AddPostsFormType) => {
         props.addPost(formData.newPostText);
     };
 
@@ -23,7 +22,7 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
         <div className={s.postsBlock}>
             <h3>My posts</h3>
             <div>
-                <AddPostsFormRedux onSubmit={onSubmit}/>
+                <AddPostFormRedux onSubmit={onAddPost}/>
             </div>
             <div className={s.posts}>
                 {postsElement}
@@ -35,18 +34,17 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 type AddPostsFormType = {
     newPostText: string
 }
-
-export const AddPostForm: React.FC<InjectedFormProps<AddPostsFormType>> = (props) => {
+export const AddNewPostForm: React.FC<InjectedFormProps<AddPostsFormType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
                 <Field component={'textarea'} name={'newPostText'} placeholder={'Enter your post'}/>
             </div>
             <div>
-                <button>add post</button>
+                <button>Add post</button>
             </div>
         </form>
     )
 };
 
-const AddPostsFormRedux = reduxForm<AddPostsFormType>({form: 'profileAddPostForm'})(AddPostForm);
+const AddPostFormRedux = reduxForm<AddPostsFormType>({form: 'profileAddNewPostForm'})(AddNewPostForm);
