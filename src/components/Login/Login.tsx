@@ -5,6 +5,8 @@ import {Input} from '../common/FormControls/FormControls';
 import {required} from '../../utils/validators/validators';
 import {connect} from 'react-redux';
 import {login, logout} from '../../redux/auth-reducer';
+import {StateType} from '../../redux/redux-store';
+import {Redirect} from 'react-router-dom';
 
 type FormDataType = {
     email: string
@@ -42,7 +44,9 @@ const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm);
 type MapDispatchToPropsType = {
     login: (email: string, password: string, rememberMe: boolean) => void
 }
-type MapStateToPropsType = {}
+type MapStateToPropsType = {
+    isAuth: boolean
+}
 type LoginPropsType = MapDispatchToPropsType & MapStateToPropsType
 
 const Login: React.FC<LoginPropsType> = (props) => {
@@ -50,6 +54,10 @@ const Login: React.FC<LoginPropsType> = (props) => {
     const onSubmit = (formData: FormDataType) => {
         props.login(formData.email, formData.password, formData.rememberMe)
     };
+
+    if (props.isAuth) {
+        return <Redirect to={'/profile'}/>
+    }
 
     return (
         <div>
@@ -59,4 +67,8 @@ const Login: React.FC<LoginPropsType> = (props) => {
     )
 };
 
-export default connect(null, {login})(Login)
+const mapStateToProps = (state: StateType) => ({
+    isAuth: state.auth.isAuth
+});
+
+export default connect(mapStateToProps, {login})(Login)
