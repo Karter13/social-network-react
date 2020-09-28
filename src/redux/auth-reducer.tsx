@@ -3,14 +3,12 @@ import {ThunkDispatchUsers, ThunkType} from './users-reducer';
 import {authPI} from '../api/api';
 
 const SET_USERS_DATA = 'SET_USERS_DATA';
-
 export type AuthType = {
     userId: number | null
     email: string | null
     login: string | null
     isAuth: boolean
 }
-
 const initialState: AuthType = {
     userId: null,
     email: null,
@@ -22,8 +20,7 @@ export const authReducer = (state = initialState, action: ActionsTypes): AuthTyp
         case SET_USERS_DATA: {
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.payload,
             }
         }
         default:
@@ -31,9 +28,9 @@ export const authReducer = (state = initialState, action: ActionsTypes): AuthTyp
     }
 };
 
-export const setAuthUserData = (userId: number | null, email: string | null, login: string | null) => ({
+export const setAuthUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
     type: SET_USERS_DATA,
-    data: {userId, email, login}
+    payload: {userId, email, login, isAuth}
 } as const);
 
 //THUNKS
@@ -41,8 +38,25 @@ export const getAuthUserData = (): ThunkType => (dispatch: ThunkDispatchUsers) =
     authPI.me().then((data) => {
         if (data.resultCode === 0) {
             let {id, email, login} = data.data;
-            dispatch(setAuthUserData(id, email, login));
+            dispatch(setAuthUserData(id, email, login, true));
         }
     });
 };
 
+export const login = (email: string, password: string, rememberMe: boolean = false): ThunkType => (dispatch: ThunkDispatchUsers) => {
+    authPI.login(email, password, rememberMe)
+        .then((data) => {
+            if (data.resultCode === 0) {
+                dispatch(getAuthUserData())
+            }
+        });
+};
+
+export const logout = (): ThunkType => (dispatch: ThunkDispatchUsers) => {
+    authPI.logout()
+        .then((data) => {
+            if (data.resultCode === 0) {
+                dispatch(setAuthUserData(null, null, null, false))
+            }
+        });
+};

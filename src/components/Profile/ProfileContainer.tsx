@@ -10,14 +10,14 @@ import {compose} from 'redux';
 type PathParamType = {
     userId: string | undefined
 }
-type MapStatePropsType = {
-    profile: ProfileType | null
-    status: string
-}
 export type MapStatePropsTypeRedirect = {
     isAuth: boolean
 }
 
+type MapStatePropsType = {
+    profile: ProfileType | null
+    status: string
+}
 type MapDispatchPropsType = {
     getUserProfile: (userId: string) => void
     getStatus: (userId: string) => void
@@ -25,7 +25,6 @@ type MapDispatchPropsType = {
 }
 type ProfileAPIContainerPropsType = MapStatePropsType & MapStatePropsTypeRedirect & MapDispatchPropsType
 type PropsType = RouteComponentProps<PathParamType> & ProfileAPIContainerPropsType
-
 
 class ProfileContainer extends React.Component<PropsType> {
 
@@ -38,7 +37,6 @@ class ProfileContainer extends React.Component<PropsType> {
         this.props.getStatus(userId)
     }
 
-
     render() {
 
         return (
@@ -50,7 +48,6 @@ class ProfileContainer extends React.Component<PropsType> {
         )
     }
 }
-
 
 const mapStateToProps = (store: StateType): MapStatePropsType => ({
     profile: store.profilePage.profile,

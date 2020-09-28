@@ -20,7 +20,7 @@ type APIUsersType = {
     error: null | string
 }
 
-type CommonResponseType<T ={}> = {
+type CommonResponseType<T = {}> = {
     resultCode: 1 | 0
     messages: Array<string>
     data: T
@@ -41,35 +41,45 @@ export const usersAPI = {
     },
     follow(id: string) {
         return instance.post<CommonResponseType>(`follow/${id}`)
-            .then(response => response.data)
+            .then(response => response.data);
     },
     unfollow(id: string) {
         return instance.delete<CommonResponseType>(`follow/${id}`)
-            .then(response => response.data)
+            .then(response => response.data);
     },
     getProfile(userId: string) {
         console.warn('Obsolete method. Please profileAPI object');
-        return profileAPI.getProfile(userId)
+        return profileAPI.getProfile(userId);
     },
 };
 
 export const profileAPI = {
     getProfile(userId: string) {
         return instance.get<ProfileType>('profile/' + userId)
-            .then(response => response.data)
+            .then(response => response.data);
     },
     getStatus(userId: string) {
-        return instance.get<string>(`profile/status/` + userId)
+        return instance.get<string>(`profile/status/` + userId);
     },
     updateStatus(status: string) {
-        return instance.put<CommonResponseType>(`profile/status/`, {status: status} );
+        return instance.put<CommonResponseType>(`profile/status/`, {status: status});
     }
 };
 
 export const authPI = {
     me() {
         return instance.get<CommonResponseType<AuthType>>(`auth/me`)
-            .then(response => response.data)
+            .then(response => response.data);
     },
+    login(email: string, password: string, rememberMe: boolean = false) {
+        return instance.post<CommonResponseType<{ userId: number }>>(`auth/login`,
+            {email, password, rememberMe})
+            .then(response => response.data);;
+    },
+    logout() {
+        return instance.delete<CommonResponseType>(`auth/login`)
+            .then(response => response.data);;
+    }
+
 };
 
