@@ -14,7 +14,7 @@ let reducers = combineReducers({
     sidebar: sidebarReducer,
     usersPage: usersReducer,
     auth: authReducer,
-    form: formReducer
+    form: formReducer,
 });
 
 export type StateType = ReturnType<typeof reducers>
