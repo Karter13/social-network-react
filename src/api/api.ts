@@ -74,11 +74,11 @@ export const authPI = {
     login(email: string, password: string, rememberMe: boolean = false) {
         return instance.post<CommonResponseType<{ userId: number }>>(`auth/login`,
             {email, password, rememberMe})
-            .then(response => response.data);;
+            .then(response => response.data);
     },
     logout() {
         return instance.delete<CommonResponseType>(`auth/login`)
-            .then(response => response.data);;
+            .then(response => response.data);
     }
 
 };

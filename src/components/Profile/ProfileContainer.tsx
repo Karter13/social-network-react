@@ -17,6 +17,8 @@ export type MapStatePropsTypeRedirect = {
 type MapStatePropsType = {
     profile: ProfileType | null
     status: string
+    authorizedUserId: number | null,
+    isAuth: boolean
 }
 type MapDispatchPropsType = {
     getUserProfile: (userId: string) => void
@@ -30,8 +32,10 @@ class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount(): void {
         let userId = this.props.match.params.userId;
+        debugger;
         if (!userId) {
-            userId = '1049'
+            userId = '2'
+            // userId = this.props.authorizedUserId
         }
         this.props.getUserProfile(userId);
         this.props.getStatus(userId)
@@ -51,7 +55,9 @@ class ProfileContainer extends React.Component<PropsType> {
 
 const mapStateToProps = (store: StateType): MapStatePropsType => ({
     profile: store.profilePage.profile,
-    status: store.profilePage.status
+    status: store.profilePage.status,
+    authorizedUserId: store.auth.userId,
+    isAuth: store.auth.isAuth
 });
 
 //question fir <any>
