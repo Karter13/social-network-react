@@ -12,6 +12,7 @@ type FormDataType = {
     email: string
     password: string
     rememberMe: boolean
+    error: string
 }
 export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
@@ -32,6 +33,11 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
             <div>
                 <Field component={'input'} name={'rememberMe'} type={'checkbox'}/>remember me
             </div>
+            {
+                props.error && <div className={style.formSummaryError}>
+                    {props.error}
+                </div>
+            }
             <div>
                 <button> Login</button>
             </div>
