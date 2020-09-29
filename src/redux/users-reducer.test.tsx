@@ -1,9 +1,10 @@
 import {
-    follow,
+    followSuccess,
     setCurrentPage,
     setUsers,
-    setUsersTotalCount, toggleIsFetching,
-    unfollow,
+    setUsersTotalCount,
+    toggleIsFetching,
+    unfollow, unfollowSuccess,
     UsersPageType,
     usersReducer
 } from './users-reducer';
@@ -39,10 +40,11 @@ test('correct change followed to true', () => {
         totalUserCount: 100,
         currentPage: 1,
         isFetching: true,
+        followingInProgress: []
     };
 
-    const action = follow('2');
-    const endState = usersReducer(startState, action)
+    const action = followSuccess('2');
+    const endState = usersReducer(startState, action);
 
     expect(endState.users.length).toBe(2);
     expect(endState.users[1].followed).toBe(true);
@@ -79,9 +81,10 @@ test('correct change followed to false', () => {
         totalUserCount: 100,
         currentPage: 1,
         isFetching: true,
+        followingInProgress: []
     };
 
-    const action = unfollow('1');
+    const action = unfollowSuccess('1');
     const endState = usersReducer(startState, action)
 
     expect(endState.users.length).toBe(2);
@@ -108,6 +111,7 @@ test('correct change users in array users', () => {
         totalUserCount: 100,
         currentPage: 1,
         isFetching: true,
+        followingInProgress: []
     };
 
     const users = [
@@ -175,6 +179,7 @@ test('correct change number in currentPage', () => {
         totalUserCount: 100,
         currentPage: 1,
         isFetching: true,
+        followingInProgress: []
     };
 
     const action = setCurrentPage(5);
@@ -215,6 +220,7 @@ test('correct change number in totalUserCount', () => {
         totalUserCount: 100,
         currentPage: 1,
         isFetching: true,
+        followingInProgress: []
     };
 
     const action = setUsersTotalCount(70);
@@ -256,6 +262,7 @@ test('correct change toggle in isFetching', () => {
         totalUserCount: 100,
         currentPage: 1,
         isFetching: true,
+        followingInProgress: []
     };
 
     const action = toggleIsFetching(false);
