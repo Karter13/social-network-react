@@ -47,18 +47,18 @@ export const usersAPI = {
         return instance.delete<CommonResponseType>(`follow/${id}`)
             .then(response => response.data);
     },
-    getProfile(userId: string) {
+    getProfile(userId: number) {
         console.warn('Obsolete method. Please profileAPI object');
         return profileAPI.getProfile(userId);
     },
 };
 
 export const profileAPI = {
-    getProfile(userId: string) {
+    getProfile(userId: number) {
         return instance.get<ProfileType>('profile/' + userId)
             .then(response => response.data);
     },
-    getStatus(userId: string) {
+    getStatus(userId: number) {
         return instance.get<string>(`profile/status/` + userId);
     },
     updateStatus(status: string) {

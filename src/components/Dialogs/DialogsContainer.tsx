@@ -27,7 +27,7 @@ const mapStateToProps = (state: StateType) => {
 
 
 //question fir <any>
-export const DialogsContainer = compose<any>(
+export const DialogsContainer = compose<React.ComponentType>(
     connect(mapStateToProps, {addMessage}),
     withAuthRedirect
 )(Dialogs);

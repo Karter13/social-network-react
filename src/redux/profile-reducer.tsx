@@ -80,7 +80,7 @@ export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE
 export const setStatus = (status: string) => ({type: SET_STATUS, status} as const);
 
 //thunkCreators
-export const getUserProfile = (userId: string): ThunkType => {
+export const getUserProfile = (userId: number): ThunkType => {
     return (dispatch: ThunkDispatchUsers) => {
         usersAPI.getProfile(userId)
             .then((data) => {
@@ -88,7 +88,7 @@ export const getUserProfile = (userId: string): ThunkType => {
             });
     }
 };
-export const getStatus = (userId: string): ThunkType => {
+export const getStatus = (userId: number): ThunkType => {
     return (dispatch: ThunkDispatchUsers) => {
         profileAPI.getStatus(userId)
             .then((response) => {
