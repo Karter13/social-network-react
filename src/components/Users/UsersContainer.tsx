@@ -24,15 +24,13 @@ type MapDispatchPropsType = {
     getUsers: (currentPage: number, pageSize: number) => void
     getPage: (pageNumber: number, pageSize: number) => void
 }
-
 export type UsersAPIContainerPropsType = OwnPropsType & MapStatePropsType & MapDispatchPropsType
 
 //при типизации классовой компоненты первая позиция типизация пропсов вторая стэйта!!!
 // пропсы в конструкторе также типизируются
-export class UsersAPIContainer extends React.Component<UsersAPIContainerPropsType, StateType> {
+export class UsersAPIContainer extends React.Component<UsersAPIContainerPropsType> {
 
     componentDidMount(): void {
-
         this.props.getUsers(this.props.currentPage,this.props.pageSize);
     }
 

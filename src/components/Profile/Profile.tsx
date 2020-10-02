@@ -5,8 +5,8 @@ import {MyPostsContainer} from './MyPosts/MyPostsContainer';
 import {ProfileType} from '../../redux/profile-reducer';
 
 type ProfilePropsType = {
-    profile: ProfileType | null
     status: string
+    profile: ProfileType | null
     updateStatus: (status: string) => void
 }
 export const Profile: React.FC<ProfilePropsType> = (props) => {

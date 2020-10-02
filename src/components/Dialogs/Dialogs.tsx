@@ -6,13 +6,21 @@ import {DialogsPageType} from '../../redux/dialogs-reducer';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {Textarea} from '../common/FormControls/FormControls';
 import {maxLengthCreator, required} from '../../utils/validators/validators';
+import {UserType} from '../../redux/users-reducer';
 
-export type DialogsPropsType = {
-    dialogsPage: DialogsPageType
-    addMessage: (value: string) => void
+type OwnFormPropsType = {
     addNewMessageText: (text: string) => void
-    isAuth: boolean
 }
+type MapStatePropsType = {
+    dialogsPage: DialogsPageType
+}
+type MapDispatchPropsType = {
+    addMessage: (value: string) => void
+}
+
+export type DialogsPropsType = OwnFormPropsType
+    & MapStatePropsType & MapDispatchPropsType
+
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
     let state = props.dialogsPage;

@@ -13,25 +13,7 @@ const mapStateToProps = (state: StateType) => {
     }
 };
 
-//До оптимизации
-// const mapDispatchToProps = (dispatch: DispatchType) => {
-//     return {
-//         addMessage: () => {
-//             dispatch(addMessageActionCreator())
-//         },
-//         addNewMessageText: (text: string) => {
-//             dispatch(updateNewMessageTextActionCreator(text));
-//         }
-//     }
-// };
-
-
-//question fir <any>
 export const DialogsContainer = compose<React.ComponentType>(
     connect(mapStateToProps, {addMessage}),
     withAuthRedirect
 )(Dialogs);
-
-
-// const AUthRedirectComponent = withAuthRedirect(Dialogs);
-// export const DialogsContainer = connect(mapStateToProps, {addMessage, addNewMessageText})(AUthRedirectComponent);

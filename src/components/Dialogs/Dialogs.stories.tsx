@@ -16,8 +16,7 @@ const AddNewMessageTextCallback = action('Value NewMessagesText');
 
 export const DialogsBaseExample: React.FC<DialogsPropsType> = (props) => {
     return (
-        <Dialogs isAuth={true}
-                 dialogsPage={
+        <Dialogs dialogsPage={
                      {
                          dialogs: [
                              {
