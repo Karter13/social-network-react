@@ -4,9 +4,6 @@ import {MyPosts} from './MyPosts';
 import {connect} from 'react-redux';
 import {StateType} from '../../../redux/redux-store';
 
-type MyPostsPropsType = {
-}
-
 const mapStateToProps = (state: StateType) => {
  return {
      posts: state.profilePage.posts,
