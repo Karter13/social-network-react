@@ -1,6 +1,6 @@
 import {v1} from 'uuid';
 import {ActionsTypes} from './store';
-import {profileAPI, usersAPI} from '../api/api';
+import {profileAPI, ResultCodesEnum, usersAPI} from '../api/api';
 import {ThunkDispatchUsers, ThunkType} from './users-reducer';
 
 const ADD_POST = 'ADD-POST';
@@ -100,7 +100,7 @@ export const updateStatus = (status: string): ThunkType => {
     return (dispatch: ThunkDispatchUsers) => {
         profileAPI.updateStatus(status)
             .then((response) => {
-                if (response.data.resultCode === 0) {
+                if (response.data.resultCode === ResultCodesEnum.Success) {
                     dispatch(setStatus(status));
                 }
             });

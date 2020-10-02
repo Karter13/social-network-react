@@ -1,6 +1,6 @@
 import {ActionsTypes} from './store';
 import {ThunkDispatchUsers, ThunkType} from './users-reducer';
-import {authPI} from '../api/api';
+import {authPI, ResultCodesEnum} from '../api/api';
 import {stopSubmit} from 'redux-form';
 
 const SET_USERS_DATA = 'SET_USERS_DATA';
@@ -37,18 +37,17 @@ export const setAuthUserData = (userId: number | null, email: string | null, log
 //THUNKS
 export const getAuthUserData = (): ThunkType => (dispatch: ThunkDispatchUsers) => {
     authPI.me().then((data) => {
-        if (data.resultCode === 0) {
+        if (data.resultCode === ResultCodesEnum.Success ) {
             let {id, email, login} = data.data;
             dispatch(setAuthUserData(id, email, login, true));
         }
     });
 };
-
 export const login = (email: string, password: string, rememberMe: boolean = false): ThunkType => (dispatch: ThunkDispatchUsers) => {
 
     authPI.login(email, password, rememberMe)
         .then((data) => {
-            if (data.resultCode === 0) {
+            if (data.resultCode === ResultCodesEnum.Success) {
                 dispatch(getAuthUserData())
             } else {
                 let message = data.messages.length > 0 ? data.messages : 'Some error!!!';
@@ -56,11 +55,10 @@ export const login = (email: string, password: string, rememberMe: boolean = fal
             }
         });
 };
-
 export const logout = (): ThunkType => (dispatch: ThunkDispatchUsers) => {
     authPI.logout()
         .then((data) => {
-            if (data.resultCode === 0) {
+            if (data.resultCode === ResultCodesEnum.Success) {
                 dispatch(setAuthUserData(null, null, null, false))
             }
         });

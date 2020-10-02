@@ -20,8 +20,13 @@ type APIUsersType = {
     error: null | string
 }
 
+export enum ResultCodesEnum {
+    Success = 0,
+    Error = 1,
+}
+
 type CommonResponseType<T = {}> = {
-    resultCode: 1 | 0
+    resultCode: ResultCodesEnum
     messages: Array<string>
     data: T
 }
