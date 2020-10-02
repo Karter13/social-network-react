@@ -1,28 +1,35 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {follow, getPage, getUsers, toggleFollowingProgress, unfollow, UserType} from '../../redux/users-reducer';
+import {follow, getPage, getUsers, unfollow, UserType} from '../../redux/users-reducer';
 import {Users} from './Users';
 import {Preloader} from '../common/Preloader/Preloader';
 import {StateType} from '../../redux/redux-store';
 import {compose} from 'redux';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
-export type UsersAPIContainerPropsType = {
+type OwnPropsType = {
+    pageTitle: string
+}
+type MapStatePropsType = {
     users: Array<UserType>
     pageSize: number
     totalUserCount: number
     currentPage: number
-    follow: (usersId: string) => void
-    unfollow: (usersId: string) => void
     isFetching: boolean
     followingInProgress: Array<string>
+}
+type MapDispatchPropsType = {
+    follow: (usersId: string) => void
+    unfollow: (usersId: string) => void
     getUsers: (currentPage: number, pageSize: number) => void
     getPage: (pageNumber: number, pageSize: number) => void
 }
 
+export type UsersAPIContainerPropsType = OwnPropsType & MapStatePropsType & MapDispatchPropsType
+
 //при типизации классовой компоненты первая позиция типизация пропсов вторая стэйта!!!
 // пропсы в конструкторе также типизируются
-export class UsersAPIContainer extends React.Component<UsersAPIContainerPropsType> {
+export class UsersAPIContainer extends React.Component<UsersAPIContainerPropsType, StateType> {
 
     componentDidMount(): void {
 
@@ -30,12 +37,12 @@ export class UsersAPIContainer extends React.Component<UsersAPIContainerPropsTyp
     }
 
     onPageChanged = (pageNumber: number) => {
-
         this.props.getPage(pageNumber,this.props.pageSize);
     };
 
     render() {
         return <>
+            <h2>{this.props.pageTitle}</h2>
             {this.props.isFetching ? <Preloader/> : null}
             <Users totalUserCount={this.props.totalUserCount}
                    pageSize={this.props.pageSize}
@@ -50,7 +57,7 @@ export class UsersAPIContainer extends React.Component<UsersAPIContainerPropsTyp
     }
 }
 
-const mapStateToProps = (state: StateType) => {
+const mapStateToProps = (state: StateType): MapStatePropsType => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
@@ -64,17 +71,11 @@ const mapStateToProps = (state: StateType) => {
 //question fir <any>
 export const UsersContainer = compose<any>(
     withAuthRedirect,
-    connect(mapStateToProps, {
+    //TStateProps = {}, TDispatchProps = {}, TOwnProps = {}, State = DefaultRootState
+    connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, StateType>(mapStateToProps, {
         follow,
         unfollow,
         getUsers,
         getPage
     })
 )(UsersAPIContainer);
-
-// export const UsersContainer = connect(mapStateToProps, {
-//     follow,
-//     unfollow,
-//     getUsers,
-//     getPage
-// })(UsersAPIContainer);

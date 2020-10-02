@@ -10,9 +10,6 @@ import {compose} from 'redux';
 type PathParamType = {
     userId: string
 }
-export type MapStatePropsTypeRedirect = {
-    isAuth: boolean
-}
 
 type MapStatePropsType = {
     profile: ProfileType | null
@@ -25,7 +22,7 @@ type MapDispatchPropsType = {
     getStatus: (userId: number) => void
     updateStatus: (status: string) => void
 }
-type ProfileAPIContainerPropsType = MapStatePropsType & MapStatePropsTypeRedirect & MapDispatchPropsType
+type ProfileAPIContainerPropsType = MapStatePropsType & MapDispatchPropsType
 type PropsType = RouteComponentProps<PathParamType> & ProfileAPIContainerPropsType
 
 class ProfileContainer extends React.Component<PropsType> {
