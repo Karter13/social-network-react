@@ -5,7 +5,6 @@ import {Users} from './Users';
 import {Preloader} from '../common/Preloader/Preloader';
 import {StateType} from '../../redux/redux-store';
 import {compose} from 'redux';
-import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 type OwnPropsType = {
     pageTitle: string
@@ -68,7 +67,6 @@ const mapStateToProps = (state: StateType): MapStatePropsType => {
 
 //question fir <any>
 export const UsersContainer = compose<any>(
-    withAuthRedirect,
     //TStateProps = {}, TDispatchProps = {}, TOwnProps = {}, State = DefaultRootState
     connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, StateType>(mapStateToProps, {
         follow,

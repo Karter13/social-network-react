@@ -14,9 +14,12 @@ import {connect} from 'react-redux';
 import {StateType} from './redux/redux-store';
 import {compose} from 'redux';
 import {initializeApp} from './redux/app-reducer';
+import {Preloader} from './components/common/Preloader/Preloader';
 
 export type OwnPropsType = {}
-export type MapStatePropsType = {}
+export type MapStatePropsType = {
+    initialized: boolean
+}
 export type MapDispatchPropsType = {
     initializeApp: () => void
 }
@@ -30,6 +33,10 @@ class App extends React.Component<AppPropsType> {
     }
 
     render() {
+        if (!this.props.initialized) {
+            return <Preloader/>
+        }
+
         return (
             <div className='app-wrapper'>
                 <HeaderContainer/>
@@ -48,9 +55,16 @@ class App extends React.Component<AppPropsType> {
     }
 }
 
+
+const MapStateToProps = (state: StateType) => {
+    return {
+        initialized: state.app.initialized
+    }
+};
 //правильная ли типизация  compose
 export default compose<React.ComponentClass>(
-    // withRouter,
     connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, StateType>
-    (null, {initializeApp}))
+    (MapStateToProps, {initializeApp}),
+    // withRouter
+)
 (App)

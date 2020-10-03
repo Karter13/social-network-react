@@ -28,10 +28,15 @@ type ProfileContainerPropsType = RouteComponentProps<PathParamType> & ProfileAPI
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType> {
 
+    //непонятки по поводу loading
     componentDidMount(): void {
+        console.log(this.props)
         let userId = Number(this.props.match.params.userId);
-        if (!userId && this.props.authorizedUserId) {
-            userId = this.props.authorizedUserId
+        if (!userId) {
+            userId = this.props.authorizedUserId || 0;
+            if(!userId ) {
+                this.props.history.push('/login');
+            }
         }
         this.props.getUserProfile(userId);
         this.props.getStatus(userId)

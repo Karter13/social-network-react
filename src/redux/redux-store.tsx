@@ -16,7 +16,7 @@ let reducers = combineReducers({
     usersPage: usersReducer,
     auth: authReducer,
     form: formReducer,
-    app: appReducer
+    app: appReducer,
 });
 
 export type StateType = ReturnType<typeof reducers>
