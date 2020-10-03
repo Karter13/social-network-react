@@ -29,14 +29,15 @@ export const authReducer = (state = initialState, action: ActionsTypes): AuthTyp
     }
 };
 
+//action
 export const setAuthUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
     type: SET_USERS_DATA,
     payload: {userId, email, login, isAuth}
 } as const);
 
-//THUNKS
+//thunk
 export const getAuthUserData = (): ThunkType => (dispatch: ThunkDispatchUsers) => {
-    authPI.me().then((data) => {
+    return authPI.me().then((data) => {
         if (data.resultCode === ResultCodesEnum.Success ) {
             let {id, email, login} = data.data;
             dispatch(setAuthUserData(id, email, login, true));

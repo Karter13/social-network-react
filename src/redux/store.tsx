@@ -10,6 +10,7 @@ import {
     unfollowSuccess
 } from './users-reducer';
 import {setAuthUserData} from './auth-reducer';
+import {initializedSuccess} from './app-reducer';
 
 export type ActionsTypes = ReturnType<typeof addPost>
     | ReturnType<typeof addMessage>
@@ -23,6 +24,8 @@ export type ActionsTypes = ReturnType<typeof addPost>
     | ReturnType<typeof setAuthUserData>
     | ReturnType<typeof toggleFollowingProgress>
     | ReturnType<typeof setStatus>
+    | ReturnType<typeof initializedSuccess>
+
 
 
 
