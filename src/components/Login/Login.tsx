@@ -74,7 +74,7 @@ const Login: React.FC<LoginPropsType> = (props) => {
     )
 };
 
-const mapStateToProps = (state: StateType) => ({
+const mapStateToProps = (state: StateType): MapStateToPropsType => ({
     isAuth: state.auth.isAuth
 });
 
