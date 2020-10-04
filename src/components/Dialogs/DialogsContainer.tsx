@@ -5,11 +5,12 @@ import {connect} from 'react-redux';
 import {StateType} from '../../redux/redux-store';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 import {compose} from 'redux';
+import {getdialogsPage} from '../../redux/dialogs-selectors';
 
 
 const mapStateToProps = (state: StateType) => {
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: getdialogsPage(state)
     }
 };
 
