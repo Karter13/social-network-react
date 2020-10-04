@@ -63,8 +63,7 @@ const MapStateToProps = (state: StateType) => {
 };
 //правильная ли типизация  compose
 export default compose<React.ComponentClass>(
-    connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, StateType>
-    (MapStateToProps, {initializeApp}),
-    // withRouter
+    // withRouter,
+    connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, StateType>(MapStateToProps, {initializeApp})
 )
 (App)
