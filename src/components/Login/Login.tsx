@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import {login} from '../../redux/auth-reducer';
 import {StateType} from '../../redux/redux-store';
 import {Redirect} from 'react-router-dom';
+import {isAuthLoginSelector} from '../../redux/login-selectors';
 
 type FormDataType = {
     email: string
@@ -75,7 +76,7 @@ const Login: React.FC<LoginPropsType> = (props) => {
 };
 
 const mapStateToProps = (state: StateType): MapStateToPropsType => ({
-    isAuth: state.auth.isAuth
+    isAuth: isAuthLoginSelector(state)
 });
 
 export default connect<MapStateToPropsType,

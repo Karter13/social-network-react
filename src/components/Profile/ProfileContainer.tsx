@@ -6,6 +6,12 @@ import {StateType} from '../../redux/redux-store';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 import {compose} from 'redux';
+import {
+    authorizedUserIdProfileSelector,
+    isAuthProfileSelector,
+    profileSelector,
+    statusProfileSelector
+} from '../../redux/profile-selectors';
 
 type OwnPropsType = {}
 //type for withRouter
@@ -54,13 +60,13 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
     }
 }
 
-const mapStateToProps = (store: StateType): MapStatePropsType => {
+const mapStateToProps = (state: StateType): MapStatePropsType => {
     // console.log('mapStateToProps PROFILE');
     return ({
-        profile: store.profilePage.profile,
-        status: store.profilePage.status,
-        authorizedUserId: store.auth.userId,
-        isAuth: store.auth.isAuth
+        profile: profileSelector(state),
+        status: statusProfileSelector(state),
+        authorizedUserId: authorizedUserIdProfileSelector(state),
+        isAuth: isAuthProfileSelector(state)
     });
 };
 
