@@ -15,8 +15,6 @@ export type UsersPropsType = {
     followingInProgress: Array<string>
 }
 
-//при типизации классовой компоненты первая позиция типизация пропсов вторая стэйта!!!
-// пропсы в конструкторе также типизируются
 export const Users: React.FC<UsersPropsType> = (props) => {
 
     let pagesCount = Math.ceil(props.totalUserCount / props.pageSize);
