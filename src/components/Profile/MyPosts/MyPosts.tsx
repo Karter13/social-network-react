@@ -15,7 +15,7 @@ type MapDispatchPropsType = {
 }
 export type MyPostsPropsType = PathParamType & MapStatePropsType & MapDispatchPropsType
 
-export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
+export const MyPosts: React.FC<MyPostsPropsType> = React.memo((props) => {
 
     let postsElement = props.posts
         .map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>);
@@ -35,7 +35,7 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
             </div>
         </div>
     )
-};
+});
 
 type AddPostsFormType = {
     newPostText: string
