@@ -87,29 +87,17 @@ export const setStatus = (status: string) => ({type: SET_STATUS, status} as cons
 export const deletePost = (postId: string) => ({type: DELETE_POST, postId} as const);
 
 //thunkCreators
-export const getUserProfile = (userId: number): ThunkType => {
-    return (dispatch: ThunkDispatchUsers) => {
-        usersAPI.getProfile(userId)
-            .then((data) => {
-                dispatch(setUserProfile(data));
-            });
-    }
+export const getUserProfile = (userId: number): ThunkType => async (dispatch: ThunkDispatchUsers) => {
+    let data = await usersAPI.getProfile(userId);
+    dispatch(setUserProfile(data));
 };
-export const getStatus = (userId: number): ThunkType => {
-    return (dispatch: ThunkDispatchUsers) => {
-        profileAPI.getStatus(userId)
-            .then((response) => {
-                dispatch(setStatus(response.data));
-            });
-    }
+export const getStatus = (userId: number): ThunkType => async (dispatch: ThunkDispatchUsers) => {
+    let response = await profileAPI.getStatus(userId);
+    dispatch(setStatus(response.data));
 };
-export const updateStatus = (status: string): ThunkType => {
-    return (dispatch: ThunkDispatchUsers) => {
-        profileAPI.updateStatus(status)
-            .then((response) => {
-                if (response.data.resultCode === ResultCodesEnum.Success) {
-                    dispatch(setStatus(status));
-                }
-            });
+export const updateStatus = (status: string): ThunkType => async (dispatch: ThunkDispatchUsers) => {
+    let response = await profileAPI.updateStatus(status);
+    if (response.data.resultCode === ResultCodesEnum.Success) {
+        dispatch(setStatus(status));
     }
 };

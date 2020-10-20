@@ -3,7 +3,7 @@ import {ThunkDispatchUsers, ThunkType} from './users-reducer';
 import {authPI, ResultCodesEnum} from '../api/api';
 import {stopSubmit} from 'redux-form';
 
-const SET_USERS_DATA = 'SET_USERS_DATA';
+const SET_USERS_DATA = 'auth/SET_USERS_DATA';
 export type AuthType = {
     userId: number | null
     email: string | null
@@ -36,31 +36,25 @@ export const setAuthUserData = (userId: number | null, email: string | null, log
 } as const);
 
 //thunk
-export const getAuthUserData = (): ThunkType => (dispatch: ThunkDispatchUsers) => {
-    return authPI.me().then((data) => {
-        if (data.resultCode === ResultCodesEnum.Success ) {
-            let {id, email, login} = data.data;
-            dispatch(setAuthUserData(id, email, login, true));
-        }
-    });
+export const getAuthUserData = (): ThunkType => async (dispatch: ThunkDispatchUsers) => {
+    let data = await authPI.me();
+    if (data.resultCode === ResultCodesEnum.Success) {
+        let {id, email, login} = data.data;
+        dispatch(setAuthUserData(id, email, login, true));
+    }
 };
-export const login = (email: string, password: string, rememberMe: boolean = false): ThunkType => (dispatch: ThunkDispatchUsers) => {
-
-    authPI.login(email, password, rememberMe)
-        .then((data) => {
-            if (data.resultCode === ResultCodesEnum.Success) {
-                dispatch(getAuthUserData())
-            } else {
-                let message = data.messages.length > 0 ? data.messages : 'Some error!!!';
-                dispatch<any>(stopSubmit('login', {_error: message}));
-            }
-        });
+export const login = (email: string, password: string, rememberMe: boolean = false): ThunkType => async (dispatch: ThunkDispatchUsers) => {
+    let data = await authPI.login(email, password, rememberMe);
+    if (data.resultCode === ResultCodesEnum.Success) {
+        dispatch(getAuthUserData())
+    } else {
+        let message = data.messages.length > 0 ? data.messages : 'Some error!!!';
+        dispatch<any>(stopSubmit('login', {_error: message}));
+    }
 };
-export const logout = (): ThunkType => (dispatch: ThunkDispatchUsers) => {
-    authPI.logout()
-        .then((data) => {
-            if (data.resultCode === ResultCodesEnum.Success) {
-                dispatch(setAuthUserData(null, null, null, false))
-            }
-        });
+export const logout = (): ThunkType => async (dispatch: ThunkDispatchUsers) => {
+    let data = await authPI.logout();
+    if (data.resultCode === ResultCodesEnum.Success) {
+        dispatch(setAuthUserData(null, null, null, false))
+    }
 };
