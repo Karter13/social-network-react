@@ -6,6 +6,7 @@ import {ThunkDispatchUsers, ThunkType} from './users-reducer';
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
+const DELETE_POST = 'DELETE_STATUS';
 
 export type PostType = {
     id: string
@@ -69,6 +70,11 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Prof
         case SET_STATUS: {
             return {...state, status: action.status};
         }
+        case DELETE_POST:
+            return {
+                ...state,
+                posts: state.posts.filter(p => p.id !== action.postId)
+            }
         default:
             return state;
     }
@@ -78,6 +84,7 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Prof
 export const addPost = (newPostText: string) => ({type: ADD_POST, newPostText} as const);
 export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const);
 export const setStatus = (status: string) => ({type: SET_STATUS, status} as const);
+export const deletePost = (postId: string) => ({type: DELETE_POST, postId} as const);
 
 //thunkCreators
 export const getUserProfile = (userId: number): ThunkType => {

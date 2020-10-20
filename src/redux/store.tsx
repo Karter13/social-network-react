@@ -1,4 +1,4 @@
-import {addPost, setStatus, setUserProfile} from './profile-reducer';
+import {addPost, setStatus, setUserProfile, deletePost} from './profile-reducer';
 import {addMessage} from './dialogs-reducer';
 import {
     followSuccess,
@@ -25,6 +25,7 @@ export type ActionsTypes = ReturnType<typeof addPost>
     | ReturnType<typeof toggleFollowingProgress>
     | ReturnType<typeof setStatus>
     | ReturnType<typeof initializedSuccess>
+    | ReturnType<typeof deletePost>
 
 
 
