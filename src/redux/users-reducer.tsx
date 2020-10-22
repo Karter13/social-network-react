@@ -3,6 +3,7 @@ import {ResultCodesEnum, usersAPI} from '../api/api';
 import {StateType} from './redux-store';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {Dispatch} from 'redux';
+import {updateObjectInArray} from '../utils/objects-helper';
 
 const FOLLOW = 'users/FOLLOW';
 const UNFOLLOW = 'users/UNFOLLOW';
@@ -53,22 +54,24 @@ export const usersReducer = (state: UsersPageType = initialState, action: Action
         case FOLLOW:
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.userId) {
-                        return {...u, followed: true}
-                    }
-                    return u;
-                })
+                users: updateObjectInArray(state.users, action.userId, 'id', {followed: true})
+                // users: state.users.map(u => {
+                //     if (u.id === action.userId) {
+                //         return {...u, followed: true}
+                //     }
+                //     return u;
+                // })
             };
         case UNFOLLOW:
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.userId) {
-                        return {...u, followed: false}
-                    }
-                    return u;
-                })
+                users: updateObjectInArray(state.users, action.userId, 'id', {followed: false})
+                // users: state.users.map(u => {
+                //     if (u.id === action.userId) {
+                //         return {...u, followed: false}
+                //     }
+                //     return u;
+                // })
             };
         case SET_USERS: {
             return {...state, users: action.users}
