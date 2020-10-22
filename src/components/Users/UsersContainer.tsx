@@ -38,11 +38,13 @@ export type UsersAPIContainerPropsType = OwnPropsType & MapStatePropsType & MapD
 export class UsersAPIContainer extends React.Component<UsersAPIContainerPropsType> {
 
     componentDidMount(): void {
-        this.props.requestUsers(this.props.currentPage,this.props.pageSize);
+        const {currentPage, pageSize} = this.props;
+        this.props.requestUsers(currentPage, pageSize);
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.getPage(pageNumber,this.props.pageSize);
+        const {pageSize} = this.props;
+        this.props.getPage(pageNumber, pageSize);
     };
 
     render() {
@@ -62,18 +64,6 @@ export class UsersAPIContainer extends React.Component<UsersAPIContainerPropsTyp
     }
 }
 
-//old version mapStateToProps
-// const mapStateToProps = (state: StateType): MapStatePropsType => {
-//     return {
-//         users: state.usersPage.users,
-//         pageSize: state.usersPage.pageSize,
-//         totalUserCount: state.usersPage.totalUserCount,
-//         currentPage: state.usersPage.currentPage,
-//         isFetching: state.usersPage.isFetching,
-//         followingInProgress: state.usersPage.followingInProgress
-//     }
-// };
-
 const mapStateToProps = (state: StateType): MapStatePropsType => {
     return {
         users: getUsers(state),
@@ -85,7 +75,6 @@ const mapStateToProps = (state: StateType): MapStatePropsType => {
     }
 };
 
-//question fir <any>
 export const UsersContainer = compose<any>(
     //TStateProps = {}, TDispatchProps = {}, TOwnProps = {}, State = DefaultRootState
     connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, StateType>(mapStateToProps, {

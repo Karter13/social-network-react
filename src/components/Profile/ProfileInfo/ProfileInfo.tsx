@@ -10,18 +10,18 @@ export type ProfileInfoPropsType = {
     status: string
     updateStatus: (status: string) => void
 }
-export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
-    if (!props.profile) {
+export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, updateStatus}) => {
+    if (!profile) {
         return <Preloader/>
     }
     return (
         <div className={s.profile}>
             <div className={s.descriptionBlock}>
                 <div className={s.photo}>
-                    <img src={props.profile.photos.small}/>
+                    <img src={profile.photos.small}/>
                 </div>
-                <ProfileStatusWithHooks status={props.status}
-                               updateStatus={props.updateStatus}
+                <ProfileStatusWithHooks status={status}
+                               updateStatus={updateStatus}
                 />
             </div>
         </div>
