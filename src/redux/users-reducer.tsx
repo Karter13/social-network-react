@@ -2,6 +2,7 @@ import {ActionsTypes} from './store';
 import {ResultCodesEnum, usersAPI} from '../api/api';
 import {StateType} from './redux-store';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
+import {Dispatch} from 'redux';
 
 const FOLLOW = 'users/FOLLOW';
 const UNFOLLOW = 'users/UNFOLLOW';
@@ -132,21 +133,26 @@ export const getPage = (pageNumber: number, pageSize: number): ThunkType => asyn
     dispatch(toggleIsFetching(false));
     dispatch(setUsers(data.items));
 };
-export const follow = (userId: string): ThunkType => async (dispatch: ThunkDispatchUsers) => {
-    dispatch(toggleFollowingProgress(true, userId));
 
-    let data = await usersAPI.follow(userId);
+const followUnfollowFlow = async (dispatch: Dispatch, userId: string, apiMethod: any, actionCreator: any) => {
+    dispatch(toggleFollowingProgress(true, userId));
+    let data = await apiMethod(userId);
     if (data.resultCode === ResultCodesEnum.Success) {
-        dispatch(followSuccess(userId))
+        dispatch(actionCreator(userId))
     }
     dispatch(toggleFollowingProgress(false, userId));
 };
-export const unfollow = (userId: string): ThunkType => async (dispatch: ThunkDispatchUsers) => {
-    dispatch(toggleFollowingProgress(true, userId));
 
-    let data = await usersAPI.unfollow(userId);
-    if (data.resultCode === ResultCodesEnum.Success) {
-        dispatch(unfollowSuccess(userId))
+export const follow = (userId: string): ThunkType => {
+    return async (dispatch: ThunkDispatchUsers) => {
+        let apiMethod = usersAPI.follow.bind(usersAPI);
+        await followUnfollowFlow(dispatch, userId, apiMethod, followSuccess)
     }
-    dispatch(toggleFollowingProgress(false, userId));
+};
+
+export const unfollow = (userId: string): ThunkType => {
+    return async (dispatch: ThunkDispatchUsers) => {
+        let apiMethod = usersAPI.unfollow.bind(usersAPI);
+        await followUnfollowFlow(dispatch, userId, apiMethod, unfollowSuccess)
+    }
 };
