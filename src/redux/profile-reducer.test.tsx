@@ -7,7 +7,6 @@ import {
     deletePost,
 } from './profile-reducer';
 
-
 const startState: ProfilePageType = {
     posts: [
         {id: '1', message: 'Good post', likesCount: 15},
@@ -37,7 +36,6 @@ const startState: ProfilePageType = {
     },
     status: ''
 };
-
 test('correct add new post in array posts for ProfilePage ', () => {
 
     const newPostText = 'Maikl';
@@ -50,7 +48,6 @@ test('correct add new post in array posts for ProfilePage ', () => {
     expect(endState.posts[3].message).toBe('Maikl');
     expect(endState.posts[3].id).toBeTruthy();
 });
-
 test('correct add date to profile for ProfilePage ', () => {
 
     const profile: ProfileType = {
@@ -83,7 +80,6 @@ test('correct add date to profile for ProfilePage ', () => {
         expect(endState.profile.userId).toBe('100');
     }
 });
-
 test('correct delete post in array for ProfilePage ', () => {
     const action = deletePost('1');
     const endState = profileReducer(startState, action);
