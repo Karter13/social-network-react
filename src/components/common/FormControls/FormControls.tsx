@@ -8,14 +8,14 @@ type CommonPropsType = {
     child: any
 }
 
-export const FormControl: React.FC<CommonPropsType> = ({input, meta, child, ...props}) => {
-    const hasError = meta.touched && meta.error;
+export const FormControl: React.FC<CommonPropsType> = ({input, meta: {touched, error}, children, ...props}) => {
+    const hasError = touched && error;
     return (
         <div className={styles.formControl + ' ' + (hasError ? styles.error : '')}>
             <div>
-                {props.children}
+                {children}
             </div>
-            {hasError && <span>{meta.error}</span>}
+            {hasError && <span>{error}</span>}
         </div>
     )
 };

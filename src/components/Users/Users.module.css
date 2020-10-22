@@ -6,11 +6,6 @@
     margin: 10px;
 }
 
-.selectedPage {
-    font-weight: bold;
-    font-size: 25px;
-}
-
 .loader {
     text-align: center;
     margin: 25px;

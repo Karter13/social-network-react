@@ -3,6 +3,7 @@ import {UserType} from '../../redux/users-reducer';
 import styles from './Users.module.css'
 import userPhoto from '../../assets/images/noavatar.png'
 import {NavLink} from 'react-router-dom';
+import {Paginator} from '../common/Paginator/Paginator';
 
 export type UsersPropsType = {
     users: Array<UserType>
@@ -15,9 +16,9 @@ export type UsersPropsType = {
     followingInProgress: Array<string>
 }
 
-export const Users: React.FC<UsersPropsType> = (props) => {
+export const Users: React.FC<UsersPropsType> = ({totalUserCount, pageSize, currentPage, onPageChanged,  ...props}) => {
 
-    let pagesCount = Math.ceil(props.totalUserCount / props.pageSize);
+    let pagesCount = Math.ceil(totalUserCount / pageSize);
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
@@ -26,15 +27,18 @@ export const Users: React.FC<UsersPropsType> = (props) => {
     return (
         <div className={styles.usersPage}>
 
-            <div>
-                {pages.map((page, i) => {
-                    return <span key={i}
-                                 className={props.currentPage === page ? styles.selectedPage : undefined}
-                                 onClick={() => {
-                                     props.onPageChanged(page);
-                                 }}>{page}</span>
-                })}
-            </div>
+            {/*<div>*/}
+            {/*    {pages.map((page, i) => {*/}
+            {/*        return <span key={i}*/}
+            {/*                     className={currentPage === page ? styles.selectedPage : undefined}*/}
+            {/*                     onClick={() => {*/}
+            {/*                         onPageChanged(page);*/}
+            {/*                     }}>{page}</span>*/}
+            {/*    })}*/}
+            {/*</div>*/}
+
+            <Paginator currentPage={currentPage} totalUserCount={totalUserCount}
+                       pageSize={pageSize} onPageChanged={onPageChanged}/>
 
             {
                 props.users.map(u => <div key={u.id}>
@@ -53,30 +57,10 @@ export const Users: React.FC<UsersPropsType> = (props) => {
 
                                         props.unfollow(u.id)
 
-                                        // props.toggleFollowingProgress(true, u.id);
-                                        //
-                                        // usersAPI.unfollow(u.id)
-                                        //     .then((data) => {
-                                        //     if (data.resultCode === 0) {
-                                        //         props.unfollow(u.id)
-                                        //     }
-                                        //     props.toggleFollowingProgress(false, u.id);
-                                        // });
-
                                     }}>Unfollow</button>
                                     : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
 
                                         props.follow(u.id)
-
-                                        // props.toggleFollowingProgress(true, u.id);
-                                        //
-                                        // usersAPI.follow(u.id)
-                                        //     .then((data) => {
-                                        //     if (data.resultCode === 0) {
-                                        //         props.follow(u.id)
-                                        //     }
-                                        //     props.toggleFollowingProgress(false, u.id);
-                                        // });
 
                                     }}>Follow</button>
                             }
