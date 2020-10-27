@@ -4,14 +4,14 @@ import {Navbar} from './components/Navbar/Navbar';
 import {Music} from './components/Music/Music';
 import {News} from './components/News/News';
 import {Settings} from './components/Settings/Settings';
-import {Route} from 'react-router-dom';
+import {BrowserRouter, Route} from 'react-router-dom';
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 import {UsersContainer} from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
-import {connect} from 'react-redux';
-import {StateType} from './redux/redux-store';
+import {connect, Provider} from 'react-redux';
+import {StateType, store} from './redux/redux-store';
 import {compose} from 'redux';
 import {initializeApp} from './redux/app-reducer';
 import {Preloader} from './components/common/Preloader/Preloader';
@@ -62,8 +62,17 @@ const MapStateToProps = (state: StateType) => {
     }
 };
 //правильная ли типизация  compose
-export default compose<React.ComponentClass>(
+ let AppContainer= compose<React.ComponentClass>(
     // withRouter,
     connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, StateType>(MapStateToProps, {initializeApp})
 )
-(App)
+(App);
+
+const SamuraiJSApp = () => {
+     return <BrowserRouter>
+         <Provider store={store}>
+             <AppContainer/>
+         </Provider>
+     </BrowserRouter>
+};
+export default SamuraiJSApp;
