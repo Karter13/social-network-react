@@ -24,7 +24,6 @@ const DialogsContainer = lazy(() =>
 );
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 
-
 export type OwnPropsType = {}
 export type MapStatePropsType = {
     initialized: boolean
