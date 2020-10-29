@@ -13,6 +13,7 @@ import {StateType, store} from './redux/redux-store';
 import {compose} from 'redux';
 import {initializeApp} from './redux/app-reducer';
 import {Preloader} from './components/common/Preloader/Preloader';
+import {withSuspense} from './hoc/withSuspense';
 // import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 // import ProfileContainer from './components/Profile/ProfileContainer';
 
@@ -31,7 +32,6 @@ export type MapStatePropsType = {
 export type MapDispatchPropsType = {
     initializeApp: () => void
 }
-
 type AppPropsType = OwnPropsType & MapStatePropsType & MapDispatchPropsType
 
 class App extends React.Component<AppPropsType> {
@@ -50,16 +50,8 @@ class App extends React.Component<AppPropsType> {
                 <HeaderContainer/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route path='/profile/:userId?' render={() => {
-                        return <React.Suspense fallback={<div>Loading...</div>}>
-                            <ProfileContainer/>
-                        </React.Suspense>
-                    }}/>
-                    <Route path='/dialogs' render={() => {
-                        return <React.Suspense fallback={<div>Loading...</div>}>
-                            <DialogsContainer/>
-                        </React.Suspense>
-                    }}/>
+                    <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
+                    <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
