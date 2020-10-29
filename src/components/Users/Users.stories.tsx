@@ -38,7 +38,7 @@ export const UsersBaseExample = () => {
             }]
     }
                   pageSize={10}
-                  totalUserCount={100}
+                  totalItemsCount={100}
                   currentPage={5}
                   follow={AddFollowCallback}
                   unfollow={AddUnFollowCallback}

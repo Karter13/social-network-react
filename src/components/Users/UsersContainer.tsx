@@ -10,7 +10,7 @@ import {
     getFollowingInProgress,
     getIsFetching,
     getPageSize,
-    getTotalUserCount,
+    getTotalItemsCount,
     getUsers
 } from '../../redux/users-selectors';
 
@@ -20,7 +20,7 @@ type OwnPropsType = {
 type MapStatePropsType = {
     users: Array<UserType>
     pageSize: number
-    totalUserCount: number
+    totalItemsCount: number
     currentPage: number
     isFetching: boolean
     followingInProgress: Array<string>
@@ -51,7 +51,7 @@ export class UsersAPIContainer extends React.Component<UsersAPIContainerPropsTyp
         return <>
             <h2>{this.props.pageTitle}</h2>
             {this.props.isFetching ? <Preloader/> : null}
-            <Users totalUserCount={this.props.totalUserCount}
+            <Users totalItemsCount={this.props.totalItemsCount}
                    pageSize={this.props.pageSize}
                    currentPage={this.props.currentPage}
                    onPageChanged={this.onPageChanged}
@@ -68,7 +68,7 @@ const mapStateToProps = (state: StateType): MapStatePropsType => {
     return {
         users: getUsers(state),
         pageSize: getPageSize(state),
-        totalUserCount: getTotalUserCount(state),
+        totalItemsCount: getTotalItemsCount(state),
         currentPage: getCurrentPage(state),
         isFetching: getIsFetching(state),
         followingInProgress: getFollowingInProgress(state)

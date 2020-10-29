@@ -32,7 +32,7 @@ export type UserType = {
 export type UsersPageType = {
     users: Array<UserType>
     pageSize: number
-    totalUserCount: number
+    totalItemsCount: number
     currentPage: number
     isFetching: boolean,
     followingInProgress: Array<string>
@@ -41,8 +41,8 @@ export type UsersPageType = {
 
 let initialState: UsersPageType = {
     users: [],
-    pageSize: 100,
-    totalUserCount: 0,
+    pageSize: 10,
+    totalItemsCount: 0,
     currentPage: 1,
     isFetching: true,
     followingInProgress: []
@@ -68,7 +68,7 @@ export const usersReducer = (state: UsersPageType = initialState, action: Action
             return {...state, currentPage: action.currentPage}
         }
         case SET_USERS_TOTAL_COUNT: {
-            return {...state, totalUserCount: action.totalUsersCount}
+            return {...state, totalItemsCount: action.totalUsersCount}
         }
         case TOGGLE_IS_FETCHING: {
             return {...state, isFetching: action.isFetching}

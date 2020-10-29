@@ -7,7 +7,7 @@ import {User} from './User';
 export type UsersPropsType = {
     users: Array<UserType>
     pageSize: number
-    totalUserCount: number
+    totalItemsCount: number
     currentPage: number
     follow: (usersId: string) => void
     unfollow: (usersId: string) => void
@@ -15,13 +15,13 @@ export type UsersPropsType = {
     followingInProgress: Array<string>
 }
 
-export const Users: React.FC<UsersPropsType> = ({totalUserCount, pageSize, currentPage, onPageChanged, users, ...props}) => {
+export const Users: React.FC<UsersPropsType> = ({totalItemsCount, pageSize, currentPage, onPageChanged, users, ...props}) => {
 
     return (
         <div className={styles.usersPage}>
 
-            <Paginator currentPage={currentPage} totalUserCount={totalUserCount}
-                       pageSize={pageSize} onPageChanged={onPageChanged}/>
+            <Paginator currentPage={currentPage} totalItemsCount={totalItemsCount}
+                       pageSize={pageSize} onPageChanged={onPageChanged} portionSize={10}/>
 
             {
                 users.map(u => <User user={u}

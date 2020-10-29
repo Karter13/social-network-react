@@ -37,7 +37,7 @@ test('correct change followed to true', () => {
             },
         ],
         pageSize: 10,
-        totalUserCount: 100,
+        totalItemsCount: 100,
         currentPage: 1,
         isFetching: true,
         followingInProgress: []
@@ -78,7 +78,7 @@ test('correct change followed to false', () => {
             },
         ],
         pageSize: 10,
-        totalUserCount: 100,
+        totalItemsCount: 100,
         currentPage: 1,
         isFetching: true,
         followingInProgress: []
@@ -108,7 +108,7 @@ test('correct change users in array users', () => {
             }
         ],
         pageSize: 10,
-        totalUserCount: 100,
+        totalItemsCount: 100,
         currentPage: 1,
         isFetching: true,
         followingInProgress: []
@@ -176,7 +176,7 @@ test('correct change number in currentPage', () => {
             },
         ],
         pageSize: 10,
-        totalUserCount: 100,
+        totalItemsCount: 100,
         currentPage: 1,
         isFetching: true,
         followingInProgress: []
@@ -217,7 +217,7 @@ test('correct change number in totalUserCount', () => {
             },
         ],
         pageSize: 10,
-        totalUserCount: 100,
+        totalItemsCount: 100,
         currentPage: 1,
         isFetching: true,
         followingInProgress: []
@@ -226,9 +226,9 @@ test('correct change number in totalUserCount', () => {
     const action = setUsersTotalCount(70);
     const endState = usersReducer(startState, action);
 
-    expect(endState.totalUserCount).toBe(70);
-    expect(endState.totalUserCount).toBeTruthy();
-    expect(typeof endState.totalUserCount).toBe('number');
+    expect(endState.totalItemsCount).toBe(70);
+    expect(endState.totalItemsCount).toBeTruthy();
+    expect(typeof endState.totalItemsCount).toBe('number');
 });
 
 test('correct change toggle in isFetching', () => {
@@ -259,7 +259,7 @@ test('correct change toggle in isFetching', () => {
             },
         ],
         pageSize: 10,
-        totalUserCount: 100,
+        totalItemsCount: 100,
         currentPage: 1,
         isFetching: true,
         followingInProgress: []
