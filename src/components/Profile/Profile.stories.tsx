@@ -38,5 +38,6 @@ export const ProfileBaseExample = () => {
         }
         status={'Active'}
         updateStatus={UpdateeStatusCallback}
+        isOwner={true}
     />
 };

@@ -4,13 +4,16 @@ import {Preloader} from '../../common/Preloader/Preloader';
 import {ProfileType} from '../../../redux/profile-reducer';
 import {ProfileStatus} from './ProfileStatus';
 import {ProfileStatusWithHooks} from './ProfileStatusWithHooks';
+import userPhoto from '../../../assets/images/noavatar.png'
+
 
 export type ProfileInfoPropsType = {
     profile: ProfileType | null
     status: string
     updateStatus: (status: string) => void
+    isOwner: boolean
 }
-export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, updateStatus}) => {
+export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, updateStatus, isOwner}) => {
     if (!profile) {
         return <Preloader/>
     }
@@ -18,8 +21,9 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, up
         <div className={s.profile}>
             <div className={s.descriptionBlock}>
                 <div className={s.photo}>
-                    <img src={profile.photos.small}/>
+                    <img src={profile.photos.large || userPhoto}/>
                 </div>
+                {isOwner && <input type={'file'}/>}
                 <ProfileStatusWithHooks status={status}
                                updateStatus={updateStatus}
                 />
