@@ -14,15 +14,15 @@ import {compose} from 'redux';
 import {initializeApp} from './redux/app-reducer';
 import {Preloader} from './components/common/Preloader/Preloader';
 import {withSuspense} from './hoc/withSuspense';
-// import {DialogsContainer} from './components/Dialogs/DialogsContainer';
-// import ProfileContainer from './components/Profile/ProfileContainer';
 
-// const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
-const DialogsContainer = lazy(() =>
-    import('./components/Dialogs/DialogsContainer')
-        .then(({DialogsContainer}) => ({default: DialogsContainer})),
-);
+//with export default
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+//with export default
+// const DialogsContainer = lazy(() =>
+//     import('./components/Dialogs/DialogsContainer')
+//         .then(({DialogsContainer}) => ({default: DialogsContainer})),
+// );
 
 export type OwnPropsType = {}
 export type MapStatePropsType = {
