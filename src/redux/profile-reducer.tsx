@@ -2,11 +2,13 @@ import {v1} from 'uuid';
 import {ActionsTypes} from './store';
 import {profileAPI, ResultCodesEnum, usersAPI} from '../api/api';
 import {ThunkDispatchUsers, ThunkType} from './users-reducer';
+import {Dispatch} from 'redux';
 
 const ADD_POST = 'profile/ADD-POST';
 const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';
 const SET_STATUS = 'profile/SET_STATUS';
 const DELETE_POST = 'profile/DELETE_STATUS';
+const SAVE_PHOTO_SUCCESS = 'profile/SAVE_PHOTO_SUCCESS';
 
 export type PostType = {
     id: string
@@ -51,7 +53,7 @@ let initialState: ProfilePageType = {
     profile: null,
     status: ''
 };
-export const profileReducer = (state = initialState, action: ActionsTypes): ProfilePageType => {
+export const profileReducer = (state = initialState, action: ActionsTypes): any => {
 
     switch (action.type) {
         case ADD_POST: {
@@ -70,11 +72,17 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Prof
         case SET_STATUS: {
             return {...state, status: action.status};
         }
-        case DELETE_POST:
+        case DELETE_POST:{
             return {
                 ...state,
                 posts: state.posts.filter(p => p.id !== action.postId)
             }
+        }
+        case SAVE_PHOTO_SUCCESS:
+            return {
+                ...state,
+                profile: {...state.profile, photos: action.photos}
+            };
         default:
             return state;
     }
@@ -85,6 +93,7 @@ export const addPost = (newPostText: string) => ({type: ADD_POST, newPostText} a
 export const setUserProfile = (profile: ProfileType) => ({type: SET_USER_PROFILE, profile} as const);
 export const setStatus = (status: string) => ({type: SET_STATUS, status} as const);
 export const deletePost = (postId: string) => ({type: DELETE_POST, postId} as const);
+export const savePhotoSuccess = (photos: PhotosType) => ({type: SAVE_PHOTO_SUCCESS, photos} as const);
 
 //thunkCreators
 export const getUserProfile = (userId: number): ThunkType => async (dispatch: ThunkDispatchUsers) => {
@@ -101,3 +110,10 @@ export const updateStatus = (status: string): ThunkType => async (dispatch: Thun
         dispatch(setStatus(status));
     }
 };
+
+export const savePhoto = (file: string): ThunkType => async (dispatch: Dispatch) => {
+    let response = await profileAPI.savePhoto(file);
+    if (response.data.resultCode === ResultCodesEnum.Success) {
+        dispatch(savePhotoSuccess(response.data.data.photos));
+    }
+}
