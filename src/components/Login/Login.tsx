@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './Login.module.css'
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
-import {Input} from '../common/FormControls/FormControls';
+import {createField, Input} from '../common/FormControls/FormControls';
 import {required} from '../../utils/validators/validators';
 import {connect} from 'react-redux';
 import {login} from '../../redux/auth-reducer';
@@ -18,22 +18,9 @@ type FormDataType = {
 export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
     return (
         <form onSubmit={handleSubmit}>
-            <div>
-                <Field placeholder={'Email'}
-                       name={'email'}
-                       component={Input}
-                       validate={[required]}/>
-            </div>
-            <div>
-                <Field placeholder={'Password'}
-                       name={'password'}
-                       type={'password'}
-                       component={Input}
-                       validate={[required]}/>
-            </div>
-            <div>
-                <Field component={'input'} name={'rememberMe'} type={'checkbox'}/>remember me
-            </div>
+            {createField('Email', 'email', [required], Input)}
+            {createField('Password', 'password', [required], Input, {type: 'password'})}
+            {createField(null, 'rememberMe', [], Input, {type: 'checkbox'}, 'remember me')}
             {
                 error && <div className={style.formSummaryError}>
                     {error}

@@ -55,7 +55,7 @@ const ProfileData: React.FC<ProfileDataPropsType> = ({profile, isOwner, goToEdit
     return (
         profile && <div>
 
-            {isOwner && <div onClick={goToEditMode}><button>edit</button></div>}
+            {isOwner && <div><button onClick={goToEditMode}>edit</button></div>}
 
             <div>
                 <b>FullName:</b>{profile.fullName}
