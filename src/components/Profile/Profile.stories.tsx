@@ -40,5 +40,6 @@ export const ProfileBaseExample = () => {
         updateStatus={UpdateeStatusCallback}
         isOwner={true}
         savePhoto={''}
+        saveProfile={()=> {}}
     />
 };

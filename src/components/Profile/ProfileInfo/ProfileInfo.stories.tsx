@@ -39,5 +39,6 @@ export const ProfileInfoBaseExample: React.FC<ProfileInfoPropsType> = () => {
         updateStatus={UpdateeStatusCallback}
         isOwner={true}
         savePhoto={''}
+        saveProfile={()=> {}}
     />
 };

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {PhotosType} from '../redux/users-reducer';
 import {ProfileType} from '../redux/profile-reducer';
+import {ProfileDataFormType} from '../components/Profile/ProfileInfo/ProfileDataForm';
 
 type UserType = {
     id: string
@@ -77,7 +78,11 @@ export const profileAPI = {
                 'Content-Type': 'multipart/form-data'
             }
         });
+    },
+    saveProfile(profile: any) {
+        return instance.put<CommonResponseType>(`profile`, profile);
     }
+
 };
 
 export const authPI = {

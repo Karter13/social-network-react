@@ -3,6 +3,8 @@ import {ActionsTypes} from './store';
 import {profileAPI, ResultCodesEnum, usersAPI} from '../api/api';
 import {ThunkDispatchUsers, ThunkType} from './users-reducer';
 import {Dispatch} from 'redux';
+import {ProfileDataFormType} from '../components/Profile/ProfileInfo/ProfileDataForm';
+import {StateType} from './redux-store';
 
 const ADD_POST = 'profile/ADD-POST';
 const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';
@@ -96,7 +98,7 @@ export const deletePost = (postId: string) => ({type: DELETE_POST, postId} as co
 export const savePhotoSuccess = (photos: PhotosType) => ({type: SAVE_PHOTO_SUCCESS, photos} as const);
 
 //thunkCreators
-export const getUserProfile = (userId: number): ThunkType => async (dispatch: ThunkDispatchUsers) => {
+export const getUserProfile = (userId: number ): ThunkType => async (dispatch: ThunkDispatchUsers) => {
     let data = await usersAPI.getProfile(userId);
     dispatch(setUserProfile(data));
 };
@@ -115,5 +117,14 @@ export const savePhoto = (file: string): ThunkType => async (dispatch: Dispatch)
     let response = await profileAPI.savePhoto(file);
     if (response.data.resultCode === ResultCodesEnum.Success) {
         dispatch(savePhotoSuccess(response.data.data.photos));
+    }
+}
+
+export const saveProfile = (profile: any): ThunkType => async (dispatch: Dispatch, getState: any) => {
+    const userId = getState().auth.userId;
+    let response = await profileAPI.saveProfile(profile);
+    if (response.data.resultCode === ResultCodesEnum.Success) {
+
+        // dispatch(getUserProfile(userId));
     }
 }

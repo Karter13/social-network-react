@@ -4,7 +4,7 @@ import {Preloader} from '../../common/Preloader/Preloader';
 import {ContactsType, ProfileType} from '../../../redux/profile-reducer';
 import {ProfileStatusWithHooks} from './ProfileStatusWithHooks';
 import userPhoto from '../../../assets/images/noavatar.png'
-import {ProfileDataForm} from './ProfileDataForm';
+import ProfileDataFormReduxForm, { ProfileDataFormType } from './ProfileDataForm';
 
 //savePhoto type?
 export type ProfileInfoPropsType = {
@@ -13,8 +13,9 @@ export type ProfileInfoPropsType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto: any
+    saveProfile: (formData: ProfileDataFormType) => void
 }
-export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, updateStatus, isOwner, savePhoto}) => {
+export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile, ...props}) => {
 
     let [editMode, setEditMode] = useState(false);
 
@@ -28,6 +29,10 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, up
         }
     };
 
+    const onSubmit = (formData: ProfileDataFormType) => {
+        saveProfile(formData)
+    };
+
     return (
         <div className={s.profile}>
             <div className={s.descriptionBlock}>
@@ -37,7 +42,8 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, up
                 {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
 
                 {editMode
-                    ? <ProfileDataForm profile={profile}/>
+                    //initialValues={profile} profile={profile}????
+                    ? <ProfileDataFormReduxForm onSubmit={onSubmit}/>
                     : <ProfileData goToEditMode={() => {setEditMode(true)}} profile={profile} isOwner={isOwner}/>}
 
                 <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
@@ -45,6 +51,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, up
         </div>
     )
 };
+
 
 type ProfileDataPropsType = {
     profile: ProfileType | null
