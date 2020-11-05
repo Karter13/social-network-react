@@ -4,7 +4,7 @@ import {Preloader} from '../../common/Preloader/Preloader';
 import {ContactsType, ProfileType} from '../../../redux/profile-reducer';
 import {ProfileStatusWithHooks} from './ProfileStatusWithHooks';
 import userPhoto from '../../../assets/images/noavatar.png'
-import ProfileDataFormReduxForm, { ProfileDataFormType } from './ProfileDataForm';
+import ProfileDataFormReduxForm from './ProfileDataForm';
 
 //savePhoto type?
 export type ProfileInfoPropsType = {
@@ -13,7 +13,7 @@ export type ProfileInfoPropsType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto: any
-    saveProfile: (formData: ProfileDataFormType) => void
+    saveProfile: (formData: ProfileType) => void
 }
 export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile, ...props}) => {
 
@@ -29,7 +29,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, up
         }
     };
 
-    const onSubmit = (formData: ProfileDataFormType) => {
+    const onSubmit = (formData: ProfileType) => {
         saveProfile(formData)
     };
 
@@ -43,7 +43,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, up
 
                 {editMode
                     //initialValues={profile} profile={profile}????
-                    ? <ProfileDataFormReduxForm onSubmit={onSubmit}/>
+                    ? <ProfileDataFormReduxForm initialValues={profile} profile={profile} onSubmit={onSubmit}/>
                     : <ProfileData goToEditMode={() => {setEditMode(true)}} profile={profile} isOwner={isOwner}/>}
 
                 <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>

@@ -3,8 +3,6 @@ import {ActionsTypes} from './store';
 import {profileAPI, ResultCodesEnum, usersAPI} from '../api/api';
 import {ThunkDispatchUsers, ThunkType} from './users-reducer';
 import {Dispatch} from 'redux';
-import {ProfileDataFormType} from '../components/Profile/ProfileInfo/ProfileDataForm';
-import {StateType} from './redux-store';
 
 const ADD_POST = 'profile/ADD-POST';
 const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';

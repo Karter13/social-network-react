@@ -18,7 +18,6 @@ import {
     profileSelector,
     statusProfileSelector
 } from '../../redux/profile-selectors';
-import {ProfileDataFormType} from './ProfileInfo/ProfileDataForm';
 
 type OwnPropsType = {}
 //type for withRouter
@@ -36,7 +35,7 @@ type MapDispatchPropsType = {
     getStatus: (userId: number) => void
     updateStatus: (status: string) => void
     savePhoto: any
-    saveProfile: (formData: ProfileDataFormType) => void
+    saveProfile: (formData: ProfileType) => void
 }
 type ProfileAPIContainerPropsType = MapStatePropsType & MapDispatchPropsType
 type ProfileContainerPropsType = RouteComponentProps<PathParamType> & ProfileAPIContainerPropsType & OwnPropsType

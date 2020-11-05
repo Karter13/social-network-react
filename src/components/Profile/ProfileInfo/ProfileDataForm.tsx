@@ -1,18 +1,21 @@
 import React from 'react';
 import {createField, Input, Textarea} from '../../common/FormControls/FormControls';
 import {InjectedFormProps, reduxForm} from 'redux-form';
+import {ProfileType} from '../../../redux/profile-reducer';
 
 
-export type ProfileDataFormType = {
-    fullName: string
-    lookingForAJob: string
-    lookingForAJobDescription: boolean
-    aboutMe: string
+// export type ProfileDataFormType = {
+//     fullName: string
+//     lookingForAJob: string
+//     lookingForAJobDescription: boolean
+//     aboutMe: string
+// }
+type PropsType = {
+    profile: ProfileType
 }
 
 
-
-const ProfileDataForm: React.FC<InjectedFormProps<ProfileDataFormType>> = ({handleSubmit}) => {
+const ProfileDataForm: React.FC<InjectedFormProps<ProfileType, PropsType> & PropsType> = ({handleSubmit}) => {
     return (
         <form onSubmit={handleSubmit}>
 
@@ -47,5 +50,5 @@ const ProfileDataForm: React.FC<InjectedFormProps<ProfileDataFormType>> = ({hand
     )
 };
 
-const ProfileDataFormReduxForm = reduxForm<ProfileDataFormType>({form: 'editProfile'})(ProfileDataForm);
+const ProfileDataFormReduxForm = reduxForm<ProfileType, PropsType>({form: 'editProfile'})(ProfileDataForm);
 export default ProfileDataFormReduxForm

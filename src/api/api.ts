@@ -1,7 +1,6 @@
 import axios from 'axios';
 import {PhotosType} from '../redux/users-reducer';
 import {ProfileType} from '../redux/profile-reducer';
-import {ProfileDataFormType} from '../components/Profile/ProfileInfo/ProfileDataForm';
 
 type UserType = {
     id: string

@@ -3,7 +3,6 @@ import s from './Profile.module.css'
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 import {MyPostsContainer} from './MyPosts/MyPostsContainer';
 import {ProfileType} from '../../redux/profile-reducer';
-import {ProfileDataFormType} from './ProfileInfo/ProfileDataForm';
 
 type ProfilePropsType = {
     status: string
@@ -11,7 +10,7 @@ type ProfilePropsType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto: any
-    saveProfile: (formData: ProfileDataFormType) => void
+    saveProfile: (formData: ProfileType) => void
 }
 export const Profile: React.FC<ProfilePropsType> = (props) => {
     return (
