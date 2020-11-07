@@ -6,7 +6,7 @@ import {ProfileStatusWithHooks} from './ProfileStatusWithHooks';
 import userPhoto from '../../../assets/images/noavatar.png'
 import ProfileDataFormReduxForm from './ProfileDataForm';
 
-//savePhoto type?
+
 export type ProfileInfoPropsType = {
     profile: ProfileType | null
     status: string
@@ -30,7 +30,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, up
     };
 
     const onSubmit = (formData: ProfileType) => {
-        saveProfile(formData)
+        saveProfile(formData);
         setEditMode(false)
 
         // saveProfile(formData).then(

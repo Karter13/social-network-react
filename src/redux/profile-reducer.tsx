@@ -129,6 +129,6 @@ export const saveProfile = (profile: any): ThunkType => async (dispatch: Dispatc
     } else {
         debugger
         dispatch<any>(stopSubmit('editProfile', {_error: response.data.messages[0]}));
-        return Promise.reject(response.data.messages[0]);
+        // return Promise.reject(response.data.messages[0]);
     }
 }

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {PhotosType} from '../redux/users-reducer';
 import {ProfileType} from '../redux/profile-reducer';
+import {BACK_URL} from './config';
 
 type UserType = {
     id: string
@@ -33,7 +34,7 @@ type CommonResponseType<T = {}> = {
 
 const instance = axios.create({
     withCredentials: true,
-    baseURL: `https://social-network.samuraijs.com/api/1.0/`,
+    baseURL: BACK_URL,
     headers: {
         'API-KEY': 'bb249f66-6d8f-4cc5-9789-2a998b315ae1'
     },
