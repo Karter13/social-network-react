@@ -37,7 +37,6 @@ export const Paginator: React.FC<PaginatorPropsType> = ({totalItemsCount, pageSi
                     return <span className={cn({
                         [styles.selectedPage]: currentPage === page
                     }, styles.pageNumber)}
-                        //     className={currentPage === page ? styles.selectedPage : undefined}
                                  key={i}
                                  onClick={() => {
                                      onPageChanged(page);

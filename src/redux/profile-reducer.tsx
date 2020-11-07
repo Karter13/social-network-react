@@ -73,7 +73,7 @@ export const profileReducer = (state = initialState, action: ActionsTypes): any 
         case SET_STATUS: {
             return {...state, status: action.status};
         }
-        case DELETE_POST:{
+        case DELETE_POST: {
             return {
                 ...state,
                 posts: state.posts.filter(p => p.id !== action.postId)
@@ -97,7 +97,7 @@ export const deletePost = (postId: string) => ({type: DELETE_POST, postId} as co
 export const savePhotoSuccess = (photos: PhotosType) => ({type: SAVE_PHOTO_SUCCESS, photos} as const);
 
 //thunkCreators
-export const getUserProfile = (userId: number ): ThunkType => async (dispatch: ThunkDispatchUsers) => {
+export const getUserProfile = (userId: number): ThunkType => async (dispatch: ThunkDispatchUsers) => {
     let data = await usersAPI.getProfile(userId);
     dispatch(setUserProfile(data));
 };
@@ -106,10 +106,15 @@ export const getStatus = (userId: number): ThunkType => async (dispatch: ThunkDi
     dispatch(setStatus(response.data));
 };
 export const updateStatus = (status: string): ThunkType => async (dispatch: ThunkDispatchUsers) => {
-    let response = await profileAPI.updateStatus(status);
-    if (response.data.resultCode === ResultCodesEnum.Success) {
-        dispatch(setStatus(status));
+    try {
+        let response = await profileAPI.updateStatus(status);
+        if (response.data.resultCode === ResultCodesEnum.Success) {
+            dispatch(setStatus(status));
+        }
+    } catch (e) {
+        console.log(e.message)
     }
+
 };
 
 export const savePhoto = (file: string): ThunkType => async (dispatch: Dispatch) => {
@@ -127,7 +132,7 @@ export const saveProfile = (profile: any): ThunkType => async (dispatch: Dispatc
     if (response.data.resultCode === ResultCodesEnum.Success) {
         dispatch<any>(getUserProfile(userId));
     } else {
-        debugger
+    debugger
         dispatch<any>(stopSubmit('editProfile', {_error: response.data.messages[0]}));
         // return Promise.reject(response.data.messages[0]);
     }

@@ -33,7 +33,7 @@ export type ActionsTypes = ReturnType<typeof addPost>
 
 
 
-
+//self-written store
 
 // import {RenderEntireTreeType} from '../index';
 // import {v1} from 'uuid';

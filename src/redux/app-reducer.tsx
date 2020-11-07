@@ -5,9 +5,11 @@ const INITIALIZED_SUCCESS = 'app/INITIALIZED_SUCCESS';
 
 export type AppType = {
     initialized: boolean
+    globalError: string | null
 }
 const initialState: AppType = {
-    initialized: false
+    initialized: false,
+    globalError: null
 };
 export const appReducer = (state = initialState, action: any): AppType => {
     switch (action.type) {

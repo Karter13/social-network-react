@@ -64,7 +64,6 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
     }
 
     render() {
-        // console.log('RENDER PROFILE');
         return (
             <Profile {...this.props}
                      isOwner={!this.props.match.params.userId}
@@ -79,7 +78,6 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
 }
 
 const mapStateToProps = (state: StateType): MapStatePropsType => {
-    // console.log('mapStateToProps PROFILE');
     return ({
         profile: profileSelector(state),
         status: statusProfileSelector(state),
