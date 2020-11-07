@@ -48,6 +48,7 @@ export const login = (email: string, password: string, rememberMe: boolean = fal
     if (data.resultCode === ResultCodesEnum.Success) {
         dispatch(getAuthUserData())
     } else {
+        //reduxForm action creator for error (from 'redux-form';)
         let message = data.messages.length > 0 ? data.messages : 'Some error!!!';
         dispatch<any>(stopSubmit('login', {_error: message}));
     }

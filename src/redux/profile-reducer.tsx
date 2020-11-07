@@ -3,6 +3,7 @@ import {ActionsTypes} from './store';
 import {profileAPI, ResultCodesEnum, usersAPI} from '../api/api';
 import {ThunkDispatchUsers, ThunkType} from './users-reducer';
 import {Dispatch} from 'redux';
+import {stopSubmit} from 'redux-form';
 
 const ADD_POST = 'profile/ADD-POST';
 const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';
@@ -118,11 +119,16 @@ export const savePhoto = (file: string): ThunkType => async (dispatch: Dispatch)
     }
 }
 
+
+//types for thunk-----------------
 export const saveProfile = (profile: any): ThunkType => async (dispatch: Dispatch, getState: any) => {
     const userId = getState().auth.userId;
     let response = await profileAPI.saveProfile(profile);
     if (response.data.resultCode === ResultCodesEnum.Success) {
-
-        // dispatch(getUserProfile(userId));
+        dispatch<any>(getUserProfile(userId));
+    } else {
+        debugger
+        dispatch<any>(stopSubmit('editProfile', {_error: response.data.messages[0]}));
+        return Promise.reject(response.data.messages[0]);
     }
 }

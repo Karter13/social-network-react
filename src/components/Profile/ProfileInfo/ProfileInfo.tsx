@@ -31,6 +31,13 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, up
 
     const onSubmit = (formData: ProfileType) => {
         saveProfile(formData)
+        setEditMode(false)
+
+        // saveProfile(formData).then(
+        //     () => {
+        //         setEditMode(false)
+        //     }
+        // )
     };
 
     return (
@@ -44,7 +51,9 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, up
                 {editMode
                     //initialValues={profile} profile={profile}????
                     ? <ProfileDataFormReduxForm initialValues={profile} profile={profile} onSubmit={onSubmit}/>
-                    : <ProfileData goToEditMode={() => {setEditMode(true)}} profile={profile} isOwner={isOwner}/>}
+                    : <ProfileData goToEditMode={() => {
+                        setEditMode(true)
+                    }} profile={profile} isOwner={isOwner}/>}
 
                 <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
             </div>
@@ -62,7 +71,9 @@ const ProfileData: React.FC<ProfileDataPropsType> = ({profile, isOwner, goToEdit
     return (
         profile && <div>
 
-            {isOwner && <div><button onClick={goToEditMode}>edit</button></div>}
+            {isOwner && <div>
+                <button onClick={goToEditMode}>edit</button>
+            </div>}
 
             <div>
                 <b>FullName:</b>{profile.fullName}
