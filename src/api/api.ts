@@ -85,20 +85,24 @@ export const profileAPI = {
 
 };
 
-export const authPI = {
+export const authAPI = {
     me() {
         return instance.get<CommonResponseType<AuthType>>(`auth/me`)
             .then(response => response.data);
     },
-    login(email: string, password: string, rememberMe: boolean = false) {
+    login(email: string, password: string, rememberMe: boolean = false, captcha: string | null = null) {
         return instance.post<CommonResponseType<{ userId: number }>>(`auth/login`,
-            {email, password, rememberMe})
+            {email, password, rememberMe, captcha})
             .then(response => response.data);
     },
     logout() {
         return instance.delete<CommonResponseType>(`auth/login`)
             .then(response => response.data);
     }
-
 };
 
+export const securityAPI = {
+    getCaptchaUrl() {
+        return instance.get('security/get-captcha-url')
+    }
+}

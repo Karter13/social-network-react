@@ -9,7 +9,7 @@ import {
     toggleIsFetching,
     unfollowSuccess
 } from './users-reducer';
-import {setAuthUserData} from './auth-reducer';
+import {getCaptchaUrlSuccess, setAuthUserData} from './auth-reducer';
 import {initializedSuccess} from './app-reducer';
 
 export type ActionsTypes = ReturnType<typeof addPost>
@@ -27,6 +27,8 @@ export type ActionsTypes = ReturnType<typeof addPost>
     | ReturnType<typeof initializedSuccess>
     | ReturnType<typeof deletePost>
     | ReturnType<typeof savePhotoSuccess>
+    | ReturnType<typeof getCaptchaUrlSuccess>
+
 
 
 
