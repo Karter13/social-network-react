@@ -13,7 +13,7 @@ export type ProfileInfoPropsType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto: any
-    saveProfile: (formData: ProfileType) => void
+    saveProfile: (formData: ProfileType) => Promise<void>
 }
 export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile, ...props}) => {
 
@@ -30,14 +30,14 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, up
     };
 
     const onSubmit = (formData: ProfileType) => {
-        saveProfile(formData);
-        setEditMode(false)
+        // saveProfile(formData);
+        // setEditMode(false)
 
-        // saveProfile(formData).then(
-        //     () => {
-        //         setEditMode(false)
-        //     }
-        // )
+        saveProfile(formData).then(
+            () => {
+                setEditMode(false)
+            }
+        )
     };
 
     return (
@@ -49,7 +49,6 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, up
                 {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
 
                 {editMode
-                    //initialValues={profile} profile={profile}????
                     ? <ProfileDataFormReduxForm initialValues={profile} profile={profile} onSubmit={onSubmit}/>
                     : <ProfileData goToEditMode={() => {
                         setEditMode(true)

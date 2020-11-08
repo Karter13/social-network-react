@@ -79,7 +79,7 @@ export const profileAPI = {
             }
         });
     },
-    saveProfile(profile: any) {
+    saveProfile(profile: ProfileType) {
         return instance.put<CommonResponseType>(`profile`, profile);
     }
 
@@ -103,6 +103,6 @@ export const authAPI = {
 
 export const securityAPI = {
     getCaptchaUrl() {
-        return instance.get('security/get-captcha-url')
+        return instance.get<{url: string}>('security/get-captcha-url').then(r => r.data)
     }
 }

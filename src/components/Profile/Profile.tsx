@@ -10,7 +10,7 @@ type ProfilePropsType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto: any
-    saveProfile: (formData: ProfileType) => void
+    saveProfile: (formData: ProfileType) => Promise<void>
 }
 export const Profile: React.FC<ProfilePropsType> = (props) => {
     return (

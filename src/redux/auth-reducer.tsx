@@ -33,7 +33,7 @@ export const authReducer = (state = initialState, action: ActionsTypes): AuthTyp
             return {
                 ...state,
                 ...action.payload
-            }
+            };
         default:
             return state;
     }
@@ -66,7 +66,7 @@ export const login = (email: string, password: string, rememberMe: boolean = fal
         dispatch(getAuthUserData())
     } else {
         if (data.resultCode === 10) {
-            dispatch(getCaptchaUrl)
+            dispatch(getCaptchaUrl());
         }
 
         //reduxForm action creator for error (from 'redux-form';)
@@ -77,7 +77,8 @@ export const login = (email: string, password: string, rememberMe: boolean = fal
 
 export const getCaptchaUrl = () => async (dispatch: Dispatch) => {
     const response = await securityAPI.getCaptchaUrl();
-    const captchaUrl = response.data.url;
+    const captchaUrl = response.url;
+
     dispatch(getCaptchaUrlSuccess(captchaUrl))
 };
 

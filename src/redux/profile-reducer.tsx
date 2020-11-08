@@ -4,6 +4,8 @@ import {profileAPI, ResultCodesEnum, usersAPI} from '../api/api';
 import {ThunkDispatchUsers, ThunkType} from './users-reducer';
 import {Dispatch} from 'redux';
 import {stopSubmit} from 'redux-form';
+import {ThunkAction} from 'redux-thunk';
+import {StateType} from './redux-store';
 
 const ADD_POST = 'profile/ADD-POST';
 const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';
@@ -54,6 +56,8 @@ let initialState: ProfilePageType = {
     profile: null,
     status: ''
 };
+
+type ThunkActionType = ThunkAction<Promise<void>, StateType, unknown, ActionsTypes>
 export const profileReducer = (state = initialState, action: ActionsTypes): any => {
 
     switch (action.type) {
@@ -117,7 +121,7 @@ export const updateStatus = (status: string): ThunkType => async (dispatch: Thun
 
 };
 
-export const savePhoto = (file: string): ThunkType => async (dispatch: Dispatch) => {
+export const savePhoto = (file: string): ThunkActionType => async (dispatch) => {
     let response = await profileAPI.savePhoto(file);
     if (response.data.resultCode === ResultCodesEnum.Success) {
         dispatch(savePhotoSuccess(response.data.data.photos));
@@ -125,15 +129,24 @@ export const savePhoto = (file: string): ThunkType => async (dispatch: Dispatch)
 }
 
 
-//types for thunk-----------------
-export const saveProfile = (profile: any): ThunkType => async (dispatch: Dispatch, getState: any) => {
-    const userId = getState().auth.userId;
-    let response = await profileAPI.saveProfile(profile);
-    if (response.data.resultCode === ResultCodesEnum.Success) {
-        dispatch<any>(getUserProfile(userId));
-    } else {
-    debugger
-        dispatch<any>(stopSubmit('editProfile', {_error: response.data.messages[0]}));
-        // return Promise.reject(response.data.messages[0]);
+
+//types for thunk-----------------y
+export const saveProfile = (profile: ProfileType): ThunkActionType => async (dispatch, getState)=> {
+    try{
+        const userId = getState().auth.userId;
+        let response = await profileAPI.saveProfile(profile);
+        if (response.data.resultCode === ResultCodesEnum.Success) {
+            if(userId)  dispatch(getUserProfile(userId));
+
+        } else {
+            // dispatch<any>(stopSubmit('edit-profile', {'contacts': {'website': response.data.messages[0]} }));
+            dispatch(stopSubmit('edit-profile', {_error: response.data.messages[0]}));
+
+            return Promise.reject(response.data.messages[0]);
+        }
+        return Promise.resolve()
+    } catch (e) {
+        return Promise.reject('error')
     }
+
 }

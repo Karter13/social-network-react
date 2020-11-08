@@ -35,7 +35,7 @@ type MapDispatchPropsType = {
     getStatus: (userId: number) => void
     updateStatus: (status: string) => void
     savePhoto: any
-    saveProfile: (formData: ProfileType) => void
+    saveProfile: (formData: ProfileType) => any
 }
 type ProfileAPIContainerPropsType = MapStatePropsType & MapDispatchPropsType
 type ProfileContainerPropsType = RouteComponentProps<PathParamType> & ProfileAPIContainerPropsType & OwnPropsType

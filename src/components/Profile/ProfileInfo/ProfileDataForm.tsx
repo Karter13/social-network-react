@@ -12,8 +12,6 @@ type PropsType = {
 
 const ProfileDataForm: React.FC<InjectedFormProps<ProfileType, PropsType> & PropsType> = ({handleSubmit, profile, error}) => {
 
-    // debugger
-
     return (
         <form onSubmit={handleSubmit}>
 
@@ -57,5 +55,5 @@ const ProfileDataForm: React.FC<InjectedFormProps<ProfileType, PropsType> & Prop
 };
 
 
-const ProfileDataFormReduxForm = reduxForm<ProfileType, PropsType>({form: 'editProfile'})(ProfileDataForm);
+const ProfileDataFormReduxForm = reduxForm<ProfileType, PropsType>({form: 'edit-profile'})(ProfileDataForm);
 export default ProfileDataFormReduxForm
