@@ -8,8 +8,6 @@ import style from '../../Login/Login.module.css';
 type PropsType = {
     profile: ProfileType
 }
-
-
 const ProfileDataForm: React.FC<InjectedFormProps<ProfileType, PropsType> & PropsType> = ({handleSubmit, profile, error}) => {
 
     return (
@@ -53,7 +51,6 @@ const ProfileDataForm: React.FC<InjectedFormProps<ProfileType, PropsType> & Prop
         </form>
     )
 };
-
 
 const ProfileDataFormReduxForm = reduxForm<ProfileType, PropsType>({form: 'edit-profile'})(ProfileDataForm);
 export default ProfileDataFormReduxForm

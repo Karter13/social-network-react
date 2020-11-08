@@ -6,7 +6,6 @@ import {DialogsPageType} from '../../redux/dialogs-reducer';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {Textarea} from '../common/FormControls/FormControls';
 import {maxLengthCreator, required} from '../../utils/validators/validators';
-import {UserType} from '../../redux/users-reducer';
 
 type OwnFormPropsType = {
     addNewMessageText: (text: string) => void

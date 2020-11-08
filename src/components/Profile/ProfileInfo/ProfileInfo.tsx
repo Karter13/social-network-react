@@ -60,7 +60,6 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, up
     )
 };
 
-
 type ProfileDataPropsType = {
     profile: ProfileType | null
     isOwner: boolean

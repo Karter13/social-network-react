@@ -7,7 +7,6 @@ import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 import {compose} from 'redux';
 import {getdialogsPage} from '../../redux/dialogs-selectors';
 
-
 const mapStateToProps = (state: StateType) => {
     return {
         dialogsPage: getdialogsPage(state)

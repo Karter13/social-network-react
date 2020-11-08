@@ -8,7 +8,6 @@ import {login} from '../../redux/auth-reducer';
 import {StateType} from '../../redux/redux-store';
 import {Redirect} from 'react-router-dom';
 import {isAuthLoginSelector} from '../../redux/login-selectors';
-import {ProfileType} from '../../redux/profile-reducer';
 
 type FormDataType = {
     email: string
@@ -16,8 +15,6 @@ type FormDataType = {
     rememberMe: boolean
     captcha: string
 }
-
-
 
 //captchaUrl types
 export const LoginForm: React.FC<InjectedFormProps<FormDataType, OwnPropsType> & OwnPropsType> = ({handleSubmit, error, captchaUrl}) => {
@@ -30,7 +27,6 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType, OwnPropsType> &
 
             {captchaUrl && <img src={captchaUrl} alt='captcha'/>}
             {captchaUrl && createField('Symbols from image', 'captcha', [required], Input, {})}
-
 
             {
                 error && <div className={style.formSummaryError}>

@@ -44,6 +44,4 @@ export const ProfileStatusWithHooks: React.FC<ProfileStatusType> = (props) => {
             }
         </div>
     )
-
-
 };

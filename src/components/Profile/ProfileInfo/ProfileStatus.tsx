@@ -60,5 +60,4 @@ export class ProfileStatus extends React.Component<ProfileStatusType, StateType>
             </div>
         )
     }
-
 }

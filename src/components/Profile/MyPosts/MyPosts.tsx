@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './MyPosts.module.css'
 import {Post} from './Post/Post';
-import {PostType, ProfileType,} from '../../../redux/profile-reducer';
+import {PostType,} from '../../../redux/profile-reducer';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {maxLengthCreator, required} from '../../../utils/validators/validators';
 import {Textarea} from '../../common/FormControls/FormControls';

@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from './FormControls.module.css'
-import {required} from '../../../utils/validators/validators';
 import {Field} from 'redux-form';
 
 type CommonPropsType = {
@@ -21,7 +20,6 @@ export const FormControl: React.FC<CommonPropsType> = ({input, meta: {touched, e
         </div>
     )
 };
-
 
 export const Textarea: React.FC<CommonPropsType> = (props) => {
     const {input, meta, child, ...restProps} = props;
