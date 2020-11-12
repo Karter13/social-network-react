@@ -30,9 +30,6 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = ({profile, status, up
     };
 
     const onSubmit = (formData: ProfileType) => {
-        // saveProfile(formData);
-        // setEditMode(false)
-
         saveProfile(formData).then(
             () => {
                 setEditMode(false)
