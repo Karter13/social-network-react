@@ -82,7 +82,7 @@ const ProfileData: React.FC<ProfileDataPropsType> = ({profile, isOwner, goToEdit
             </div>
             }
             <div>
-                <b>About me:</b>{profile.aboutMe ? 'YES' : 'No'}
+                <b>About me:</b>{profile.aboutMe}
             </div>
             <div>
                 <b>Contacts</b>: {(Object.keys(profile.contacts) as Array<keyof ContactsType>).map(key => {
